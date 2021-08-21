@@ -12,8 +12,9 @@ export const Navbar = () => {
                     <a class="nav-link dropdown-toggle navman" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                       HOMBRE
                     </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <ul class="dropdown-menu" id="categoriesnav_man" aria-labelledby="navbarDropdown">
                       <li><a class="dropdown-item" id="hombre" href="#">Principal</a></li>
+                      <li><hr class="dropdown-divider"></li>
                     </ul>
                   </li>
                   <li class="nav-item dropdown">

@@ -42,4 +42,5 @@ window.addEventListener("click", (e) => {
   }
 });
 
+getCategories('nav')
 

@@ -72,7 +72,7 @@ export function createElement(e) {
     });
 }
 
-export const getCategories = async () => {
+export const getCategories = async (parametro) => {
 
     let categories = []
 
@@ -84,26 +84,40 @@ export const getCategories = async () => {
         id: doc.id
     }));
 
-    let allCategories = document.createElement('div')
-    allCategories.className = 'col-12 d-flex flex-wrap all-categories'
+    const categoriesNav = () => {
+        
+        let categoriesnav_man
 
-    categories.forEach(el => {
+        if(document.getElementById('categoriesnav_man')){
+        console.log('si');
+        categoriesnav_man = document.querySelector('#categoriesnav_man')
+        }
+
+        categories.forEach(el => {
+        let categoriesNav = document.createElement('li')
+        categoriesNav.innerHTML = `<a class="dropdown-item" id="${el.name}" href="#">${el.name}</a>`
+        categoriesnav_man.appendChild(categoriesNav)
+        })}
+
+    const categoriesPage = () =>{
+        
+        let allCategories = document.createElement('div')
+        allCategories.className = 'col-12 d-flex flex-wrap all-categories'
+
+        categories.forEach(el => {
         let category = document.createElement('div')
         category.className = 'col-4'
-        category.style.cssText =
-            `
-                            display: flex;
-                            justify-content: center;
-                            align-items: center;`
-        category.innerHTML =
-            `
-                        <div class="images">${el.name}</div>
-                        `
-
+        category.style.cssText = `display: flex; justify-content: center; align-items: center;`
+        category.innerHTML = `<div class="images">${el.name}</div>`
+        
         allCategories.appendChild(category)
-    })
+        })
 
-    app.appendChild(allCategories)
+        app.appendChild(allCategories)}
+
+    if(parametro === 'nav'){
+        categoriesNav()
+    }
 }
 
 export async function getItems() {
@@ -194,6 +208,7 @@ window.addEventListener('click', async (e)=>{
                         editForm[1].value = i
                     }
                 }
+
                 editForm.setAttribute('id', id)
                 editForm[0].value = name;
                 editForm[2].value = price;
