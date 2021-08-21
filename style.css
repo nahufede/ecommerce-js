@@ -1,3 +1,10 @@
+@import url(//db.onlinewebfonts.com/c/fd131d436dd85453848ae4a84bb466ad?family=Zing+Rust+Demo+Base);
+@font-face {
+    font-family: "Zing Rust Demo Base";
+    src: url("//db.onlinewebfonts.com/t/fd131d436dd85453848ae4a84bb466ad.eot");
+    src: url("//db.onlinewebfonts.com/t/fd131d436dd85453848ae4a84bb466ad.eot?#iefix") format("embedded-opentype"), url("//db.onlinewebfonts.com/t/fd131d436dd85453848ae4a84bb466ad.woff2") format("woff2"), url("//db.onlinewebfonts.com/t/fd131d436dd85453848ae4a84bb466ad.woff") format("woff"), url("//db.onlinewebfonts.com/t/fd131d436dd85453848ae4a84bb466ad.ttf") format("truetype"), url("//db.onlinewebfonts.com/t/fd131d436dd85453848ae4a84bb466ad.svg#Zing Rust Demo Base") format("svg");
+}
+
 .dropdown-toggle::after{
     display: none;
 }
@@ -186,4 +193,34 @@
     justify-content: center;
     font-size: 3rem;
     color: white;
+}
+
+.container-itemDetail__details h1, .container-itemDetail__details p, .container-itemDetail__details span {
+    margin: 2rem;
+}
+
+.container-itemDetail h1 {
+    font-family: 'Zing Rust Demo Base', sans-serif;
+}
+
+.container-itemDetail__img {
+    width: 90%;
+    margin: 2rem;
+}
+
+.horizontalLine {
+    width: 80%;
+    color: black;
+    margin: auto;
+    margin-top: 2rem;
+    border: 1px solid black;
+}
+
+.container-itemDetail__related {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.container-itemDetail__relatedProd {
+    margin-top: 2rem;
 }
