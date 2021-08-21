@@ -1,0 +1,189 @@
+.dropdown-toggle::after{
+    display: none;
+}
+
+.mynav{
+    margin: 1rem 3rem;
+}
+
+.navitems{
+    margin-left: 3rem;
+}
+
+.navman, .navwoman{
+    border-left: 1px solid;
+    padding: 0 1rem;
+}
+
+.navcontact{
+    border-left: 1px solid;
+    border-right: 1px solid;
+    padding: 0 1rem;
+}
+
+#search{
+    border-radius: 1rem;
+    width: 20rem;
+}
+
+.carrito{
+    font-size: 1.7rem;
+    margin-left: 1.5rem;
+}
+
+.navbar-light .navbar-nav .nav-link {
+    color: black;
+}
+
+.title{
+    text-align: center;
+    border-bottom: 1px solid black;
+    width: min-content;
+    font-size: 8rem;
+}
+
+.titleContent{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 5rem;
+}
+
+.line{
+    border-bottom: 1px solid black;
+    padding: 0 1rem;
+    margin: 5rem 0;
+}
+
+.man{
+    height: 25rem;
+    background-image: url('/img/hombre.jpg');
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.truck, .whatsapp{
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+}
+
+.truck i{
+    font-size: 6rem;
+}
+
+.whatsapp i{
+    font-size: 4.6rem;
+}
+
+#novedades{
+    border-radius: 1rem;
+    width: 50rem;
+}
+
+.prefooter{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 5rem;
+}
+
+#emailbutton{
+    width: 8rem;
+    align-self: center;
+    margin: 2rem 0;
+    background-color: black;
+    color: white;
+    border-radius: 1rem;
+    padding: 0.2rem 2rem;
+    border-style: none;
+    text-align: center;
+}
+
+#contactbutton{
+    width: 8rem;
+    align-self: center;
+    margin: 2rem 0;
+    background-color: black;
+    color: white;
+    border-radius: 1rem;
+    padding: 0.2rem 2rem;
+    border-style: none;
+    text-align: center;
+}
+
+#contactForm input{
+    border-radius: 1rem;
+    border: 2px solid black;
+}
+
+#contactForm textarea{
+    border-bottom-left-radius: 1rem;
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+    border: 2px solid black;
+}
+
+.footerlinks a{
+    text-decoration: none;
+    color: black;
+}
+
+.footerlinks{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.info{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 3rem;
+}
+
+.info div{
+    display: flex;
+}
+
+.info div i{
+    margin-right: 0.3rem;
+}
+
+.social i{
+    font-size: 2rem;
+    margin: 0 1rem;
+}
+
+.last-title h4{
+    border-bottom: 1px solid;
+    width: min-content;
+}
+
+.last-title{
+    display: flex;
+    justify-content: center;
+}
+
+.contactbreadcrumb{
+    margin-right: 0.3rem;
+    text-decoration: none;
+    color: black;
+}
+
+.images{
+    background-image: url('/img/clothes.jpg');
+    height: 23rem;
+    width: 23rem;
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    color: white;
+}
