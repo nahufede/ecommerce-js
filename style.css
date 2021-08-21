@@ -1,10 +1,10 @@
-@import url(//db.onlinewebfonts.com/c/fd131d436dd85453848ae4a84bb466ad?family=Zing+Rust+Demo+Base);
+/* @import url(//db.onlinewebfonts.com/c/fd131d436dd85453848ae4a84bb466ad?family=Zing+Rust+Demo+Base);
 @font-face {
     font-family: "Zing Rust Demo Base";
     src: url("//db.onlinewebfonts.com/t/fd131d436dd85453848ae4a84bb466ad.eot");
     src: url("//db.onlinewebfonts.com/t/fd131d436dd85453848ae4a84bb466ad.eot?#iefix") format("embedded-opentype"), url("//db.onlinewebfonts.com/t/fd131d436dd85453848ae4a84bb466ad.woff2") format("woff2"), url("//db.onlinewebfonts.com/t/fd131d436dd85453848ae4a84bb466ad.woff") format("woff"), url("//db.onlinewebfonts.com/t/fd131d436dd85453848ae4a84bb466ad.ttf") format("truetype"), url("//db.onlinewebfonts.com/t/fd131d436dd85453848ae4a84bb466ad.svg#Zing Rust Demo Base") format("svg");
 }
-
+ */
 .dropdown-toggle::after{
     display: none;
 }

@@ -4,7 +4,8 @@ import { Home } from "./components/home.js";
 import { Contacto } from "./components/contact.js";
 import { Hombre } from "./components/hombre.js";
 import { Mujer } from "./components/mujer.js";
-import { getCategories } from "./firebase/products.js"
+import { getCategories } from "./firebase/products.js";
+import { ItemList } from "./components/itemList.js";
 
 let nav = document.querySelector("#nav");
 let app = document.querySelector("#app");
@@ -25,7 +26,7 @@ window.addEventListener("click", (e) => {
   switch (id) {
     case "hombre":
       app.innerHTML = Hombre();
-      getCategories()
+      getCategories();
       break;
 
     case "mujer":
@@ -42,5 +43,12 @@ window.addEventListener("click", (e) => {
   }
 });
 
-getCategories('nav')
+getCategories("nav");
 
+window.addEventListener("click", (e) => {
+  if (e.target.classList.contains("click-category")) {
+    let category = e.target.attributes.id.value;
+    console.log(category)
+    ItemList(category)
+  }
+});

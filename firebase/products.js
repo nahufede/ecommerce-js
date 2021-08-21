@@ -95,7 +95,7 @@ export const getCategories = async (parametro) => {
 
         categories.forEach(el => {
         let categoriesNav = document.createElement('li')
-        categoriesNav.innerHTML = `<a class="dropdown-item" id="${el.name}" href="#">${el.name}</a>`
+        categoriesNav.innerHTML = `<a class="dropdown-item click-category" id="${el.name}" href="#">${el.name}</a>`
         categoriesnav_man.appendChild(categoriesNav)
         })}
 

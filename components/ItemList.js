@@ -4,6 +4,8 @@ let db = getFirestore();
 let app = document.querySelector("#app");
 
 export async function ItemList(category) {
+  app.innerHTML = "";
+
   let allProducts = [];
 
   let products = document.createElement("div");
@@ -40,5 +42,8 @@ export async function ItemList(category) {
     products.appendChild(prod);
   });
 
+  if (allProducts.length === 0) {
+    products.innerHTML = "<h1>No hay productos</h1>";
+  }
   app.appendChild(products);
 }
