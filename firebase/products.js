@@ -89,7 +89,6 @@ export const getCategories = async (parametro) => {
         let categoriesnav_man
 
         if(document.getElementById('categoriesnav_man')){
-        console.log('si');
         categoriesnav_man = document.querySelector('#categoriesnav_man')
         }
 

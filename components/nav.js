@@ -1,4 +1,9 @@
+import { auth } from "../firebase/firebase.js";
+
 export const Navbar = () => {
+
+    const user = auth().currentUser;
+
     return (
             `<nav class="navbar navbar-expand-lg navbar-light">
             <div class="container-fluid mynav">
@@ -28,6 +33,14 @@ export const Navbar = () => {
                   <li class="nav-item">
                     <a class="nav-link active navcontact" aria-current="page" id="contact" href="#">CONTACTO</a>
                   </li>
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle navadmin" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      ADMIN
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <li><a class="dropdown-item" id="admin" href="#">Principal</a></li>
+                    </ul>
+                  </li>
                 </ul>
                 <form class="d-flex">
                   <input class="form-control me-2" id="search" type="search" placeholder="Buscar" aria-label="Search">
@@ -36,7 +49,7 @@ export const Navbar = () => {
               </div>
             </div>
           </nav>`
-    )
+      )
 }
 
 export default Navbar;
