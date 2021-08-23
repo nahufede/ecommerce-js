@@ -13,7 +13,7 @@ export const Footer = () => {
                         <p>ENVIOS A TODO EL PAIS</p>
                     </div>
                     <div class="col-6">
-                        <p>CONSULTAS Y PEDIDOS</p>
+                        <a href="https://wa.me/34645049621" target="_blank" class="socialmedia">CONSULTAS Y PEDIDOS</a>
                     </div>
                 </div>
                 <div class="col-12 prefooter">
@@ -29,18 +29,19 @@ export const Footer = () => {
             <div class="container">
                 <div class="row">
                     <div class="col-12 text-center social">
-                        <i class="bi bi-instagram"></i>
+                        
+                        <a href="https://instagram.com/__lucca._" target="_blank" class="iglink mb-3"><i class="bi bi-instagram iglink"></i></a>
                         <i class="bi bi-facebook"></i>
                     </div>
                     <div class="col-6 offset-3 footerlinks mt-5">
-                        <a href="">Hombre</a>
-                        <a href="">Mujer</a>
-                        <a href="">Contacto</a>
+                        <a href="" id="hombre">Hombre</a>
+                        <a href="" id="mujer">Mujer</a>
+                        <a href="" id="contact">Contacto</a>
                     </div>
                     <div class="col-12 info">
                         <div>
                             <i class="bi bi-whatsapp"></i>
-                            <p>357894473</p>
+                            <a href="https://wa.me/34645049621" target="_blank" class="socialmedia mb-3">357894473</a>
                         </div>
                         <div>
                             <i class="bi bi-envelope"></i>
@@ -48,7 +49,7 @@ export const Footer = () => {
                         </div>
                         <div>
                             <i class="bi bi-geo-alt"></i>
-                            <p>San Telmo</p>
+                            <a href="https://goo.gl/maps/RYdLajm3pCPf3m5o9" target="_blank" class="socialmedia mb-3">San Telmo</a>
                         </div>
                     </div>
                     <div class="col-12 mt-3 last-title mb-3">

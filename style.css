@@ -229,3 +229,18 @@
 .container-itemDetail__relatedProd {
     margin-top: 2rem;
 }
+
+.socialmedia, .iglink{
+    text-decoration: none;
+    color: black;
+}
+
+.socialmedia:hover{
+    font-size: 1.1rem;
+    color: black;
+}
+
+.iglink:hover{
+    color: black;
+    font-size: 2.2rem;
+}
