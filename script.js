@@ -23,9 +23,9 @@ footer.innerHTML = Footer();
 window.addEventListener("DOMContentLoaded", () => (app.innerHTML = Home()));
 
 window.addEventListener("click", (e) => {
-  /* if (e.target.type !== "file") {
+  if (e.target.type !== "file") {
     e.preventDefault();
-  } */
+  }
 
   let id = e.target.getAttribute("id");
 
