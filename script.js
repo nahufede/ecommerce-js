@@ -8,7 +8,9 @@ import { Mujer } from "./components/mujer.js";
 import { getCategories } from "./firebase/products.js";
 import { ItemList } from "./components/itemList.js";
 import { auth } from "./firebase/firebase.js";
-import { LogOut, LogIn } from "./firebase/user.js"
+import { LogOut, LogIn } from "./firebase/user.js";
+import { SearchResults } from "./components/itemList.js";
+import { Checkout } from "./components/Cart/checkout-view.js";
 
 let full = document.querySelector("#full");
 let nav = document.querySelector("#nav");
@@ -48,6 +50,10 @@ window.addEventListener("click", (e) => {
     case "admin":
       app.innerHTML = Admin();
       break;
+
+    case "cart":
+      app.innerHTML = Checkout();
+      break;
   }
 });
 
@@ -67,8 +73,16 @@ window.addEventListener("click", (e) => {
     LogIn();
   }
 
-  if(id === "logoutbutton"){
-    LogOut()
+  if (id === "logoutbutton") {
+    LogOut();
   }
+});
 
+let searchForm = document.getElementById("search-form");
+let searchTerm = document.getElementById("search");
+
+searchForm.addEventListener("submit", function (e) {
+  e.preventDefault();
+  let search = searchTerm.value;
+  SearchResults(search); 
 });
