@@ -7,11 +7,11 @@ export async function ItemList(category) {
   app.innerHTML = "";
 
   let allProducts = [];
-
+  let itemListContainer = document.createElement("div");
+  itemListContainer.className = "container";
   let products = document.createElement("div");
-  products.className = "container";
-  products.style.cssText =
-    "display: flex ; flex-direction: column ; margin: 5rem";
+  products.className = "row";
+  itemListContainer.appendChild(products);
 
   const itemCollection = db.collection("products");
   let filteredItems = itemCollection.where("category", "==", category);
@@ -24,7 +24,10 @@ export async function ItemList(category) {
   }));
 
   allProducts.forEach((el) => {
+    let prodContainer = document.createElement("div");
+    prodContainer.className = "col-md-3 col-6";
     let prod = document.createElement("div");
+    prodContainer.appendChild(prod);
     prod.className = "card";
     prod.setAttribute("id", el.id);
     prod.style = "width: 14rem;";
@@ -39,13 +42,13 @@ export async function ItemList(category) {
                 </div>
             `;
 
-    products.appendChild(prod);
+    products.appendChild(prodContainer);
   });
 
   if (allProducts.length === 0) {
     products.innerHTML = "<h1>No hay productos</h1>";
   }
-  app.appendChild(products);
+  app.appendChild(itemListContainer);
 }
 
 export async function SearchResults(search) {
@@ -96,5 +99,5 @@ export async function SearchResults(search) {
   if (filteredItems.length === 0) {
     products.innerHTML = "<h1>No hay productos</h1>";
   }
-  app.appendChild(products);
+  app.appendChild(itemListContainer);
 }
