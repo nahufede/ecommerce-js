@@ -102,7 +102,7 @@ export const getCategories = async (parametro) => {
         
         let allCategories = document.createElement('div')
         allCategories.className = 'col-12 d-flex flex-wrap all-categories'
-
+        
         categories.forEach(el => {
         let category = document.createElement('div')
         category.className = 'col-4'

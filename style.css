@@ -5,6 +5,10 @@
     src: url("//db.onlinewebfonts.com/t/fd131d436dd85453848ae4a84bb466ad.eot?#iefix") format("embedded-opentype"), url("//db.onlinewebfonts.com/t/fd131d436dd85453848ae4a84bb466ad.woff2") format("woff2"), url("//db.onlinewebfonts.com/t/fd131d436dd85453848ae4a84bb466ad.woff") format("woff"), url("//db.onlinewebfonts.com/t/fd131d436dd85453848ae4a84bb466ad.ttf") format("truetype"), url("//db.onlinewebfonts.com/t/fd131d436dd85453848ae4a84bb466ad.svg#Zing Rust Demo Base") format("svg");
 }
 
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
 .dropdown-toggle::after {
     display: none;
 }
@@ -26,6 +30,23 @@
     border-left: 1px solid;
     border-right: 1px solid;
     padding: 0 1rem;
+}
+
+.badge {
+    padding-left: 5px;
+    padding-right: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 15px;
+}
+
+#lblCartCount {
+    font-size: 14px;
+    background: #000000;
+    color: #fff;
+    padding: 0 5px;
+    vertical-align: top;
+    margin-left: -10px;
 }
 
 #search {
@@ -204,17 +225,37 @@
     color: white;
 }
 
-.itemList-card {
+.container-itemList .card {
+    margin: 2rem;
+}
+
+.container-itemList h1 {
+    font-family: 'Zing Rust Demo Base', sans-serif;
+}
+
+.container-itemList {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+}
+
+#carrito-checkout {
+    text-align: center;
+}
+
+.itemList-product a {
     text-decoration: none;
     color: black;
 }
 
-.itemList-productName {
-    background: lightgray;
+.itemList-product {
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    width: 100%;
 }
 
-.itemList-productImg {
-    max-height: 20rem;
+.itemList-product__name {
+    background: rgb(236, 236, 236);
 }
 
 .container-itemDetail__details h1, .container-itemDetail__details p, .container-itemDetail__details span {
@@ -251,7 +292,6 @@
     width: 100%;
     margin: 1rem;
     border-radius: 20px;
-
 }
 
 .socialmedia, .iglink {

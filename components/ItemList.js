@@ -11,7 +11,7 @@ export async function ItemList(category) {
   itemListContainer.className = "container";
   itemListContainer.classList.add("container-itemList");
   itemListContainer.innerHTML = `
-                        <h1 class="text-center">${category}</h1>
+                        <h1 class="text-center container-itemList__title">${category}</h1>
                       `;
 
   let products = document.createElement("div");
@@ -34,10 +34,10 @@ export async function ItemList(category) {
     let prod = document.createElement("div");
     prodContainer.appendChild(prod);
     prod.className = "card";
-    prod.style = "width: 22rem;";
-    prod.innerHTML = `<a class="itemList-card" href="">  
-                <img src="${el.img}" class="card-img itemList-productImg" id="${el.id}" alt="${el.name}">
-                <div class="card-body itemList-productName">
+    prod.classList.add("itemList-product")
+    prod.innerHTML = `<a href="">  
+                <img src="${el.img}" class="card-img itemList-product__image" id="${el.id}" alt="${el.name}">
+                <div class="card-body itemList-product__name">
                     <p class="card-title text-center">${el.name}</p>
                 </div>
                 </a>

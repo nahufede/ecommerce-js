@@ -45,7 +45,10 @@ export const Navbar = () => {
                 <form id="search-form" class="d-flex">
                   <input class="form-control me-4" id="search" type="search" placeholder="Buscar" aria-label="Search">
                 </form>
-                <a><i class="bi bi-cart3 carrito" id=cart></i></a>
+                <a>
+                  <i class="bi bi-cart3 carrito" id=cart></i>
+                  <span class='badge badge-warning' id='lblCartCount'> 5 </span>
+                </a>
               </div>
             </div>
           </nav>`

@@ -84,19 +84,18 @@ export const Checkout = () => {
                     ${cantidad}
                 </td>
                 <td>
-                    <a href="#" class="btn-remove-product" data-id="${id}"> X </a>
+                    <a href="#" class="btn-remove-product" data-id="${id}"> Eliminar </a>
                 </td>
                 
             `;
     cartList.appendChild(row);
   });
-
   if (articulosCarrito.length === 0) {
-      return `<div class="container">
+    return `<div class="container">
             <h1>El carrito está vacío.</h1>
-      </div>`
+      </div>`;
   }
-    return `
+  return `
     <div class="container">
 
         <div class="card">
@@ -109,7 +108,7 @@ export const Checkout = () => {
                     <div class="d-flex justify-content-between finalizarCompra row">
                         <div class="col-md-5" id="">
                             <div class="container">
-                                <div class="row card carrito-checkout">
+                                <div class="row carrito-checkout">
                                     <table id="carrito-checkout" class="u-full-width">
                                         <thead>
                                             <tr>
