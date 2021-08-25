@@ -9,6 +9,11 @@ export async function ItemList(category) {
   let allProducts = [];
   let itemListContainer = document.createElement("div");
   itemListContainer.className = "container";
+  itemListContainer.classList.add("container-itemList");
+  itemListContainer.innerHTML = `
+                        <h1 class="text-center">${category}</h1>
+                      `;
+
   let products = document.createElement("div");
   products.className = "row";
   itemListContainer.appendChild(products);
@@ -25,28 +30,24 @@ export async function ItemList(category) {
 
   allProducts.forEach((el) => {
     let prodContainer = document.createElement("div");
-    prodContainer.className = "col-md-3 col-6";
+    prodContainer.className = "col-md-4 col-6";
     let prod = document.createElement("div");
     prodContainer.appendChild(prod);
     prod.className = "card";
-    prod.setAttribute("id", el.id);
-    prod.style = "width: 14rem;";
-    prod.innerHTML = `
-            
-                <img src="${el.img}" class="card-img-top" style="height: 12rem;" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">${el.name}</h5>
-                    <p class="card-text">${el.description}</p>
-                    <p class="card-text">${el.price}</p>
-                    <p class="card-text">${el.category}</p>
+    prod.style = "width: 22rem;";
+    prod.innerHTML = `<a class="itemList-card" href="">  
+                <img src="${el.img}" class="card-img itemList-productImg" id="${el.id}" alt="${el.name}">
+                <div class="card-body itemList-productName">
+                    <p class="card-title text-center">${el.name}</p>
                 </div>
+                </a>
             `;
 
     products.appendChild(prodContainer);
   });
 
   if (allProducts.length === 0) {
-    products.innerHTML = "<h1>No hay productos</h1>";
+    itemListContainer.innerHTML = "<h1>No hay productos</h1>";
   }
   app.appendChild(itemListContainer);
 }
@@ -55,11 +56,16 @@ export async function SearchResults(search) {
   app.innerHTML = "";
 
   let allProducts = [];
+  let itemListContainer = document.createElement("div");
+  itemListContainer.className = "container";
+  itemListContainer.classList.add("container-itemList");
+  itemListContainer.innerHTML = `
+                        <h3>Mostrando resultados de "${search}"</h3>
+                      `;
 
   let products = document.createElement("div");
-  products.className = "container";
-  products.style.cssText =
-    "display: flex ; flex-direction: column ; margin: 5rem";
+  products.className = "row";
+  itemListContainer.appendChild(products);
 
   const itemCollection = db.collection("products");
 
@@ -73,27 +79,26 @@ export async function SearchResults(search) {
   let categoryFilter = allProducts.filter((item) =>
     item.category.toLowerCase().includes(search.toLowerCase())
   );
-  let nameFilter = allProducts.filter((item) =>
+  let nameFilter = allProducts.map((item) =>
     item.name.toLowerCase().includes(search.toLowerCase())
   );
   const filteredItems = categoryFilter.concat(nameFilter);
   filteredItems.forEach((el) => {
+    let prodContainer = document.createElement("div");
+    prodContainer.className = "col-md-4 col-6";
     let prod = document.createElement("div");
+    prodContainer.appendChild(prod);
     prod.className = "card";
-    prod.setAttribute("id", el.id);
-    prod.style = "width: 14rem;";
-    prod.innerHTML = `
-            
-                <img src="${el.img}" class="card-img-top" style="height: 12rem;" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">${el.name}</h5>
-                    <p class="card-text">${el.description}</p>
-                    <p class="card-text">${el.price}</p>
-                    <p class="card-text">${el.category}</p>
+    prod.style = "width: 22rem;";
+    prod.innerHTML = `<a class="itemList-card" href="">  
+                <img src="${el.img}" class="card-img itemList-productImg" id="${el.id}" alt="${el.name}">
+                <div class="card-body itemList-productName">
+                    <p class="card-title text-center">${el.name}</p>
                 </div>
+                </a>
             `;
 
-    products.appendChild(prod);
+    products.appendChild(prodContainer);
   });
 
   if (filteredItems.length === 0) {
