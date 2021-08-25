@@ -58,7 +58,7 @@ export const Navbar = () => {
                 </form>
                 <a>
                   <i class="bi bi-cart3 carrito" id=cart></i>
-                  <span class='badge badge-warning ${conditionalDisplay}' id='lblCartCount'> ${productQuantity} </span>
+                  <span class='badge badge-warning ${conditionalDisplay} scale-up-center' id='lblCartCount'> ${productQuantity} </span>
                 </a>
               </div>
             </div>
