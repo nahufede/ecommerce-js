@@ -4,10 +4,15 @@ export const Navbar = () => {
   const user = auth().currentUser;
 
   let cart = JSON.parse(localStorage.getItem("carrito")) || [];
+  let productQuantity = 0;
+  let i;
+  for (i = 0; i < cart.length; i++) {
+    productQuantity += cart[i].cantidad;
+  }
 
   let conditionalDisplay = "d-none";
 
-  if(cart.length > 0) {
+  if (cart.length > 0) {
     conditionalDisplay = "";
   }
 
@@ -53,7 +58,7 @@ export const Navbar = () => {
                 </form>
                 <a>
                   <i class="bi bi-cart3 carrito" id=cart></i>
-                  <span class='badge badge-warning ${conditionalDisplay}' id='lblCartCount'> ${cart.length} </span>
+                  <span class='badge badge-warning ${conditionalDisplay}' id='lblCartCount'> ${productQuantity} </span>
                 </a>
               </div>
             </div>
