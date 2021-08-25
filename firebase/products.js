@@ -107,7 +107,7 @@ export const getCategories = async (parametro) => {
         let category = document.createElement('div')
         category.className = 'col-4'
         category.style.cssText = `display: flex; justify-content: center; align-items: center;`
-        category.innerHTML = `<div class="images">${el.name}</div>`
+        category.innerHTML = `<div class="images click-category" id="${el.name}">${el.name}</div>`
         
         allCategories.appendChild(category)
         })
