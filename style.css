@@ -191,11 +191,10 @@
 }
 
 .images {
-    background-image: url('/img/clothes.jpg');
     height: 23rem;
     width: 23rem;
     background-position: center;
-    background-size: contain;
+    background-size: cover;
     background-repeat: no-repeat;
     display: flex;
     align-items: center;
