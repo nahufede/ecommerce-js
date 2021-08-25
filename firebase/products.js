@@ -112,10 +112,17 @@ export const getCategories = async (parametro) => {
         allCategories.appendChild(category)
         })
 
-        app.appendChild(allCategories)}
+        if(document.querySelector('.mancategories')){
+            let manContainer = document.querySelector('.mancategories')
+            manContainer.appendChild(allCategories)
+            console.log('hola');
+        }
+    }
 
     if(parametro === 'nav'){
         categoriesNav()
+    } else if (parametro === 'manContainer'){
+        categoriesPage()
     }
 }
 

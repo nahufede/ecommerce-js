@@ -32,7 +32,7 @@ window.addEventListener("click", (e) => {
   switch (id) {
     case "hombre":
       app.innerHTML = Hombre();
-      getCategories();
+      getCategories("manContainer");
       break;
 
     case "mujer":

@@ -1,7 +1,8 @@
 export const Hombre = () => {
+
     return (
             `
-            <div class="container-fluid man-container">
+            <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
                         <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
@@ -37,6 +38,7 @@ export const Hombre = () => {
                         </div>
                     </div>
                 </div>
+                <div class="row mancategories"></div>
             </div>
     `)
 }
