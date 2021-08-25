@@ -17,13 +17,11 @@ function addProduct(e) {
   e.preventDefault();
   const productoSeleccionado =
     e.target.parentElement.parentElement.parentElement;
-  console.log(productoSeleccionado);
   obtenerDatosProducto(productoSeleccionado);
 }
 
 function removeProduct(e) {
   const productoId = e.target.getAttribute("data-id");
-
   articulosCarrito = articulosCarrito.filter(
     (producto) => producto.id !== productoId
   );
