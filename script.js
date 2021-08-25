@@ -9,9 +9,11 @@ import { getCategories } from "./firebase/products.js";
 import { ItemList } from "./components/itemList.js";
 import { itemDetail } from "./components/itemDetail.js";
 import { auth } from "./firebase/firebase.js";
+import { createElement } from "./firebase/products.js";
 import { LogOut, LogIn } from "./firebase/user.js";
 import { SearchResults } from "./components/itemList.js";
 import { Checkout } from "./components/Cart/checkout-view.js";
+import { CreateProduct } from "./components/upload.js";
 
 let full = document.querySelector("#full");
 let nav = document.querySelector("#nav");
@@ -92,4 +94,11 @@ searchForm.addEventListener("submit", function (e) {
   e.preventDefault();
   let search = searchTerm.value;
   SearchResults(search);
+});
+
+window.addEventListener("click", (e) => {
+  if (e.target.classList.contains("submitBtn")) {
+    e.preventDefault();
+    createElement(e);
+  }
 });

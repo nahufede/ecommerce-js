@@ -31,7 +31,7 @@ export function createElement(e) {
     })
     .then((docRef) => {
 
-        var uploadTask = storageRef.child(`${category}/${docRef.id}`).put(file);
+        var uploadTask = storageRef.child(`products/${category}/${docRef.id}`).put(file);
 
         uploadTask.on('state_changed', function (snapshot) {
             var progress = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100)
@@ -101,13 +101,22 @@ export const getCategories = async (parametro) => {
     const categoriesPage = () =>{
         
         let allCategories = document.createElement('div')
-        allCategories.className = 'col-12 d-flex flex-wrap all-categories'
-        
+        allCategories.className = 'col-12 d-flex flex-wrap all-categories mt-3'
+
         categories.forEach(el => {
         let category = document.createElement('div')
-        category.className = 'col-4'
-        category.style.cssText = `display: flex; justify-content: center; align-items: center;`
-        category.innerHTML = `<div class="images click-category" id="${el.name}">${el.name}</div>`
+        category.className = 'col-12 col-md-6 col-lg-4 my-3'
+        category.style.cssText = `
+                                display: flex; 
+                                justify-content: center; 
+                                align-items: center;`
+        
+        let image = document.createElement('div')
+        image.className = 'images'
+        image.innerHTML = el.name
+        image.style.cssText = `background-image: url('${el.img}')`
+
+        category.appendChild(image)
         
         allCategories.appendChild(category)
         })
