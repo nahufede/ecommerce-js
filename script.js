@@ -7,6 +7,7 @@ import { Admin } from "./components/admin.js";
 import { Mujer } from "./components/mujer.js";
 import { getCategories } from "./firebase/products.js";
 import { ItemList } from "./components/itemList.js";
+import { itemDetail } from "./components/itemDetail.js";
 import { auth } from "./firebase/firebase.js";
 import { LogOut, LogIn } from "./firebase/user.js";
 import { SearchResults } from "./components/itemList.js";
@@ -60,15 +61,20 @@ window.addEventListener("click", (e) => {
 getCategories("nav");
 
 window.addEventListener("click", (e) => {
-
   let id = e.target.getAttribute("id");
 
   if (e.target.classList.contains("click-category")) {
     let category = e.target.attributes.id.value;
-    console.log(category);
     ItemList(category);
   }
 
+  if (e.target.classList.contains("card-img")) {
+    let productId = e.target.attributes.id.value;
+    itemDetail.render(productId).then((response) => {
+      app.innerHTML = response;
+    });
+  }
+  
   if (id === "loginbutton") {
     LogIn();
   }
@@ -76,6 +82,7 @@ window.addEventListener("click", (e) => {
   if (id === "logoutbutton") {
     LogOut();
   }
+
 });
 
 let searchForm = document.getElementById("search-form");
@@ -84,5 +91,5 @@ let searchTerm = document.getElementById("search");
 searchForm.addEventListener("submit", function (e) {
   e.preventDefault();
   let search = searchTerm.value;
-  SearchResults(search); 
+  SearchResults(search);
 });

@@ -14,15 +14,14 @@ export const itemDetail = {
         product = { ...doc.data(), id: doc.id };
 
         response = `<div class="container container-itemDetail">
-      <div class="row">
+      <div class="row" id="${id}">
         <div class="col-md-6">
           <img class="container-itemDetail__img" alt="ProdImg" src="${product.img}" />
         </div>
         <div class="col-md-6 container-itemDetail__details">
           <span>Inicio > ${product.category} > ${product.name}</span>
-          <h1>${product.name}</h1>
-          <div><button class="btn btn-dark">AGREGAR AL CARRITO</button></div>
-          <div><button class="btn btn-dark">CONSULTAR PRECIO</button></div>
+          <h1 class="product-name">${product.name}</h1>
+          <div><button class="btn btn-dark btn-add-product"">AGREGAR AL CARRITO</button></div>
           <div><p>${product.description}</p></div>
         </div>
       </div>
