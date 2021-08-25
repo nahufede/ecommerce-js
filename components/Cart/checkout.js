@@ -1,3 +1,7 @@
+import { Navbar } from "../nav.js";
+
+let nav = document.querySelector("#nav");
+
 let articulosCarrito = [];
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -18,15 +22,18 @@ function addProduct(e) {
   const productoSeleccionado =
     e.target.parentElement.parentElement.parentElement;
   obtenerDatosProducto(productoSeleccionado);
+  nav.innerHTML = Navbar();
 }
 
 function removeProduct(e) {
+  e.preventDefault();
   const productoId = e.target.getAttribute("data-id");
   articulosCarrito = articulosCarrito.filter(
     (producto) => producto.id !== productoId
   );
-
+  app.innerHTML = Checkout();
   guardarStorage();
+  nav.innerHTML = Navbar();
 }
 
 function obtenerDatosProducto(producto) {
@@ -37,7 +44,6 @@ function obtenerDatosProducto(producto) {
     id: producto.getAttribute("id"),
     cantidad: 1,
   };
-  console.log(productoAgregado);
   const existe = articulosCarrito.some(
     (producto) => producto.id === productoAgregado.id
   );

@@ -12,7 +12,7 @@ import { auth } from "./firebase/firebase.js";
 import { createElement } from "./firebase/products.js";
 import { LogOut, LogIn } from "./firebase/user.js";
 import { SearchResults } from "./components/itemList.js";
-import { Checkout } from "./components/Cart/checkout-view.js";
+import { Checkout } from "./components/Cart/checkout.js";
 import { CreateProduct } from "./components/upload.js";
 
 let full = document.querySelector("#full");
