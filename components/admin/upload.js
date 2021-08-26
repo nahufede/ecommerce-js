@@ -1,4 +1,101 @@
-export const Upload = (e) => {
+import { getCategories } from "../../firebase/products.js";
+import { getFirestore } from "../../firebase/firebase.js"
+
+let db = getFirestore();
+
+export function createElement(e) {
+
+    let createForm = document.querySelector('#createForm')
+
+    // PREVENT DEFAULT PARA QUE NO RECARGUE LA PAGINA AL DARLE SUBMIT
+    e.preventDefault();
+
+    let progressBar = document.querySelector('.progress-bar')
+
+    // ASIGNACION DE ELEMENTOS DEL FORM
+    let name = createForm[0].value;
+    let categories = createForm[1];
+    let selectedCategory = createForm[1].value;
+    let price = createForm[2].value;
+    let description = createForm[3].value;
+    let category = categories[selectedCategory].innerHTML
+    let file = createForm[4].files[0];
+
+    db.collection('products').add({
+        name,
+        price,
+        description,
+        category,
+        img: ""
+    })
+    .then((docRef) => {
+
+        var uploadTask = storageRef.child(`products/${category.toLowerCase()}/${docRef.id}`).put(file);
+
+        uploadTask.on('state_changed', function (snapshot) {
+            var progress = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100)
+
+            progressBar.style.width = `${progress}%`
+
+            console.log(progressBar.style.width);
+
+            console.log('Upload is ' + progress + '% done');
+            switch (snapshot.state) {
+                case firebase.storage.TaskState.PAUSED:
+                    console.log('Upload is paused');
+                    break;
+                case firebase.storage.TaskState.RUNNING:
+                    console.log('Upload is running');
+                    break;
+            }
+        }, function (error) {
+            console.log(error);
+        }, function() {
+            // Upload completed successfully, now we can get the download URL
+            uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL) {
+                db.collection("products").doc(docRef.id).update({
+                    "img": downloadURL
+                })
+                .then(() => {
+                    console.log("Document successfully updated!");
+                    progressBar.classList.add('bg-warning')
+
+                    setTimeout(()=>location.reload(),5000)
+                    
+                });
+            });
+        });    
+    })
+    .catch((error) => {
+        console.error("Error adding document: ", error);
+    });
+}
+
+export const Upload = () => {
+
+    getCategories().then((el) => {
+
+        let categories = el;
+    
+        let selectItems
+
+        categories.forEach((el, index) => {
+
+          const option = document.createElement('option');
+
+          /* Destrucuring sobre el objeto p */
+          const { name } = el;
+    
+          option.innerHTML = name
+          option.setAttribute('value', index+1)
+
+          if(document.querySelector('.categoryoptions')){
+            selectItems = document.querySelector('.categoryoptions')
+          }
+
+        selectItems.appendChild(option)
+        });
+      });
 
     return (
         `<div class="container">
@@ -21,11 +118,8 @@ export const Upload = (e) => {
                           <label for="floatingName">Nombre</label>
                       </div>
                       <div class="form-floating mb-3">
-                          <select class="form-select" id="floatingCategory" aria-label="Floating label category">
+                          <select class="form-select categoryoptions" id="floatingCategory" aria-label="Floating label category">
                               <option selected>Seleccionar</option>
-                              <option value="1">Camisas</option>
-                              <option value="2">Trajes de baño</option>
-                              <option value="3">Buzos</option>
                           </select>
                           <label for="floatingCategory">Categoria</label>
                       </div>

@@ -1,25 +1,19 @@
 import { Navbar } from "./components/nav.js";
 import { Footer } from "./components/footer.js";
-import { Home } from "./components/home.js";
-import { Contacto } from "./components/contact.js";
-import { Hombre } from "./components/hombre.js";
+import { Home } from "./components/views/home.js";
+import { Contacto } from "./components/views/contact.js";
+import { Hombre } from "./components/views/hombre.js";
 import { Admin } from "./components/admin/admin.js";
-import { Mujer } from "./components/mujer.js";
-import { getCategories, getItems } from "./firebase/products.js";
-import { ItemList } from "./components/itemList.js";
-import { itemDetail } from "./components/itemDetail.js";
-import { auth } from "./firebase/firebase.js";
-import { createElement } from "./firebase/products.js";
+import { Mujer } from "./components/views/mujer.js";
+import { getCategories } from "./firebase/products.js";
+import { ItemList } from "./components/items/itemList.js";
+import { itemDetail } from "./components/items/itemDetail.js";
+import { createElement } from "./components/admin/upload.js";
 import { LogOut, LogIn } from "./firebase/user.js";
-import { SearchResults } from "./components/itemList.js";
-<<<<<<< HEAD
-import { Checkout } from "./components/Cart/checkout-view.js";
+import { SearchResults } from "./components/items/itemList.js";
+import { Checkout } from "./components/cart/checkout.js";
 import { Upload } from "./components/admin/upload.js";
-import { DBProducts } from "./components/admin/products.js";
-=======
-import { Checkout } from "./components/Cart/checkout.js";
-import { CreateProduct } from "./components/upload.js";
->>>>>>> c0798a6011c167b20e68059de91d08725ae95732
+import { DBProducts } from "./components/admin/dbproducts.js";
 
 let full = document.querySelector("#full");
 let nav = document.querySelector("#nav");
@@ -73,8 +67,6 @@ window.addEventListener("click", (e) => {
       break;
   }
 });
-
-getCategories("nav");
 
 window.addEventListener("click", (e) => {
   let id = e.target.getAttribute("id");

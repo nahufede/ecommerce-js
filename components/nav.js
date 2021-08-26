@@ -1,6 +1,25 @@
 import { auth } from "../firebase/firebase.js";
+import { getCategories } from "../firebase/products.js";
+
+const categoriesNav = () => {
+  getCategories().then((el) => {
+    let categoriesnav_man;
+
+    if (document.getElementById("categoriesnav_man")) {
+      categoriesnav_man = document.querySelector("#categoriesnav_man");
+    }
+
+    el.forEach((el) => {
+      let categoriesNav = document.createElement("li");
+      categoriesNav.innerHTML = `<a class="dropdown-item click-category" id="${el.name}" href="#">${el.name}</a>`;
+      categoriesnav_man.appendChild(categoriesNav);
+    });
+  });
+};
 
 export const Navbar = () => {
+  categoriesNav();
+
   const user = auth().currentUser;
 
   let cart = JSON.parse(localStorage.getItem("carrito")) || [];

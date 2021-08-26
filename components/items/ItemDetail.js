@@ -1,5 +1,5 @@
-import { getFirestore } from "../firebase/firebase.js";
-import { ItemList, RelatedItems } from "../components/ItemList.js";
+import { getFirestore } from "../../firebase/firebase.js";
+import { ItemList, RelatedItems } from "./ItemList.js";
 
 let db = getFirestore();
 

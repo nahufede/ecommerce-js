@@ -1,4 +1,4 @@
-import { getFirestore } from "../firebase/firebase.js";
+import { getFirestore } from "../../firebase/firebase.js";
 
 let db = getFirestore();
 let app = document.querySelector("#app");

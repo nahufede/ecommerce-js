@@ -33,11 +33,7 @@ function removeProduct(e) {
   );
   app.innerHTML = Checkout();
   guardarStorage();
-<<<<<<< HEAD:components/Cart/checkout-view.js
-  app.innerHTML = Checkout();
-=======
   nav.innerHTML = Navbar();
->>>>>>> c0798a6011c167b20e68059de91d08725ae95732:components/Cart/checkout.js
 }
 
 function obtenerDatosProducto(producto) {
