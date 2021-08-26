@@ -12,9 +12,14 @@ import { auth } from "./firebase/firebase.js";
 import { createElement } from "./firebase/products.js";
 import { LogOut, LogIn } from "./firebase/user.js";
 import { SearchResults } from "./components/itemList.js";
+<<<<<<< HEAD
 import { Checkout } from "./components/Cart/checkout-view.js";
 import { Upload } from "./components/admin/upload.js";
 import { DBProducts } from "./components/admin/products.js";
+=======
+import { Checkout } from "./components/Cart/checkout.js";
+import { CreateProduct } from "./components/upload.js";
+>>>>>>> c0798a6011c167b20e68059de91d08725ae95732
 
 let full = document.querySelector("#full");
 let nav = document.querySelector("#nav");

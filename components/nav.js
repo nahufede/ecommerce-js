@@ -1,11 +1,22 @@
 import { auth } from "../firebase/firebase.js";
 
 export const Navbar = () => {
+  const user = auth().currentUser;
 
-    const user = auth().currentUser;
+  let cart = JSON.parse(localStorage.getItem("carrito")) || [];
+  let productQuantity = 0;
+  let i;
+  for (i = 0; i < cart.length; i++) {
+    productQuantity += cart[i].cantidad;
+  }
 
-    return (
-            `<nav class="navbar navbar-expand-lg navbar-light">
+  let conditionalDisplay = "d-none";
+
+  if (cart.length > 0) {
+    conditionalDisplay = "";
+  }
+
+  return `<nav class="navbar navbar-expand-lg navbar-light">
             <div class="container-fluid mynav">
               <a class="navbar-brand" id="home" href="">LUCCA</a>
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -47,12 +58,11 @@ export const Navbar = () => {
                 </form>
                 <a>
                   <i class="bi bi-cart3 carrito" id=cart></i>
-                  <span class='badge badge-warning' id='lblCartCount'> 5 </span>
+                  <span class='badge badge-warning ${conditionalDisplay} scale-up-center' id='lblCartCount'> ${productQuantity} </span>
                 </a>
               </div>
             </div>
-          </nav>`
-      )
-}
+          </nav>`;
+};
 
 export default Navbar;
