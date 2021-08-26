@@ -1,4 +1,4 @@
-import { auth } from "../firebase/firebase.js";
+import { auth } from "../../firebase/firebase.js";
 
 export const Admin = () => {
 
@@ -24,7 +24,7 @@ export const Admin = () => {
                             <input type="password" class="form-control" id="floatingPassword" placeholder="Contraseña">
                             <label for="floatingPassword">Contraseña</label>
                         </div>
-                        <button id="loginbutton" type="submit">ENVIAR</button>
+                        <button id="login" class="mybutton" type="submit">INICIAR SESIÓN</button>
                     </form>
                 </div>
             </div>
@@ -40,7 +40,9 @@ export const Admin = () => {
                         </div>
                         <h1 class="text-center mt-3">SESIÓN INICIADA</h1>
                         <p class="text-center mt-3">${user.email}</p>
-                        <button id="logoutbutton" type="submit">SALIR</button>
+                        <button id="upload" class="mybutton" type="submit">Subir Items</button>
+                        <button id="dbproducts" class="mybutton" type="submit">Ver Items</button>
+                        <button id="logout" class="mybutton" type="submit">SALIR</button>
                     </div>
                 </div>
             </div>`

@@ -3,9 +3,9 @@ import { Footer } from "./components/footer.js";
 import { Home } from "./components/home.js";
 import { Contacto } from "./components/contact.js";
 import { Hombre } from "./components/hombre.js";
-import { Admin } from "./components/admin.js";
+import { Admin } from "./components/admin/admin.js";
 import { Mujer } from "./components/mujer.js";
-import { getCategories } from "./firebase/products.js";
+import { getCategories, getItems } from "./firebase/products.js";
 import { ItemList } from "./components/itemList.js";
 import { itemDetail } from "./components/itemDetail.js";
 import { auth } from "./firebase/firebase.js";
@@ -13,7 +13,8 @@ import { createElement } from "./firebase/products.js";
 import { LogOut, LogIn } from "./firebase/user.js";
 import { SearchResults } from "./components/itemList.js";
 import { Checkout } from "./components/Cart/checkout-view.js";
-import { CreateProduct } from "./components/upload.js";
+import { Upload } from "./components/admin/upload.js";
+import { DBProducts } from "./components/admin/products.js";
 
 let full = document.querySelector("#full");
 let nav = document.querySelector("#nav");
@@ -57,6 +58,14 @@ window.addEventListener("click", (e) => {
     case "cart":
       app.innerHTML = Checkout();
       break;
+
+    case "upload":
+      app.innerHTML = Upload();
+      break;
+
+    case "dbproducts":
+      app.innerHTML = DBProducts();
+      break;
   }
 });
 
@@ -77,11 +86,11 @@ window.addEventListener("click", (e) => {
     });
   }
   
-  if (id === "loginbutton") {
+  if (id === "login") {
     LogIn();
   }
 
-  if (id === "logoutbutton") {
+  if (id === "logout") {
     LogOut();
   }
 

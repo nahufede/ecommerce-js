@@ -1,5 +1,5 @@
 import { auth } from "./firebase.js";
-import { Admin } from "../components/admin.js";
+import { Admin } from "../components/admin/admin.js";
 
 export const LogOut = () => {
     auth().signOut().then(() => {

@@ -148,7 +148,7 @@ export async function getItems() {
 
     allProducts = querySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
 
-    allProducts.forEach(el=>{
+    /* allProducts.forEach(el=>{
         let prod = document.createElement('div')
         prod.className = 'card'
         prod.setAttribute('id',el.id)
@@ -169,9 +169,9 @@ export async function getItems() {
         `
 
         products.appendChild(prod)
-    })
+    }) */
 
-    app.appendChild(products)
+    /* app.appendChild(products) */
 }
 
 let editForm = document.querySelector('#editForm')

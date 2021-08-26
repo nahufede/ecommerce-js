@@ -29,6 +29,7 @@ function removeProduct(e) {
   );
 
   guardarStorage();
+  app.innerHTML = Checkout();
 }
 
 function obtenerDatosProducto(producto) {

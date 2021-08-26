@@ -130,8 +130,8 @@ body {
     text-align: center;
 }
 
-#contactbutton, #loginbutton, #logoutbutton {
-    width: 8rem;
+.mybutton {
+    width: auto;
     align-self: center;
     margin: 2rem 0;
     background-color: black;
