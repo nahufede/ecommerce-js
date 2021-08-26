@@ -1,37 +1,40 @@
-import {getFirestore, storage} from './firebase.js'
+import { getFirestore, storage } from "./firebase.js";
+import { DBProducts, Modal } from "../components/admin/dbproducts.js";
 
 let db = getFirestore();
 let storageRef = storage().ref();
 let app = document.querySelector("#app");
 
 export const getCategories = async () => {
+  const itemCollection = db.collection("categoriesman");
+  const querySnapshot = await itemCollection.get();
 
-    const itemCollection = db.collection('categoriesman')
-    const querySnapshot = await itemCollection.get()
+  let categories = querySnapshot.docs.map((doc) => ({
+    ...doc.data(),
+    id: doc.id,
+  }));
 
-    let categories = querySnapshot.docs.map((doc) => ({
-        ...doc.data(),
-        id: doc.id
-    }));
-
-    return categories
-}
+  return categories;
+};
 
 export async function getItems() {
+  let allProducts = [];
 
-    let allProducts = []
+  let products = document.createElement("div");
+  products.className = "container";
+  products.style.cssText =
+    "display: flex ; flex-direction: column ; margin: 5rem";
 
-    let products = document.createElement('div');
-    products.className = 'container';
-    products.style.cssText = 'display: flex ; flex-direction: column ; margin: 5rem'
+  const itemCollection = db.collection("products");
+  const querySnapshot = await itemCollection.get();
 
-    const itemCollection = db.collection('products')
-    const querySnapshot = await itemCollection.get()
+  allProducts = querySnapshot.docs.map((doc) => ({
+    ...doc.data(),
+    id: doc.id,
+  }));
 
-    allProducts = querySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
-
-    return allProducts
-    /* allProducts.forEach(el=>{
+  return allProducts;
+  /* allProducts.forEach(el=>{
         let prod = document.createElement('div')
         prod.className = 'card'
         prod.setAttribute('id',el.id)
@@ -54,102 +57,127 @@ export async function getItems() {
         products.appendChild(prod)
     }) */
 
-    /* app.appendChild(products) */
+  /* app.appendChild(products) */
 }
 
-let editForm = document.querySelector('#editForm')
+window.addEventListener("click", async (e) => {
+  let focus = e.target;
 
+  if (focus.classList.contains("delete")) {
+    let id = focus.parentElement.parentElement.getAttribute("id");
+    let folder =
+      focus.parentElement.parentElement.children[2].innerText.toLowerCase();
 
-window.addEventListener('click', async (e)=>{
+    let confirmacion = confirm("Desea eleminar el elemento?");
 
-    let focus = e.target
+    if (confirmacion) {
+      let focusImg = storageRef.child(`products/${folder}/${id}`);
 
-    if(focus.classList.contains('delete')){
-
-        let id = e.target.parentElement.parentElement.attributes.id.value
-        let folder = e.target.parentElement.children[3].innerHTML
-
-        let confirmacion = confirm('Desea eleminar el elemento?')
-
-        if(confirmacion){
-        
-        let focusImg = storageRef.child(`${folder}/${id}`);
-    
-        focusImg.delete().then(function() {
-            console.log('imagen borrada');
-        }).catch(function(error) {
-            console.log('error ->', error);
-        });
-
-        db.collection('products').doc(id).delete().then(() => {
-            console.log('documento eliminado');
-            location.reload();
-        }).catch((error) => {
-            console.error('error ->', error);
-        });}
-    }
-
-    if (focus.classList.contains('editBtn')){
-        
-        let id = e.target.parentElement.parentElement.attributes.id.value;
-
-        var docRef = db.collection('products').doc(id);
-
-        await docRef.get().then((doc) => {
-            if (doc.exists) {
-                let product = (({ ...doc.data(), id: doc.id }))
-                const {name, price, description, category} = product
-
-                let categoryLength = editForm[1].length
-
-                for (let i = 0; i < categoryLength; i++) {
-                    if ((editForm[1][i].innerHTML) === category){
-                        editForm[1].value = i
-                    }
-                }
-
-                editForm.setAttribute('id', id)
-                editForm[0].value = name;
-                editForm[2].value = price;
-                editForm[3].value = description;
-
-            } else {
-                // doc.data() will be undefined in this case
-                console.log("No such document!");
-            }
-        }).catch((error) => {
-            console.log("Error getting document:", error);
-        });
-    }
-
-    if (focus.classList.contains('saveEdit')){
-
-        e.preventDefault();
-        
-        let id = e.target.parentElement.getAttribute('id')
-
-        var docRef = db.collection('products').doc(id);
-
-        let selectedCategory = editForm[1].value;
-        let editCategory = editForm[1][selectedCategory].innerHTML
-
-        return docRef.update({
-            name: editForm[0].value,
-            price: editForm[2].value,
-            category: editCategory,
-            description: editForm[3].value,
+      focusImg
+        .delete()
+        .then(function () {
+          console.log("imagen borrada");
         })
-        .then(() => {
-            console.log("Document successfully updated!");
+        .catch(function (error) {
+          console.log("error ->", error);
+        });
 
-            setTimeout(
-                location.reload(),
-                10000
-            )
+      db.collection("products")
+        .doc(id)
+        .delete()
+        .then(() => {
+          console.log("documento eliminado");
+          location.reload();
         })
         .catch((error) => {
-            // The document probably doesn't exist.
-            console.error("Error updating document: ", error);
+          console.error("error ->", error);
         });
     }
-})
+  }
+
+  let exampleModal
+
+  if (focus.classList.contains("editBtn")) {
+
+    if(document.querySelector('#exampleModal')){
+        exampleModal = document.querySelector('#exampleModal')
+    }
+    
+    let editForm;
+
+    editForm = document.querySelector(".editForm");
+    
+
+    let id = focus.parentElement.parentElement.getAttribute("id");
+
+    var docRef = db.collection("products").doc(id);
+
+    await docRef
+      .get()
+      .then((doc) => {
+        if (doc.exists) {
+          let product = { ...doc.data(), id: doc.id };
+          const { name, price, description, category } = product;
+
+          let categoryLength = editForm[1].length;
+
+          for (let i = 0; i < categoryLength; i++) {
+            if (editForm[1][i].innerHTML === category) {
+              editForm[1].value = i;
+            }
+          }
+
+          editForm.setAttribute("id", id);
+          editForm[0].value = name;
+          editForm[2].value = price;
+          editForm[3].value = description;
+        } else {
+          // doc.data() will be undefined in this case
+          console.log("No such document!");
+        }
+      })
+      .catch((error) => {
+        console.log("Error getting document:", error);
+      });
+  }
+
+  if (focus.classList.contains("saveEdit")) {
+    e.preventDefault();
+
+    if(document.querySelector('#exampleModal')){
+        exampleModal = document.querySelector('#exampleModal')
+    }
+
+    let editForm;
+
+    editForm = document.querySelector(".editForm");
+
+    let id = e.target.parentElement.getAttribute("id");
+
+    var docRef = db.collection("products").doc(id);
+
+    let selectedCategory = editForm[1].value;
+    let editCategory = editForm[1][selectedCategory].innerHTML;
+
+    return docRef
+      .update({
+        name: editForm[0].value,
+        price: editForm[2].value,
+        category: editCategory,
+        description: editForm[3].value,
+      })
+      .then(() => {
+        console.log("Document successfully updated!");
+        app.innerHTML = DBProducts();
+        modal.innerHTML = Modal();
+        if(document.querySelector('.modal-backdrop')){
+            let modalback = document.querySelector('.modal-backdrop')
+            modalback.className = ""
+        }
+      })
+      .catch((error) => {
+        // The document probably doesn't exist.
+        console.error("Error updating document: ", error);
+      });
+  }
+});

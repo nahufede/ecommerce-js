@@ -14,14 +14,15 @@ import { SearchResults } from "./components/items/itemList.js";
 import { Checkout } from "./components/cart/checkout.js";
 import { Upload } from "./components/admin/upload.js";
 import { DBProducts } from "./components/admin/dbproducts.js";
+import { Modal } from "./components/admin/dbproducts.js"
 
-let full = document.querySelector("#full");
 let nav = document.querySelector("#nav");
 let app = document.querySelector("#app");
 let footer = document.querySelector("#footer");
 
 nav.innerHTML = Navbar();
 footer.innerHTML = Footer();
+modal.innerHTML = Modal();
 
 window.addEventListener("DOMContentLoaded", () => (app.innerHTML = Home()));
 

@@ -1,7 +1,8 @@
 import { getCategories } from "../../firebase/products.js";
-import { getFirestore } from "../../firebase/firebase.js"
+import { getFirestore, storage } from "../../firebase/firebase.js"
 
 let db = getFirestore();
+let storageRef = storage().ref();
 
 export function createElement(e) {
 
