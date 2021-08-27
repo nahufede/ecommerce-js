@@ -2,7 +2,6 @@ import { getItems } from "../../firebase/products.js";
 import { getCategories } from "../../firebase/products.js";
 
 export const Modal = () => {
-
   return `<!-- Modal -->
   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -37,11 +36,10 @@ export const Modal = () => {
 };
 
 export const DBProducts = () => {
-
-  let modal = document.querySelector('#modal')
+  let modal = document.querySelector("#modal");
+  let productsLength
 
   getCategories().then((el) => {
-
     let categories = el;
 
     let selectItems;
@@ -63,12 +61,30 @@ export const DBProducts = () => {
     });
   });
 
-  getItems().then((el) => {
-    let products = el;
+  getItems().then((products) => {
 
-    let cartList;
+    productsLength = products.length
 
-    products.forEach((el) => {
+    let viewList;
+
+    if (document.querySelector(".cuerpo")) {
+      viewList = document.querySelector(".cuerpo")
+    }
+
+    viewList.innerHTML = ""
+
+    const setProducts = (parameter) => {
+
+      const mappingCart = (x) => {
+        let start = x * 5;
+        let end = start + 5;
+  
+        products = products.slice(start, end);
+      }
+
+      mappingCart(parameter)
+      
+      products.forEach((el) => {
       /* Destrucuring sobre el objeto */
 
       const { name, img, category, id } = el;
@@ -95,57 +111,107 @@ export const DBProducts = () => {
                 </td>
                 
             `;
+      viewList.appendChild(row);
+    });}
 
-      if (document.querySelector(".cuerpo")) {
-        cartList = document.querySelector(".cuerpo");
+    const pagination = (productsLength) => {
+      let pageDivision = Math.ceil(productsLength / 5);
+      let pageNumbers = [];
+  
+      for (let i = 0; i < pageDivision; i++) {
+        pageNumbers.push(i + 1);
       }
-      cartList.appendChild(row);
-    });
+  
+      if(document.querySelector('.mypagination')){
+        let paginationFather = document.querySelector('.mypagination')
+        paginationFather.innerHTML = ""
+  
+        let preview = document.createElement('li')
+        preview.classList = "page-item"
+        preview.innerHTML = `<a class="page-link" href="#" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+        </a>`
+        paginationFather.appendChild(preview)
+        
+        pageNumbers.map((el, index)=>{
+          el = document.createElement('li')
+          el.className = "page-item"
+          el.innerHTML= `<a class="page-link pagenumber" page="${index}" href="#">${index+1}</a>`
+          paginationFather.appendChild(el)
+        })
+  
+        let next = document.createElement('li')
+        next.className = "page-item"
+        next.innerHTML = `<a class="page-link" href="#" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+                          </a>`
+        paginationFather.appendChild(next)
+      }
+  
+    };
+
+    pagination(productsLength)
+
+    if(document.querySelector('.pagenumber')){
+      window.addEventListener('click',(e)=>{
+
+        if(e.target.classList.contains('pagenumber')){
+
+          let page = e.target.getAttribute('page')
+  
+          setProducts(page);
+        }
+      })
+    }
   });
 
   return `
-    <div class="container dbproductspage">
-    <div class="row">
-      <div class="col-12">
-        <div class="d-flex flex-row justify-content-center">
-          <a id="home" class="contactbreadcrumb" href="">Inicio</a>
-          <a id="admin" class="contactbreadcrumb" href="">> Administrador</a>
-          <p>> Productos</p>
-        </div>
+  <div class="container dbproductspage">
+  <div class="row">
+    <div class="col-12">
+      <div class="d-flex flex-row justify-content-center">
+        <a id="home" class="contactbreadcrumb" href="">Inicio</a>
+        <a id="admin" class="contactbreadcrumb" href="">> Administrador</a>
+        <p>> Productos</p>
       </div>
-      <div class="col-12 my-5 d-flex">
-        <div class="col-4">
-          <h1>MIS PRODUCTOS</h1>
-        </div>
-        <div class="col-8">
-          <div class="card">
-            <div class="card-content" id="tajeta-checkout">
-              <div class="card-body">
-                <div class="container">
-                  <div class="row carrito-checkout">
-                    <table id="carrito-checkout" class="u-full-width">
-                      <thead>
-                        <tr>
-                          <th>Producto</th>
-                          <th>Nombre</th>
-                          <th>Categoria</th>
-                          <th></th>
-                        </tr>
-                      </thead>
-                      <tbody class="cuerpo">
-                      </tbody>
-                    </table>
-                  </div>
-                  <br>
+    </div>
+    <div class="col-12 my-5 d-flex flex-row">
+      <div class="col-12 col-md-4">
+        <h1>MIS PRODUCTOS</h1>
+      </div>
+      <div class="col-12 col-md-8">
+        <div class="card">
+          <div class="card-content" id="tajeta-checkout">
+            <div class="card-body">
+              <div class="container">
+                <div class="row carrito-checkout">
+                  <table id="carrito-checkout" class="u-full-width">
+                    <thead>
+                      <tr>
+                        <th>Producto</th>
+                        <th>Nombre</th>
+                        <th>Categoria</th>
+                        <th></th>
+                      </tr>
+                    </thead>
+                    <tbody class="cuerpo">
+                    </tbody>
+                  </table>
                 </div>
+                <br>
               </div>
             </div>
           </div>
+          <nav aria-label="Page navigation example" class="d-flex justify-content-center">
+            <ul class="pagination mypagination">
+            </ul>
+          </nav>
         </div>
       </div>
     </div>
   </div>
-  <br>
+</div>
+<br>
 </div>
 `;
 };

@@ -61,7 +61,7 @@ export function createElement(e) {
                     console.log("Document successfully updated!");
                     progressBar.classList.add('bg-warning')
 
-                    setTimeout(()=>location.reload(),5000)
+                    app.innerHTML = Upload();
                     
                 });
             });

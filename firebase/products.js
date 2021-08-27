@@ -26,7 +26,7 @@ export async function getItems() {
     "display: flex ; flex-direction: column ; margin: 5rem";
 
   const itemCollection = db.collection("products");
-  const querySnapshot = await itemCollection.get();
+  const querySnapshot = await itemCollection.orderBy("name").get();
 
   allProducts = querySnapshot.docs.map((doc) => ({
     ...doc.data(),
