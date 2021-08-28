@@ -42,7 +42,7 @@ export const Admin = () => {
                         <p class="text-center mt-3">${user.email}</p>
                         <button id="upload" class="mybutton" type="submit">Subir Items</button>
                         <button id="dbproducts" class="mybutton" type="submit">Editar Items</button>
-                        <button id="logout" class="mybutton" type="submit">SALIR</button>
+                        <button id="logout" class="mybutton" type="submit">Cerrar Sesión</button>
                     </div>
                 </div>
             </div>`

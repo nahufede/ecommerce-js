@@ -39,6 +39,8 @@ export const DBProducts = () => {
   let modal = document.querySelector("#modal");
   let productsLength
 
+  // LLAMADO FIREBASE DE CATEGORIAS
+
   getCategories().then((el) => {
     let categories = el;
 
@@ -61,61 +63,67 @@ export const DBProducts = () => {
     });
   });
 
+  // LLAMADO FIREBASE DE PRODUCTOS
+
   getItems().then((products) => {
 
-    productsLength = products.length
+    /* productsLength = products.length */
 
-    let viewList;
+    let viewList = document.createElement('div')
+    viewList.className = "row pt-4"
 
-    if (document.querySelector(".cuerpo")) {
-      viewList = document.querySelector(".cuerpo")
+    let dbproductsContainer 
+
+    if (document.querySelector("#dbproducts")) {
+      dbproductsContainer  = document.querySelector("#dbproducts")
     }
 
-    viewList.innerHTML = ""
+    /* const mappingCart = (x) => {
+      let start = x * 8;
+      let end = start + 8;
 
+      products = products.slice(start, end);
+    }
+ */
     const setProducts = (parameter) => {
 
-      const mappingCart = (x) => {
-        let start = x * 5;
-        let end = start + 5;
-  
-        products = products.slice(start, end);
-      }
-
-      mappingCart(parameter)
+      /* mappingCart(parameter) */
       
       products.forEach((el) => {
       /* Destrucuring sobre el objeto */
 
       const { name, img, category, id } = el;
 
-      const row = document.createElement("tr");
-      row.setAttribute("id", id);
+      const card = document.createElement('div');
+      card.className = "col-6 col-md-4 col-lg-3 d-flex justify-content-center mb-4"
+      card.innerHTML = 
+      `<div class="card" style="width: 15rem; height: 15rem;" id="${id}">
+        <div class="card-body card-space p-0" style="background-image: url(${img})">
+          <div class="card-inner">
+            <h5 class="text-center">${name}</h5>
+            <p>${category}</p>
+            <span class="d-flex flex-row justify-content-evenly w-100">
+              <button type="button" class="btn btn-info editBtn" data-bs-toggle="modal"     data-bs-target="#exampleModal">
+                      Editar
+              </button>
+              <button type="button" class="btn btn-warning deleteBtn">Eliminar
+              </button>
+            </span>
+          </div>
+        </div>
+      </div>
+      `
+      viewList.appendChild(card);
+    });
 
-      row.innerHTML = `
-                <td style="background-image: url(${img})" class="tableimage">
-                </td>
-                <td>
-                    ${name}
-                </td>
-                <td>
-                    ${category}
-                </td>
-                <td>
-                  <a class="btn btn-warning delete">Borrar</a>
-                </td>
-                <td>
-                  <button type="button" class="btn btn-info editBtn" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                  Editar
-                  </button>
-                </td>
-                
-            `;
-      viewList.appendChild(row);
-    });}
+    dbproductsContainer.appendChild(viewList)
 
-    const pagination = (productsLength) => {
-      let pageDivision = Math.ceil(productsLength / 5);
+    }
+
+    setProducts()
+
+    /* const pagination = (productsLength) => {
+      let pageDivision = Math.ceil(productsLength / 8);
       let pageNumbers = [];
   
       for (let i = 0; i < pageDivision; i++) {
@@ -150,68 +158,49 @@ export const DBProducts = () => {
   
     };
 
-    pagination(productsLength)
+    pagination(productsLength) */
 
-    if(document.querySelector('.pagenumber')){
+    /* if(document.querySelector('.pagenumber')){
       window.addEventListener('click',(e)=>{
 
         if(e.target.classList.contains('pagenumber')){
 
           let page = e.target.getAttribute('page')
-  
+          
+          console.log(page);
+
           setProducts(page);
         }
       })
-    }
+    } */
   });
 
   return `
-  <div class="container dbproductspage">
-  <div class="row">
-    <div class="col-12">
-      <div class="d-flex flex-row justify-content-center">
-        <a id="home" class="contactbreadcrumb" href="">Inicio</a>
-        <a id="admin" class="contactbreadcrumb" href="">> Administrador</a>
-        <p>> Productos</p>
-      </div>
-    </div>
-    <div class="col-12 my-5 d-flex flex-row">
-      <div class="col-12 col-md-4">
-        <h1>MIS PRODUCTOS</h1>
-      </div>
-      <div class="col-12 col-md-8">
-        <div class="card">
-          <div class="card-content" id="tajeta-checkout">
-            <div class="card-body">
-              <div class="container">
-                <div class="row carrito-checkout">
-                  <table id="carrito-checkout" class="u-full-width">
-                    <thead>
-                      <tr>
-                        <th>Producto</th>
-                        <th>Nombre</th>
-                        <th>Categoria</th>
-                        <th></th>
-                      </tr>
-                    </thead>
-                    <tbody class="cuerpo">
-                    </tbody>
-                  </table>
-                </div>
-                <br>
-              </div>
-            </div>
+    <div class="container dbproductspage">
+      <div class="row">
+        <div class="col-12">
+          <div class="d-flex flex-row justify-content-center">
+            <a id="home" class="contactbreadcrumb" href="">Inicio</a>
+            <a id="admin" class="contactbreadcrumb" href="">> Administrador</a>
+            <p>> Productos</p>
           </div>
-          <nav aria-label="Page navigation example" class="d-flex justify-content-center">
-            <ul class="pagination mypagination">
-            </ul>
-          </nav>
+        </div>
+      </div>
+      <div class="row p-0">
+        <div class="col-12 my-5">
+          <div class="col-12">
+            <h1 class="text-center mb-5">MIS PRODUCTOS</h1>
+          </div>
+          <div class="col-12">
+            <div class="container" id="dbproducts">
+            </div>
+            <nav aria-label="Page navigation example" class="d-flex justify-content-center mt-3">
+              <ul class="pagination mypagination">
+              </ul>
+            </nav>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</div>
-<br>
-</div>
 `;
 };

@@ -5,7 +5,7 @@ import { Contacto } from "./components/views/contact.js";
 import { Hombre } from "./components/views/hombre.js";
 import { Admin } from "./components/admin/admin.js";
 import { Mujer } from "./components/views/mujer.js";
-import { getCategories } from "./firebase/products.js";
+import { getCategories, getItems } from "./firebase/products.js";
 import { ItemList } from "./components/items/itemList.js";
 import { itemDetail } from "./components/items/itemDetail.js";
 import { createElement } from "./components/admin/upload.js";
@@ -24,7 +24,7 @@ nav.innerHTML = Navbar();
 footer.innerHTML = Footer();
 modal.innerHTML = Modal();
 
-window.addEventListener("DOMContentLoaded", () => (app.innerHTML = Home()));
+window.addEventListener("DOMContentLoaded", () => (app.innerHTML = DBProducts()));
 
 window.addEventListener("click", (e) => {
   if (e.target.type !== "file") {

@@ -331,8 +331,47 @@ body {
     font-size: 2.2rem;
 }
 
-.tableimage{
+.card-space{
+    position: relative;
+    overflow: hidden;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
+}
+
+#dbproducts{
+    border: 0.1rem solid black;
+}
+
+.card-space::after {
+    position: absolute;
+    content: '';
+    height: 100%;
+    width: 100%;
+    left: 0;
+    background: rgba(255, 255, 255, 0.342);
+    top: -100%;
+    transition: 0.4s;
+    z-index: 9;
+}
+  
+.card-space:hover::after {
+top: 0%;
+}
+
+.card-inner {
+position: absolute;
+bottom: -100%;
+transition: 0.4s;
+z-index: 99;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+width: 100%;
+}
+
+.card-space:hover .card-inner {
+bottom: 5%;
+opacity: 1;
 }

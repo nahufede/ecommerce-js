@@ -17,18 +17,17 @@ export const getCategories = async () => {
   return categories;
 };
 
-export async function getItems() {
-  let allProducts = [];
-
+export const getItems = async () => {
+  /* 
   let products = document.createElement("div");
   products.className = "container";
   products.style.cssText =
-    "display: flex ; flex-direction: column ; margin: 5rem";
+    "display: flex ; flex-direction: column ; margin: 5rem"; */
 
   const itemCollection = db.collection("products");
   const querySnapshot = await itemCollection.orderBy("name").get();
 
-  allProducts = querySnapshot.docs.map((doc) => ({
+  let allProducts = querySnapshot.docs.map((doc) => ({
     ...doc.data(),
     id: doc.id,
   }));
@@ -63,10 +62,9 @@ export async function getItems() {
 window.addEventListener("click", async (e) => {
   let focus = e.target;
 
-  if (focus.classList.contains("delete")) {
-    let id = focus.parentElement.parentElement.getAttribute("id");
-    let folder =
-      focus.parentElement.parentElement.children[2].innerText.toLowerCase();
+  if (focus.classList.contains("deleteBtn")) {
+    let id = focus.parentElement.parentElement.parentElement.getAttribute("id");
+    let folder = focus.parentElement.children[1].innerHTML.toLowerCase()
 
     let confirmacion = confirm("Desea eleminar el elemento?");
 
@@ -107,8 +105,9 @@ window.addEventListener("click", async (e) => {
 
     editForm = document.querySelector(".editForm");
     
+    let id = focus.parentElement.parentElement.parentElement.getAttribute("id");
 
-    let id = focus.parentElement.parentElement.getAttribute("id");
+    console.log(id);
 
     var docRef = db.collection("products").doc(id);
 
