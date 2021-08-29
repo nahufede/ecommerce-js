@@ -40,9 +40,10 @@ export const Admin = () => {
                         </div>
                         <h1 class="text-center mt-3">SESIÓN INICIADA</h1>
                         <p class="text-center mt-3">${user.email}</p>
-                        <button id="upload" class="mybutton" type="submit">Subir Items</button>
-                        <button id="dbproducts" class="mybutton" type="submit">Editar Items</button>
-                        <button id="logout" class="mybutton" type="submit">Cerrar Sesión</button>
+                        <button id="upload" class="mybutton mb-2" type="button">Subir Items</button>
+                        <button id="databproducts" class="mybutton mb-2" type="button">Editar Items</button>
+                        <button id="editcategories" class="mybutton mb-2" type="button">Editar Categorias</button>
+                        <button id="logout" class="mybutton mb-2" type="button">Cerrar Sesión</button>
                     </div>
                 </div>
             </div>`

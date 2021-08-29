@@ -5,7 +5,7 @@ import { Contacto } from "./components/views/contact.js";
 import { Hombre } from "./components/views/hombre.js";
 import { Admin } from "./components/admin/admin.js";
 import { Mujer } from "./components/views/mujer.js";
-import { getCategories, getItems } from "./firebase/products.js";
+import { getCategories } from "./firebase/products.js";
 import { ItemList } from "./components/items/itemList.js";
 import { itemDetail } from "./components/items/itemDetail.js";
 import { createElement } from "./components/admin/upload.js";
@@ -14,15 +14,17 @@ import { SearchResults } from "./components/items/itemList.js";
 import { Checkout } from "./components/cart/checkout.js";
 import { Upload } from "./components/admin/upload.js";
 import { DBProducts } from "./components/admin/dbproducts.js";
-import { Modal } from "./components/admin/dbproducts.js"
+import { DBModal } from "./components/modal.js"
+import { Categories } from "./components/admin/categories.js"
 
 let nav = document.querySelector("#nav");
 let app = document.querySelector("#app");
 let footer = document.querySelector("#footer");
+let modal = document.querySelector("#modal");
 
 nav.innerHTML = Navbar();
 footer.innerHTML = Footer();
-modal.innerHTML = Modal();
+modal.innerHTML = DBModal();
 
 window.addEventListener("DOMContentLoaded", () => (app.innerHTML = DBProducts()));
 
@@ -63,8 +65,12 @@ window.addEventListener("click", (e) => {
       app.innerHTML = Upload();
       break;
 
-    case "dbproducts":
+    case "databproducts":
       app.innerHTML = DBProducts();
+      break;
+
+    case "editcategories":
+      app.innerHTML = Categories();
       break;
   }
 });

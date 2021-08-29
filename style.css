@@ -160,13 +160,16 @@ body {
 .mybutton {
     width: auto;
     align-self: center;
-    margin: 2rem 0;
     background-color: black;
     color: white;
     border-radius: 1rem;
     padding: 0.2rem 2rem;
     border-style: none;
     text-align: center;
+}
+
+.mybutton:hover {
+    color: white;
 }
 
 #contactForm input {
@@ -339,7 +342,7 @@ body {
     background-position: center;
 }
 
-#dbproducts{
+#dbproducts, #categoriespage{
     border: 0.1rem solid black;
 }
 

@@ -90,8 +90,8 @@ export const Upload = () => {
           option.innerHTML = name
           option.setAttribute('value', index+1)
 
-          if(document.querySelector('.categoryoptions')){
-            selectItems = document.querySelector('.categoryoptions')
+          if(document.querySelector('.categoryupload')){
+            selectItems = document.querySelector('.categoryupload')
           }
 
         selectItems.appendChild(option)
@@ -119,7 +119,7 @@ export const Upload = () => {
                           <label for="floatingName">Nombre</label>
                       </div>
                       <div class="form-floating mb-3">
-                          <select class="form-select categoryoptions" id="floatingCategory" aria-label="Floating label category">
+                          <select class="form-select categoryupload" id="floatingCategory" aria-label="Floating label category">
                               <option selected>Seleccionar</option>
                           </select>
                           <label for="floatingCategory">Categoria</label>

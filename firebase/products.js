@@ -1,12 +1,13 @@
 import { getFirestore, storage } from "./firebase.js";
-import { DBProducts, Modal } from "../components/admin/dbproducts.js";
+import { DBProducts } from "../components/admin/dbproducts.js";
+import { DBModal } from "../components/modal.js"
 
 let db = getFirestore();
 let storageRef = storage().ref();
 let app = document.querySelector("#app");
 
 export const getCategories = async () => {
-  const itemCollection = db.collection("categoriesman");
+  const itemCollection = db.collection('categories_man');
   const querySnapshot = await itemCollection.get();
 
   let categories = querySnapshot.docs.map((doc) => ({
@@ -47,7 +48,7 @@ export const getItems = async () => {
                 <p class="card-text">${el.price}</p>
                 <p class="card-text">${el.category}</p>
                 <a class="btn btn-warning delete">Delete</a>
-                <button type="button" class="btn btn-info editBtn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <button type="button" class="btn btn-info editBtn" data-bs-toggle="modal" data-bs-target="#dbproductsmodal">
                     Editar
                 </button>
             </div>
@@ -63,8 +64,8 @@ window.addEventListener("click", async (e) => {
   let focus = e.target;
 
   if (focus.classList.contains("deleteBtn")) {
-    let id = focus.parentElement.parentElement.parentElement.getAttribute("id");
-    let folder = focus.parentElement.children[1].innerHTML.toLowerCase()
+    let id = focus.parentElement.getAttribute('id');
+    let folder = focus.parentElement.parentElement.children[1].innerHTML.toLowerCase()
 
     let confirmacion = confirm("Desea eleminar el elemento?");
 
@@ -93,21 +94,19 @@ window.addEventListener("click", async (e) => {
     }
   }
 
-  let exampleModal
-
   if (focus.classList.contains("editBtn")) {
 
-    if(document.querySelector('#exampleModal')){
-        exampleModal = document.querySelector('#exampleModal')
+    let exampleModal
+
+    if(document.querySelector('#dbproductsmodal')){
+      exampleModal = document.querySelector('#dbproductsmodal')
     }
-    
+
     let editForm;
 
     editForm = document.querySelector(".editForm");
-    
-    let id = focus.parentElement.parentElement.parentElement.getAttribute("id");
 
-    console.log(id);
+    let id = focus.parentElement.getAttribute('id');
 
     var docRef = db.collection("products").doc(id);
 
@@ -115,6 +114,7 @@ window.addEventListener("click", async (e) => {
       .get()
       .then((doc) => {
         if (doc.exists) {
+
           let product = { ...doc.data(), id: doc.id };
           const { name, price, description, category } = product;
 
@@ -143,8 +143,10 @@ window.addEventListener("click", async (e) => {
   if (focus.classList.contains("saveEdit")) {
     e.preventDefault();
 
-    if(document.querySelector('#exampleModal')){
-        exampleModal = document.querySelector('#exampleModal')
+    let exampleModal
+
+    if(document.querySelector('#dbproductsmodal')){
+        exampleModal = document.querySelector('#dbproductsmodal')
     }
 
     let editForm;
@@ -167,12 +169,8 @@ window.addEventListener("click", async (e) => {
       })
       .then(() => {
         console.log("Document successfully updated!");
-        app.innerHTML = DBProducts();
-        modal.innerHTML = Modal();
-        if(document.querySelector('.modal-backdrop')){
-            let modalback = document.querySelector('.modal-backdrop')
-            modalback.className = ""
-        }
+        location.reload()
+        app.innerHTML = DBProducts()
       })
       .catch((error) => {
         // The document probably doesn't exist.
