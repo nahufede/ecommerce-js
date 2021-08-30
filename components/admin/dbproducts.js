@@ -41,7 +41,7 @@ export const DBProducts = () => {
           <div class="card-inner" id="${id}">
             <h5 class="text-center">${name}</h5>
             <p>${category}</p>
-              <button type="button" class="btn editBtn mybutton mb-2" data-bs-toggle="modal" data-bs-target="#dbproductsmodal">
+              <button type="button" class="btn editBtn mybutton2 mb-2" data-bs-toggle="modal" data-bs-target="#dbproductsmodal">
               Editar
               </button>
               <button type="button" class="btn deleteBtn mybutton">Eliminar
