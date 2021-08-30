@@ -36,7 +36,7 @@ export async function ItemList(category) {
     prod.className = "card";
     prod.classList.add("itemList-product");
     prod.innerHTML = `<a href="">  
-                <img src="${el.img}" class="card-img itemList-product__image" id="${el.id}" alt="${el.name}">
+    <div class="itemList-imgContainer"><img src="${el.img}" class="card-img itemList-product__image" id="${el.id}" alt="${el.name}"></div>
                 <div class="card-body itemList-product__name">
                     <p class="card-title text-center">${el.name}</p>
                 </div>
