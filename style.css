@@ -14,7 +14,7 @@ body {
 }
 
 .mynav {
-    margin: 1rem 3rem;
+    padding: 1rem 3rem;
 }
 
 .navitems {
@@ -78,7 +78,15 @@ body {
 
 #search {
     border-radius: 1rem;
-    width: 20rem;
+    width: 60%;
+}
+
+.linkborder{
+    border: none;
+}
+
+.mynav .navbar-toggler{
+    border: none;
 }
 
 .carrito {
@@ -94,7 +102,7 @@ body {
     text-align: center;
     border-bottom: 1px solid black;
     width: min-content;
-    font-size: 8rem;
+    font-size: 6rem;
 }
 
 .titleContent {
@@ -109,8 +117,8 @@ body {
     margin: 5rem 0;
 }
 
-.man {
-    height: 25rem;
+.landingpageimg {
+    height: 20rem;
     background-image: url('/img/hombre.jpg');
     background-position: center;
     background-size: contain;
@@ -135,7 +143,7 @@ body {
 
 #novedades {
     border-radius: 1rem;
-    width: 50rem;
+    width: 70%;
 }
 
 .prefooter {
@@ -257,9 +265,9 @@ body {
     color: black;
 }
 
-.images {
-    height: 23rem;
-    width: 23rem;
+.focuscategoryimages {
+    height: 21rem;
+    width: 21rem;
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -268,6 +276,15 @@ body {
     justify-content: center;
     font-size: 3rem;
     color: white;
+    transition: 0.5s;
+    border-radius: 2rem;
+}
+
+.focuscategoryimages:hover{
+    height: 22rem;
+    width: 22rem;
+    border-radius: 15rem;
+    transition: 1s;
 }
 
 .container-itemList .card {
@@ -358,7 +375,7 @@ body {
     background-position: center;
 }
 
-#dbproducts, #categoriespage{
+#dbproducts, #categoriesman, #categorieswoman {
     border: 0.1rem solid black;
 }
 
@@ -393,4 +410,20 @@ width: 100%;
 .card-space:hover .card-inner {
 bottom: 5%;
 opacity: 1;
+}
+
+.landingman{
+    background-image: url('/img/portadaman.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 60vh;
+}
+
+.landingwoman{
+    background-image: url('/img/portadawoman.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 60vh;
 }

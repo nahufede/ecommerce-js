@@ -18,7 +18,7 @@ export const Footer = () => {
                 </div>
                 <div class="col-12 prefooter">
                     <h4 class="mb-0">RECIBI LAS NOVEDADES</h4>
-                    <form class="d-flex flex-column mt-4">
+                    <form class="d-flex flex-column align-items-center mt-4 w-100">
                         <input class="form-control me-2" id="novedades" type="search" placeholder="Email" aria-label="Search">
                         <button id="emailbutton" type="submit">ENVIAR</button>
                     </form>

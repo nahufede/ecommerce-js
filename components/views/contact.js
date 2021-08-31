@@ -1,4 +1,39 @@
+import { getFirestore } from "../../firebase/firebase.js"
+
+let db = getFirestore();
+
 export const Contacto = () => {
+
+    window.addEventListener('click', (e)=>{
+
+        let form = document.querySelector('#contactForm')
+        
+        if(e.target.getAttribute('id') === 'contactbutton'){
+        
+           let name = form[0].value;
+           let email = form[1].value;
+           let phone = Number(form[2].value);
+           let message = form[3].value;
+           let date = new Date().toLocaleDateString();
+           
+           db.collection("consultas").add({
+            name,
+            email,
+            phone,
+            message,
+            date
+            })
+            .then((docRef) => {
+                form.reset()
+                console.log("Document written with ID: ", docRef.id);
+            })
+            .catch((error) => {
+                console.error("Error adding document: ", error);
+            });
+
+        };
+    })
+
     return (
             `<div class="container">
             <div class="row">
@@ -27,7 +62,7 @@ export const Contacto = () => {
                                 style="height: 150px"></textarea>
                             <label for="floatingTextarea2">Mensaje</label>
                         </div>
-                        <button id="contactbutton" type="submit">ENVIAR</button>
+                        <button id="contactbutton" class="mybutton" type="submit">ENVIAR</button>
                     </form>
                 </div>
             </div>

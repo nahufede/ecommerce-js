@@ -6,8 +6,6 @@ export const DBProducts = () => {
 
   getItems().then((products) => {
 
-    /* productsLength = products.length */
-
     let viewList = document.createElement('div')
     viewList.className = "row justify-content-center pt-4"
 
@@ -17,16 +15,7 @@ export const DBProducts = () => {
       dbproductsContainer  = document.querySelector("#dbproducts")
     }
 
-    /* const mappingCart = (x) => {
-      let start = x * 8;
-      let end = start + 8;
-
-      products = products.slice(start, end);
-    }
- */
     const setProducts = () => {
-
-      /* mappingCart(parameter) */
       
       products.forEach((el) => {
       /* Destrucuring sobre el objeto */
@@ -58,58 +47,6 @@ export const DBProducts = () => {
     }
 
     setProducts()
-
-    /* const pagination = (productsLength) => {
-      let pageDivision = Math.ceil(productsLength / 8);
-      let pageNumbers = [];
-  
-      for (let i = 0; i < pageDivision; i++) {
-        pageNumbers.push(i + 1);
-      }
-  
-      if(document.querySelector('.mypagination')){
-        let paginationFather = document.querySelector('.mypagination')
-        paginationFather.innerHTML = ""
-  
-        let preview = document.createElement('li')
-        preview.classList = "page-item"
-        preview.innerHTML = `<a class="page-link" href="#" aria-label="Previous">
-        <span aria-hidden="true">&laquo;</span>
-        </a>`
-        paginationFather.appendChild(preview)
-        
-        pageNumbers.map((el, index)=>{
-          el = document.createElement('li')
-          el.className = "page-item"
-          el.innerHTML= `<a class="page-link pagenumber" page="${index}" href="#">${index+1}</a>`
-          paginationFather.appendChild(el)
-        })
-  
-        let next = document.createElement('li')
-        next.className = "page-item"
-        next.innerHTML = `<a class="page-link" href="#" aria-label="Next">
-        <span aria-hidden="true">&raquo;</span>
-                          </a>`
-        paginationFather.appendChild(next)
-      }
-  
-    };
-
-    pagination(productsLength) */
-
-    /* if(document.querySelector('.pagenumber')){
-      window.addEventListener('click',(e)=>{
-
-        if(e.target.classList.contains('pagenumber')){
-
-          let page = e.target.getAttribute('page')
-          
-          console.log(page);
-
-          setProducts(page);
-        }
-      })
-    } */
   });
 
   return `
@@ -119,7 +56,8 @@ export const DBProducts = () => {
           <div class="d-flex flex-row justify-content-center">
             <a id="home" class="contactbreadcrumb" href="">Inicio</a>
             <a id="admin" class="contactbreadcrumb" href="">> Administrador</a>
-            <p>> Productos</p>
+            <a id="admindashboard" class="contactbreadcrumb" href="">> Productos</a>
+            <p>> Editar Items</p>
           </div>
         </div>
       </div>
@@ -128,16 +66,10 @@ export const DBProducts = () => {
           <div class="col-12">
             <h1 class="text-center mb-5">MIS PRODUCTOS</h1>
           </div>
-          <div class="col-12">
             <div class="container" id="dbproducts">
             </div>
-            <nav aria-label="Page navigation example" class="d-flex justify-content-center mt-3">
-              <ul class="pagination mypagination">
-              </ul>
-            </nav>
           </div>
         </div>
       </div>
-    </div>
 `;
 };

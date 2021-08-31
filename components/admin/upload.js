@@ -105,7 +105,8 @@ export const Upload = () => {
               <div class="d-flex flex-row justify-content-center">
                 <a id="home" class="contactbreadcrumb" href="">Inicio</a>
                 <a id="admin" class="contactbreadcrumb" href="">> Administrador</a>
-                <p>> Nuevos</p>
+                <a id="admindashboard" class="contactbreadcrumb" href="">> Productos</a>
+                <p>> Subir Item</p>
             </div>
             </div>
             <div class="col-12 my-5 d-flex">

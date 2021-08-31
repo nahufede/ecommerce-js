@@ -33,17 +33,19 @@ export const Admin = () => {
         return (
             `<div class="container">
                 <div class="row">
-                    <div class="col-12 col-sm-6 offset-sm-3 d-flex flex-column">
+                    <div class="col-12 col-sm-6 offset-sm-3 d-flex flex-column justify-content-between" style="height: 60vh;">
                         <div class="d-flex flex-row justify-content-center">
                             <a id="home" class="contactbreadcrumb" href="">Inicio</a>
                             <p>> Administrador</p>
                         </div>
-                        <h1 class="text-center mt-3">SESIÓN INICIADA</h1>
+                        <h1 class="text-center">SESIÓN INICIADA</h1>
                         <p class="text-center mt-3">${user.email}</p>
-                        <button id="upload" class="mybutton mb-2" type="button">Subir Items</button>
-                        <button id="databproducts" class="mybutton mb-2" type="button">Editar Items</button>
-                        <button id="editcategories" class="mybutton mb-2" type="button">Editar Categorias</button>
-                        <button id="logout" class="mybutton mb-2" type="button">Cerrar Sesión</button>
+                        <div class="d-flex flex-column">
+                            <button id="consultas" class="mybutton mb-2" type="button">Consultas</button>
+                            <button id="productsdash" class="mybutton mb-2" type="button">Productos</button>
+                            <button id="editcategories" class="mybutton mb-2" type="button">Categorias</button>
+                            <button id="logout" class="mybutton mb-2" type="button">Cerrar Sesión</button>
+                        </div>
                     </div>
                 </div>
             </div>`

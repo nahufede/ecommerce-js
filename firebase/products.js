@@ -6,24 +6,29 @@ let db = getFirestore();
 let storageRef = storage().ref();
 let app = document.querySelector("#app");
 
-export const getCategories = async () => {
-  const itemCollection = db.collection('categories_man');
-  const querySnapshot = await itemCollection.get();
+export const getCategories = async (x) => {
 
-  let categories = querySnapshot.docs.map((doc) => ({
-    ...doc.data(),
-    id: doc.id,
-  }));
+  let itemCollection
 
-  return categories;
+  if(x === "man"){
+    itemCollection = db.collection('categories_man');
+  } else if (x === "woman"){
+    itemCollection = db.collection('categories_woman')
+  }
+
+  if(itemCollection !== undefined){
+    const querySnapshot = await itemCollection.get();
+
+    let categories = querySnapshot.docs.map((doc) => ({
+      ...doc.data(),
+      id: doc.id,
+    }));
+
+    return categories;
+  }
 };
 
 export const getItems = async () => {
-  /* 
-  let products = document.createElement("div");
-  products.className = "container";
-  products.style.cssText =
-    "display: flex ; flex-direction: column ; margin: 5rem"; */
 
   const itemCollection = db.collection("products");
   const querySnapshot = await itemCollection.orderBy("name").get();
@@ -34,30 +39,6 @@ export const getItems = async () => {
   }));
 
   return allProducts;
-  /* allProducts.forEach(el=>{
-        let prod = document.createElement('div')
-        prod.className = 'card'
-        prod.setAttribute('id',el.id)
-        prod.style = 'width: 12rem;'
-        prod.innerHTML = `
-        
-            <img src="${el.img}" class="card-img-top" style="height: 8rem;" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">${el.name}</h5>
-                <p class="card-text">${el.description}</p>
-                <p class="card-text">${el.price}</p>
-                <p class="card-text">${el.category}</p>
-                <a class="btn btn-warning delete">Delete</a>
-                <button type="button" class="btn btn-info editBtn" data-bs-toggle="modal" data-bs-target="#dbproductsmodal">
-                    Editar
-                </button>
-            </div>
-        `
-
-        products.appendChild(prod)
-    }) */
-
-  /* app.appendChild(products) */
 }
 
 window.addEventListener("click", async (e) => {

@@ -2,7 +2,7 @@ import { getCategories } from "../firebase/products.js";
 
 export const DBModal = () => {
 
-    getCategories().then((categories) => {
+    getCategories('man').then((categories) => {
       let selectItems;
 
       categories.forEach((el, index) => {

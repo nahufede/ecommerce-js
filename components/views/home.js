@@ -3,14 +3,14 @@ export const Home = () => {
             `<div class="container">
             <div class="row">
                 <div class="col-12 titleContent">
-                    <h1 class="title">LUCCA</h1>
+                    <h3 class="title">LUCCA</h3>
                 </div>
-                <div class="col-12 d-flex">
-                    <div class="col-6">
-                        <div class="man"></div>
+                <div class="col-12 d-flex flex-wrap">
+                    <div class="col-12 col-lg-6 mb-3">
+                        <div class="landingpageimg"></div>
                     </div>
-                    <div class="col-6">
-                        <div class="man"></div>
+                    <div class="col-12 col-lg-6 mb-3">
+                        <div class="landingpageimg"></div>
                     </div>
                 </div>
             </div>

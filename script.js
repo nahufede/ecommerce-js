@@ -16,6 +16,9 @@ import { Upload } from "./components/admin/upload.js";
 import { DBProducts } from "./components/admin/dbproducts.js";
 import { DBModal } from "./components/modal.js"
 import { Categories } from "./components/admin/categories.js"
+import { ProductsDashboard } from "./components/admin/productsdash.js";
+import { Consultas } from "./components/admin/consultas.js";
+
 
 let nav = document.querySelector("#nav");
 let app = document.querySelector("#app");
@@ -26,7 +29,7 @@ nav.innerHTML = Navbar();
 footer.innerHTML = Footer();
 modal.innerHTML = DBModal();
 
-window.addEventListener("DOMContentLoaded", () => (app.innerHTML = DBProducts()));
+window.addEventListener("DOMContentLoaded", () => (app.innerHTML = Consultas()));
 
 window.addEventListener("click", (e) => {
   if (e.target.type !== "file") {
@@ -72,6 +75,14 @@ window.addEventListener("click", (e) => {
     case "editcategories":
       app.innerHTML = Categories();
       break;
+
+    case "productsdash":
+    app.innerHTML = ProductsDashboard();
+    break;
+
+    case "consultas":
+    app.innerHTML = Consultas();
+    break;
   }
 });
 
