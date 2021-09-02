@@ -4,6 +4,12 @@ import { getFirestore, storage } from "../../firebase/firebase.js"
 let db = getFirestore();
 let storageRef = storage().ref();
 
+window.addEventListener("keypress", function(event){
+    if (event.key === 'Enter'){
+        event.preventDefault();
+    }
+}, false);
+
 window.addEventListener("click", (e) => {
     if (e.target.classList.contains("submitBtn")) {
       e.preventDefault();
@@ -11,7 +17,7 @@ window.addEventListener("click", (e) => {
     }
 });
 
-const formValidation = () => {
+const uploadFormValidation = () => {
 
     let createForm = document.querySelector('#createForm')
 
@@ -82,8 +88,11 @@ const formValidation = () => {
     }
 }
 
-window.addEventListener('change', formValidation)
-
+window.addEventListener('change', ()=>{
+    if(document.querySelector('#uploadpage')){
+        uploadFormValidation()
+    }
+})
 export function createElement(e) {
 
     // PREVENT DEFAULT PARA QUE NO RECARGUE LA PAGINA AL DARLE SUBMIT
@@ -181,7 +190,7 @@ export const Upload = () => {
 
     return (
         `<div class="container">
-        <div class="row">
+        <div class="row" id="uploadpage">
             <div class="col-12">
               <div class="d-flex flex-row justify-content-center">
                 <a id="home" class="contactbreadcrumb">Inicio</a>
@@ -202,7 +211,7 @@ export const Upload = () => {
                     <div class="valid-feedback">
                         Correcto!
                     </div>
-                    <div id="validationServerUsernameFeedback" class="invalid-feedback">
+                    <div id="validationServer01Feedback" class="invalid-feedback">
                         Elige un nombre
                     </div>
                     </div>
@@ -238,7 +247,7 @@ export const Upload = () => {
                     <div class="form-floating mb-3">
                     <textarea class="form-control" id="validationServer04" placeholder="Required example textarea" required
                         style="height: 100px"></textarea>
-                    <label for="floatingTextarea" style="padding-left: 1.3rem;">Descripción</label>
+                    <label for="validationServer04" style="padding-left: 1.3rem;">Descripción</label>
                     <div class="valid-feedback">
                         Correcto!
                     </div>
