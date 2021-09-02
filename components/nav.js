@@ -51,7 +51,7 @@ export const Navbar = () => {
 
   return `<nav class="navbar navbar-expand-lg navbar-light d-none d-lg-block">
             <div class="container-fluid mynav">
-              <a class="navbar-brand" id="home" href="">LUCCA</a>
+              <a class="navbar-brand" id="home">LUCCA</a>
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
               </button>

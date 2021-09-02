@@ -27,7 +27,6 @@ const categoriesPage = () => {
     if (document.querySelector(".mancategories")) {
       let manContainer = document.querySelector(".mancategories");
       manContainer.appendChild(allCategories);
-      console.log("hola");
     }
   });
 };

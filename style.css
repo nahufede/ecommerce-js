@@ -427,3 +427,8 @@ opacity: 1;
     background-size: cover;
     height: 60vh;
 }
+
+#alertsuccess{
+    transition: 1s;
+    padding: 0;
+}

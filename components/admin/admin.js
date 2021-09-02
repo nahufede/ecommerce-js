@@ -10,7 +10,7 @@ export const Admin = () => {
             <div class="row">
                 <div class="col-12 col-sm-6 offset-sm-3 userdiv">
                     <div class="d-flex flex-row justify-content-center">
-                        <a id="home" class="contactbreadcrumb" href="">Inicio</a>
+                        <a id="home" class="contactbreadcrumb">Inicio</a>
                         <p>> Administrador</p>
                     </div>
                     <h1 class="text-center mt-3">INICIAR SESIÓN</h1>
@@ -35,7 +35,7 @@ export const Admin = () => {
                 <div class="row">
                     <div class="col-12 col-sm-6 offset-sm-3 d-flex flex-column justify-content-between" style="height: 60vh;">
                         <div class="d-flex flex-row justify-content-center">
-                            <a id="home" class="contactbreadcrumb" href="">Inicio</a>
+                            <a id="home" class="contactbreadcrumb">Inicio</a>
                             <p>> Administrador</p>
                         </div>
                         <h1 class="text-center">SESIÓN INICIADA</h1>

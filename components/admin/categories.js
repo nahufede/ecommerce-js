@@ -85,8 +85,8 @@ export const Categories = () => {
       <div class="row">
         <div class="col-12">
           <div class="d-flex flex-row justify-content-center">
-            <a id="home" class="contactbreadcrumb" href="">Inicio</a>
-            <a id="admin" class="contactbreadcrumb" href="">> Administrador</a>
+            <a id="home" class="contactbreadcrumb">Inicio</a>
+            <a id="admin" class="contactbreadcrumb">> Administrador</a>
             <p>> Categorias</p>
           </div>
         </div>

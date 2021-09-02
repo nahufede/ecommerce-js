@@ -33,7 +33,7 @@ export const Footer = () => {
                         <a href="https://instagram.com/__lucca._" target="_blank" class="iglink mb-3"><i class="bi bi-instagram iglink"></i></a>
                         <i class="bi bi-facebook"></i>
                     </div>
-                    <div class="col-6 offset-3 footerlinks mt-5">
+                    <div class="col-8 offset-2 footerlinks mt-5">
                         <a href="" id="hombre">Hombre</a>
                         <a href="" id="mujer">Mujer</a>
                         <a href="" id="contact">Contacto</a>

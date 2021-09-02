@@ -15,8 +15,7 @@ export const Consultas = () => {
         ...doc.data(),
         id: doc.id,
         }));
-        
-        console.log(consultas);
+      
         return consultas;
     };
 
@@ -36,14 +35,14 @@ export const Consultas = () => {
         const { name, email, phone, message, date, id } = el;
     
         const card = document.createElement('div');
-        card.className = "col-6 col-md-4 col-lg-3 d-flex justify-content-center mb-4"
+        card.className = "col-6 col-md-4 d-flex justify-content-center mb-4"
         card.innerHTML = 
-        `<div class="card" style="width: 18rem; ${id}">
+        `<div class="card" style="width: 18rem;" id=${id}>
             <div class="card-body">
             <h5 class="card-title">${name}</h5>
             <h6 class="card-subtitle mb-2 text-muted">${email}</h6>
             <p class="card-text">${message}</p>
-            <a href="#" class="card-link">${phone}</a>
+            <a href="https://wa.me/${phone}" target="_blank">${phone}</a>
             <p class="card-text">${date}</p>
             </div>
         </div>
@@ -59,8 +58,8 @@ export const Consultas = () => {
       <div class="row">
         <div class="col-12">
           <div class="d-flex flex-row justify-content-center">
-            <a id="home" class="contactbreadcrumb" href="">Inicio</a>
-            <a id="admin" class="contactbreadcrumb" href="">> Administrador</a>
+            <a id="home" class="contactbreadcrumb">Inicio</a>
+            <a id="admin" class="contactbreadcrumb">> Administrador</a>
             <p>> Consultas</p>
           </div>
         </div>

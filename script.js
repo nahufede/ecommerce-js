@@ -29,11 +29,12 @@ nav.innerHTML = Navbar();
 footer.innerHTML = Footer();
 modal.innerHTML = DBModal();
 
-window.addEventListener("DOMContentLoaded", () => (app.innerHTML = Consultas()));
+if(app.innerHTML == ""){app.innerHTML = Home()}
 
 window.addEventListener("click", (e) => {
-  if (e.target.type !== "file") {
-    e.preventDefault();
+
+  if(e.target.classList.contains('noprevent')){
+    e.preventDefault()
   }
 
   let id = e.target.getAttribute("id");
@@ -118,11 +119,4 @@ searchForm.addEventListener("submit", function (e) {
   e.preventDefault();
   let search = searchTerm.value;
   SearchResults(search);
-});
-
-window.addEventListener("click", (e) => {
-  if (e.target.classList.contains("submitBtn")) {
-    e.preventDefault();
-    createElement(e);
-  }
 });

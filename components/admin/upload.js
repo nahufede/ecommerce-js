@@ -4,14 +4,93 @@ import { getFirestore, storage } from "../../firebase/firebase.js"
 let db = getFirestore();
 let storageRef = storage().ref();
 
-export function createElement(e) {
+window.addEventListener("click", (e) => {
+    if (e.target.classList.contains("submitBtn")) {
+      e.preventDefault();
+      createElement(e);
+    }
+});
+
+const formValidation = () => {
 
     let createForm = document.querySelector('#createForm')
 
+    let validation
+
+    for (let i = 0; i < 5; i++) {
+
+        if(createForm[i].value === ""){
+            createForm[i].classList.add('is-invalid')
+            createForm[i].classList.remove('is-valid')
+        } else {
+            createForm[i].classList.add('is-valid')
+            createForm[i].classList.remove('is-invalid')
+        }   
+    }
+
+    if ((createForm[0].value != "")&&
+        (createForm[1].value != "")&&
+        (createForm[2].value != "")&&
+        (createForm[3].value != "")&&
+        (createForm[4].value != "")){
+        validation = true;
+    }   else {
+        validation = false;
+    }
+
+    let progressBar = document.querySelector('.progress-bar-1')
+
+    const progressValidation = () => {
+
+        let progressVal = [];
+
+        for (let i = 0; i < 5; i++) {
+            if (createForm[i].value.length != 0){
+                progressVal.push(1)
+            }
+        }
+
+        let progressForm = progressVal.reduce((a,b) => a + b , 0)
+
+        switch (progressForm) {
+            case 1:
+                progressBar.style.width = '20%';
+                break;
+            case 2:
+                progressBar.style.width = '40%';
+                break;
+            case 3:
+                progressBar.style.width = '60%';
+                break;
+            case 4:
+                progressBar.style.width = '80%';
+                break;
+            case 5:
+                progressBar.style.width = '100%';
+                break;
+            default:
+                progressBar.style.width = '0%';
+                break;
+        }
+    }
+
+    progressValidation()
+
+    if(validation){
+        createForm[5].removeAttribute('disabled');
+        document.querySelector('.submitBtn').style.opacity = 1;
+    }
+}
+
+window.addEventListener('change', formValidation)
+
+export function createElement(e) {
+
     // PREVENT DEFAULT PARA QUE NO RECARGUE LA PAGINA AL DARLE SUBMIT
     e.preventDefault();
-
-    let progressBar = document.querySelector('.progress-bar')
+    document.querySelector('.submitBtn').style.display = 'none';
+    document.querySelector('.loadingbtn').style.display = 'block';
+    document.querySelector('.progress-bar-1').parentElement.style.display = "none"
 
     // ASIGNACION DE ELEMENTOS DEL FORM
     let name = createForm[0].value;
@@ -30,6 +109,8 @@ export function createElement(e) {
         img: ""
     })
     .then((docRef) => {
+
+        let progressBar = document.querySelector('.progress-bar-2');
 
         var uploadTask = storageRef.child(`products/${category.toLowerCase()}/${docRef.id}`).put(file);
 
@@ -74,7 +155,7 @@ export function createElement(e) {
 
 export const Upload = () => {
 
-    getCategories().then((el) => {
+    getCategories('man').then((el) => {
 
         let categories = el;
     
@@ -103,47 +184,91 @@ export const Upload = () => {
         <div class="row">
             <div class="col-12">
               <div class="d-flex flex-row justify-content-center">
-                <a id="home" class="contactbreadcrumb" href="">Inicio</a>
-                <a id="admin" class="contactbreadcrumb" href="">> Administrador</a>
-                <a id="admindashboard" class="contactbreadcrumb" href="">> Productos</a>
+                <a id="home" class="contactbreadcrumb">Inicio</a>
+                <a id="admin" class="contactbreadcrumb">> Administrador</a>
+                <a id="admindashboard" class="contactbreadcrumb">> Productos</a>
                 <p>> Subir Item</p>
             </div>
             </div>
-            <div class="col-12 my-5 d-flex">
-              <div class="col-6">
+            <div class="col-12 my-5 d-flex flex-wrap justify-content-center">
+              <div class="col-10 col-md-6">
                 <h1>SUBIR PRODUCTOS</h1>
               </div>
-              <div class="col-6 form">
-                  <form id="createForm">
-                      <div class="form-floating mb-3">
-                          <input type="text" class="form-control" id="floatingName" placeholder="Traje de baño">
-                          <label for="floatingName">Nombre</label>
-                      </div>
-                      <div class="form-floating mb-3">
-                          <select class="form-select categoryupload" id="floatingCategory" aria-label="Floating label category">
-                              <option selected>Seleccionar</option>
-                          </select>
-                          <label for="floatingCategory">Categoria</label>
-                      </div>
-                      <div class="input-group mb-3">
-                          <span class="input-group-text">$</span>
-                          <input type="text" class="form-control" id="price" aria-label="Amount (to the nearest dollar)">
-                          <span class="input-group-text">.00</span>
-                      </div>
-                      <div class="form-floating mb-3">
-                          <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea"
-                              style="height: 100px"></textarea>
-                          <label for="floatingTextarea">Descripción</label>
-                      </div>
-                      <div class="mb-3">
-                          <input class="form-control" type="file" id="formFileMultiple" multiple>
-                      </div>
-                      <div class="progress mb-3">
-                          <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
-                              style="width: 0%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
-                      </div>
-                      <button type="submitBtn" class="mybutton submitBtn">Subir</button>
-                  </form>
+              <div class="col-10 col-md-6 form">
+              <form class="row g-3" id="createForm">
+                    <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="validationServer01" placeholder="Traje de baño" required>
+                    <label for="validationServer01" class="form-label" style="padding-left: 1.3rem;">Nombre</label>
+                    <div class="valid-feedback">
+                        Correcto!
+                    </div>
+                    <div id="validationServerUsernameFeedback" class="invalid-feedback">
+                        Elige un nombre
+                    </div>
+                    </div>
+                
+                    <div class="form-floating mb-3">
+                    <select class="form-select categoryupload" id="validationServer02"
+                        aria-describedby="validationServer04Feedback" required>
+                        <option selected disabled value="">Seleccionar</option>
+                    </select>
+                    <label for="validationServer02" style="padding-left: 1.3rem;" class="form-label">Categoria</label>
+                    <div class="valid-feedback">
+                        Correcto!
+                    </div>
+                    <div id="validationServer02Feedback" class="invalid-feedback">
+                        Selecciona una categoría
+                    </div>
+                    </div>
+                
+                    <div class="input-group mb-3">
+                    <label for="validationServer03" class="form-label" style="display: none;">Precio</label>
+                    <span class="input-group-text">$</span>
+                    <input type="number" class="form-control" id="validationServer03"
+                        aria-label="Amount (to the nearest dollar)" required>
+                    <span class="input-group-text">.00</span>
+                    <div class="valid-feedback">
+                        Correcto!
+                    </div>
+                    <div id="validationServer03Feedback" class="invalid-feedback">
+                        Introducir precio
+                    </div>
+                    </div>
+                
+                    <div class="form-floating mb-3">
+                    <textarea class="form-control" id="validationServer04" placeholder="Required example textarea" required
+                        style="height: 100px"></textarea>
+                    <label for="floatingTextarea" style="padding-left: 1.3rem;">Descripción</label>
+                    <div class="valid-feedback">
+                        Correcto!
+                    </div>
+                    <div id="validationServer04Feedback" class="invalid-feedback">
+                        Escribe una descripción
+                    </div>
+                    </div>
+                    <div class="mb-3">
+                    <input class="form-control" type="file" id="formFileMultiple" multiple>
+                    <div class="valid-feedback">
+                        Archivo seleccionado
+                    </div>
+                    <div id="validationServer03Feedback" class="invalid-feedback">
+                        Selecciona una imagen
+                    </div>
+                    </div>
+                    <div class="progress mb-3 px-0">
+                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning progress-bar-1" role="progressbar" style="width: 0%"
+                        aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <div class="progress mb-3 px-0">
+                    <div class="progress-bar progress-bar-striped progress-bar-animated progress-bar-2" role="progressbar" style="width: 0%"
+                        aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <button type="submitBtn" class="mybutton submitBtn" disabled="true" style="opacity:0.6;">Subir</button>
+                    <button class="mybutton loadingbtn" type="button" disabled style="display:none;">
+                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                    Subiendo
+                    </button>
+                </form>
               </div>
             </div>
         </div>
