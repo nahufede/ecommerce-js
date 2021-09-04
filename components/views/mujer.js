@@ -1,5 +1,7 @@
 import { getCategories } from "../../firebase/products.js";
 
+let app = document.querySelector("#app");
+
 const categoriesPage = () => {
 
   getCategories('woman').then((categories) => {
@@ -12,27 +14,38 @@ const categoriesPage = () => {
       category.style.cssText = `
                                 display: flex; 
                                 justify-content: center; 
-                                align-items: center;`;
+                                align-items: center;
+                                text-shadow: 1px 1px 10px black;
+                                text-decoration: none;
+                                cursor: pointer;`;
 
-      let image = document.createElement("div");
+      let image = document.createElement("a");
       image.className = "focuscategoryimages";
-      image.innerHTML = `<h1>${el.name}</h1>`
-      image.style.cssText = `background-image: url('${el.img}')`;
+      image.innerHTML = `<h1 class="fontzing">${el.name}</h1>`
+      image.style.cssText = `background-image: url('${el.img}'); text-decoration: none`;
 
       category.appendChild(image);
 
       allCategories.appendChild(category);
     });
 
-    if (document.querySelector(".mancategories")) {
-      let manContainer = document.querySelector(".mancategories");
-      manContainer.appendChild(allCategories);
+    if (document.querySelector(".womancategories")) {
+      let womanContainer = document.querySelector(".womancategories");
+      womanContainer.appendChild(allCategories);
     }
   });
 };
 
 export const Mujer = () => {
   categoriesPage();
+
+  window.addEventListener('click', (e)=>{
+    let category = e.target.innerText;
+    if(e.target.classList.contains('focuscategoryimages')){
+      e.preventDefault()
+      app.innerHTML = ItemList(category)
+    }
+  })
 
   return `
             <div class="container-fluid">
@@ -41,7 +54,7 @@ export const Mujer = () => {
                         <div class="landingwoman"></div>
                     </div>
                 </div>
-                <div class="row mancategories"></div>
+                <div class="row womancategories"></div>
             </div>
     `;
 };

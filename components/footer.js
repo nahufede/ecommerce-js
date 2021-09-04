@@ -1,4 +1,5 @@
 export const Footer = () => {
+
     return (
             `<div class="container">
             <div class="row">
@@ -17,7 +18,7 @@ export const Footer = () => {
                     </div>
                 </div>
                 <div class="col-12 prefooter">
-                    <h4 class="mb-0">RECIBI LAS NOVEDADES</h4>
+                    <h4 class="mb-0 fontzing">RECIBI LAS NOVEDADES</h4>
                     <form class="d-flex flex-column align-items-center mt-4 w-100">
                         <input class="form-control me-2" id="novedades" type="search" placeholder="Email" aria-label="Search">
                         <button id="emailbutton" type="submit">ENVIAR</button>
@@ -34,9 +35,9 @@ export const Footer = () => {
                         <i class="bi bi-facebook"></i>
                     </div>
                     <div class="col-8 offset-2 footerlinks mt-5">
-                        <a href="" id="hombre">Hombre</a>
-                        <a href="" id="mujer">Mujer</a>
-                        <a href="" id="contact">Contacto</a>
+                        <a href="#navbar" id="hombre">Hombre</a>
+                        <a href="#navbar" id="mujer">Mujer</a>
+                        <a href="#navbar" id="contact">Contacto</a>
                     </div>
                     <div class="col-12 info">
                         <div>

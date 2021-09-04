@@ -48,7 +48,7 @@ export async function ItemList(category) {
 
   if (allProducts.length === 0) {
     itemListContainer.innerHTML = `<h1 class="text-center container-itemList__title">${category}</h1>
-    <h2>No hay productos</h2>`;
+    <h2 class="text-center">No hay productos</h2>`;
   }
   app.appendChild(itemListContainer);
 }

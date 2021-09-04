@@ -9,12 +9,28 @@ body {
     font-family: 'Poppins', sans-serif;
 }
 
+#nav{
+    position: fixed;
+    background-color: white;
+    width: 100%;
+    opacity: 0.8;
+    z-index: 9;
+}
+
+#app{
+    padding-top: 5.5rem;
+}
+
+.fontzing{
+    font-family: "Zing Rust Demo Base";
+}
+
 .dropdown-toggle::after {
     display: none;
 }
 
 .mynav {
-    padding: 1rem 3rem;
+    padding: 0.5rem 3rem;
 }
 
 .navitems {
@@ -100,7 +116,7 @@ body {
 
 .title {
     text-align: center;
-    border-bottom: 1px solid black;
+    border-bottom: 3px solid black;
     width: min-content;
     font-size: 6rem;
 }
@@ -112,17 +128,49 @@ body {
 }
 
 .line {
-    border-bottom: 1px solid black;
+    border-bottom: 3px solid black;
     padding: 0 1rem;
     margin: 5rem 0;
 }
 
-.landingpageimg {
-    height: 20rem;
+.landingpageimgman {
+    height: 23rem;
     background-image: url('/img/hombre.jpg');
     background-position: center;
     background-size: contain;
     background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 3rem;
+    text-shadow: 1px 1px 10px black;
+    transition: 0.8s;
+}
+
+.landingpageimgwoman {
+    height: 23rem;
+    background-image: url('/img/hombre.jpg');
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 3rem;
+    text-shadow: 1px 1px 10px black;
+    transition: 0.8s;
+}
+
+.landingpageimgwoman:hover, .landingpageimgman:hover{
+    font-size: 3.3rem;
+    transition: 0.8s;
+    height: 23.5rem;
+}
+
+.imgPrincipales a{
+    text-decoration: none;
 }
 
 .truck, .whatsapp {
@@ -216,10 +264,12 @@ body {
 .footerlinks a {
     text-decoration: none;
     color: black;
+    transition: 0.8s;
 }
 
 .footerlinks a:hover {
-    font-size: 1.1rem;
+    font-size: 1.3rem;
+    transition: 0.8s;
 }
 
 .footerlinks {
@@ -285,6 +335,7 @@ body {
     width: 22rem;
     border-radius: 15rem;
     transition: 1s;
+    color: white;
 }
 
 .container-itemList .card {
@@ -355,11 +406,13 @@ body {
 .socialmedia, .iglink {
     text-decoration: none;
     color: black;
+    transition: 0.8s;
 }
 
 .socialmedia:hover {
     font-size: 1.1rem;
     color: black;
+    transition: 0.8s;
 }
 
 .iglink:hover {
@@ -431,4 +484,9 @@ opacity: 1;
 #alertsuccess{
     transition: 1s;
     padding: 0;
+}
+
+.consultcard a{
+    text-decoration: none;
+    color: black;
 }

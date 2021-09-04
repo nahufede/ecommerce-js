@@ -2,9 +2,36 @@ import { getFirestore } from "../../firebase/firebase.js";
 
 let db = getFirestore();
 
+window.addEventListener("click", async (e) => {
+  let focus = e.target;
+  
+  if (focus.parentElement.classList.contains("deleteConsult")) {
+
+    e.preventDefault()
+
+    let id = focus.parentElement.parentElement.parentElement.parentElement.getAttribute('id');
+
+    let confirmacion = confirm("Desea eleminar el elemento?");
+
+    if (confirmacion) {
+
+      db.collection("consultas")
+        .doc(id)
+        .delete()
+        .then(() => {
+          console.log("documento eliminado");
+          app.innerHTML = Consultas();
+        })
+        .catch((error) => {
+          console.error("error ->", error);
+        });
+    }
+  }
+})
+
 export const Consultas = () => {
 
-    const getConsultas = async (x) => {
+    const getConsultas = async () => {
 
         let itemCollection
       
@@ -35,15 +62,20 @@ export const Consultas = () => {
         const { name, email, phone, message, date, id } = el;
     
         const card = document.createElement('div');
-        card.className = "col-6 col-md-4 d-flex justify-content-center mb-4"
+        card.className = "col-6 d-flex justify-content-center mb-4"
         card.innerHTML = 
-        `<div class="card" style="width: 18rem;" id=${id}>
-            <div class="card-body">
-            <h5 class="card-title">${name}</h5>
-            <h6 class="card-subtitle mb-2 text-muted">${email}</h6>
+        `<div class="card w-100" id=${id}>
+            <div class="card-body d-flex flex-column consultcard">
+            <span class="d-flex justify-content-between align-items-center">
+              <h5 class="card-title"><i class="bi bi-person me-2"></i>${name}</h5>
+              <a href="" class="deleteConsult"><i class="bi bi-trash-fill"></i></a>
+            </span>
             <p class="card-text">${message}</p>
-            <a href="https://wa.me/${phone}" target="_blank">${phone}</a>
-            <p class="card-text">${date}</p>
+            <span class="d-flex justify-content-between align-items-center">
+              <h6 class="card-subtitle"><i class="bi bi-envelope me-2"></i>${email}</h6>
+              <a href="https://wa.me/+549${phone}" target="_blank"><i class="bi bi-telephone-forward me-2"></i>${phone}</a>
+              <p class="card-text align-self-end"><i class="bi bi-calendar-check-fill me-2"></i>${date}</p>
+            </span>
             </div>
         </div>
         `

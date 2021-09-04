@@ -1,4 +1,7 @@
 import { getCategories } from "../../firebase/products.js";
+import { ItemList } from "../items/itemList.js";
+
+let app = document.querySelector("#app");
 
 const categoriesPage = () => {
 
@@ -12,12 +15,15 @@ const categoriesPage = () => {
       category.style.cssText = `
                                 display: flex; 
                                 justify-content: center; 
-                                align-items: center;`;
+                                align-items: center;
+                                text-shadow: 1px 1px 10px black;
+                                text-decoration: none;
+                                cursor: pointer;`;
 
-      let image = document.createElement("div");
+      let image = document.createElement("a");
       image.className = "focuscategoryimages";
-      image.innerHTML = `<h1>${el.name}</h1>`
-      image.style.cssText = `background-image: url('${el.img}')`;
+      image.innerHTML = `<h1 class="fontzing">${el.name}</h1>`
+      image.style.cssText = `background-image: url('${el.img}'); text-decoration: none`;
 
       category.appendChild(image);
 
@@ -27,13 +33,20 @@ const categoriesPage = () => {
     if (document.querySelector(".mancategories")) {
       let manContainer = document.querySelector(".mancategories");
       manContainer.appendChild(allCategories);
-      console.log("hola");
     }
   });
 };
 
 export const Hombre = () => {
   categoriesPage();
+
+  window.addEventListener('click', (e)=>{
+    let category = e.target.innerText;
+    if(e.target.classList.contains('focuscategoryimages')){
+      e.preventDefault()
+      app.innerHTML = ItemList(category)
+    }
+  })
 
   return `
             <div class="container-fluid">
