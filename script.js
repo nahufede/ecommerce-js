@@ -7,6 +7,7 @@ import { Router } from "./components/router.js";
 import { Consultas } from "./components/admin/consultas.js";
 import { DBProducts } from "./components/admin/dbproducts.js";
 import Hombre from "./components/views/hombre.js";
+import { Categories } from "./components/admin/categories.js";
 
 let nav = document.querySelector("#nav");
 let app = document.querySelector("#app");
@@ -17,7 +18,7 @@ nav.innerHTML = Navbar();
 footer.innerHTML = Footer();
 modal.innerHTML = DBModal();
 
-if(app.innerHTML == ""){app.innerHTML = Hombre()}
+if(app.innerHTML == ""){app.innerHTML = Categories()}
 
 window.addEventListener('DOMContentLoaded', ()=> Router())
 

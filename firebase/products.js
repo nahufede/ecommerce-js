@@ -9,7 +9,7 @@ export const getCategories = async (x) => {
   if(x === "man"){
     itemCollection = db.collection('categories_man');
   } else if (x === "woman"){
-    itemCollection = db.collection('categories_woman')
+    itemCollection = db.collection('categories_woman');
   }
 
   if(itemCollection !== undefined){

@@ -2,38 +2,74 @@ import { getFirestore } from "../../firebase/firebase.js"
 
 let db = getFirestore();
 
+window.addEventListener('keyup',(e)=>{
+    if(e.target.classList.contains('textareamsj')){
+        let caracteres = e.target.value
+        caracteres = caracteres.replaceAll(" ","")
+        document.getElementById('caracterestextarea').innerHTML = `${caracteres.length}/256`;
+    }
+})
+
 const contactFormValidation = () => {
 
-    let validation
+    let validation = 0
 
     let contactForm = document.querySelector('#contactForm')
 
-    // VALIDANDO FORMULARIO 
+    // VALIDANDO FORMULARIO
 
-    let regExp=/[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,5}/
-    let regExpPhone=/^(?:(?:00)?549?)?0?(?:11|[2368]\d)(?:(?=\d{0,2}15)\d{2})??\d{8}$/
+    function validateEmail(email) {
+        const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(String(email).toLowerCase());
+    }
 
     for (let i = 0; i < 5; i++) {
 
         if(contactForm[i].value === ""){
             contactForm[i].classList.add('is-invalid')
             contactForm[i].classList.remove('is-valid')
+            validation -= 1
         } else {
+            if(contactForm[i].getAttribute('type') === 'email'){
+                let email = contactForm[i].value
+                let response = validateEmail(email)
+                if(response === true){
+                    contactForm[i].classList.add('is-valid')
+                    contactForm[i].classList.remove('is-invalid')
+                    return
+                }
+            } else if (contactForm[i].getAttribute('name') === 'telefono'){
+
+                let number = contactForm[i].value
+                number = number.replaceAll(" ", "").replaceAll("-", "")
+                
+                if(!isNaN(Number(number)) && number.length >= 10){
+                    contactForm[i].classList.add('is-valid')
+                    contactForm[i].classList.remove('is-invalid')
+                } else {
+                    contactForm[i].classList.add('is-invalid')
+                    contactForm[i].classList.remove('is-valid')
+                }
+            } else if (contactForm[i].getAttribute('name') === "textareamsj"){
+
+                let mensaje = contactForm[i].value
+                mensaje = mensaje.replaceAll(" ", "")
+
+                if(mensaje.length >= 15 && mensaje.length <= 256){
+                    contactForm[i].classList.add('is-valid')
+                    contactForm[i].classList.remove('is-invalid')
+                } else {
+                    contactForm[i].classList.add('is-invalid')
+                    contactForm[i].classList.remove('is-valid')
+                }
+            } else {
             contactForm[i].classList.add('is-valid')
             contactForm[i].classList.remove('is-invalid')
+            validation += 1}
         }   
     }
 
-    if ((contactForm[0].value != "")&&
-        (contactForm[1].value != "")&&
-        (contactForm[2].value != "")&&
-        (contactForm[3].value != "")){
-        validation = true;
-    }   else {
-        validation = false;
-    }
-
-    if(validation){
+    if(validation === 3){
         contactForm[4].removeAttribute('disabled');
         contactForm[4].style.opacity = 1;
     }else{
@@ -49,7 +85,7 @@ window.addEventListener('change', ()=>{
 })
 
 export const Contacto = () => {
-
+    
     window.addEventListener("keypress", function(event){
         if (event.key === 'Enter'){
             event.preventDefault();
@@ -104,7 +140,7 @@ export const Contacto = () => {
             <div class="col-12 col-sm-6 offset-sm-3">
                 <h1 class="text-center mt-3 fontzing">CONTACTO</h1>
                 <p class="text-center mt-3">Dejanos tu consulta y te responderemos a la brevedad</p>
-                <form id="contactForm" class="row g-3 d-flex flex-column mt-5">
+                <form id="contactForm" class="row g-3 d-flex flex-column mt-3">
                     <div class="form-floating">
                         <input type="text" class="form-control" id="validationServer01" placeholder="Nombre" required>
                         <label for="validationServer01" class="form-label" style="padding-left: 1.3rem;">Nombre</label>
@@ -126,24 +162,25 @@ export const Contacto = () => {
                         </div>
                     </div>
                     <div class="form-floating">
-                        <input type="number" class="form-control" id="validationServer03" placeholder="Teléfono" required>
+                        <input type="text" class="form-control" name="telefono" id="validationServer03" placeholder="Teléfono" required>
                         <label for="validationServer03" style="padding-left: 1.3rem;">Teléfono</label>
                         <div class="valid-feedback">
                         Correcto!
                         </div>
                         <div id="validationServer03Feedback" class="invalid-feedback">
-                            Introduce un número válido
+                            Introduce un número válido. Código de área sin 0 ni 15. Ej. 115 842 0029
                         </div>
                     </div>
                     <div class="form-floating">
-                        <textarea class="form-control" placeholder="Leave a comment here" id="validationServer04"
-                            style="height: 150px" required></textarea>
+                        <textarea class="form-control textareamsj" placeholder="Leave a comment here" id="validationServer04"
+                            style="height: 150px" name="textareamsj" required></textarea>
                         <label for="validationServer04" style="padding-left: 1.3rem;">Mensaje</label>
+                        <p id="caracterestextarea">0/256</p>
                         <div class="valid-feedback">
                         Correcto!
                         </div>
                         <div id="validationServer03Feedback" class="invalid-feedback">
-                            Escribe un mensaje. Mínimo 15 carácteres.
+                            Escribe un mensaje. Mínimo 15 carácteres y máximo 256.
                         </div>
                     </div>
                     <button id="contactbutton" class="mybutton noprevent" disabled="true" style="opacity:0.6;" onkeypress="(e)=>{if(e.which === 13){return false}}" type="submit">ENVIAR</button>

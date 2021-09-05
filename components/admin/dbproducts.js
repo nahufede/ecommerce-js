@@ -148,10 +148,10 @@ export const DBProducts = () => {
       const card = document.createElement('div');
       card.className = "col-6 col-md-4 col-lg-3 d-flex justify-content-center mb-4 dbcard"
       card.innerHTML = 
-      `<div class="card" style="width: 13rem; height: 13rem; border:none;">
+      `<div class="card" style="width: 10rem; height: 13rem; border:none;">
         <div class="card-body card-space p-0" style="background-image: url(${img})">
           <div class="card-inner" id="${id}">
-            <h5 class="text-center">${name}</h5>
+            <h5 class="text-center fontzing">${name}</h5>
             <p>${category}</p>
               <button type="button" class="btn editBtn mybutton2 mb-2" data-bs-toggle="modal" data-bs-target="#dbproductsmodal">
               Editar
