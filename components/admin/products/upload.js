@@ -1,5 +1,5 @@
-import { getCategories } from "../../firebase/products.js";
-import { getFirestore, storage } from "../../firebase/firebase.js"
+import { getCategories } from "../../../firebase/products.js";
+import { getFirestore, storage } from "../../../firebase/firebase.js"
 
 let db = getFirestore();
 let storageRef = storage().ref();
@@ -23,7 +23,7 @@ const uploadFormValidation = () => {
 
     let validation
 
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 6; i++) {
 
         if(createForm[i].value === ""){
             createForm[i].classList.add('is-invalid')
@@ -38,7 +38,8 @@ const uploadFormValidation = () => {
         (createForm[1].value != "")&&
         (createForm[2].value != "")&&
         (createForm[3].value != "")&&
-        (createForm[4].value != "")){
+        (createForm[4].value != "")&&
+        (createForm[5].value != "")){
         validation = true;
     }   else {
         validation = false;
@@ -50,7 +51,7 @@ const uploadFormValidation = () => {
 
         let progressVal = [];
 
-        for (let i = 0; i < 5; i++) {
+        for (let i = 0; i < 6; i++) {
             if (createForm[i].value.length != 0){
                 progressVal.push(1)
             }
@@ -60,18 +61,21 @@ const uploadFormValidation = () => {
 
         switch (progressForm) {
             case 1:
-                progressBar.style.width = '20%';
+                progressBar.style.width = '17%';
                 break;
             case 2:
-                progressBar.style.width = '40%';
+                progressBar.style.width = '33%';
                 break;
             case 3:
-                progressBar.style.width = '60%';
+                progressBar.style.width = '50%';
                 break;
             case 4:
-                progressBar.style.width = '80%';
+                progressBar.style.width = '65%';
                 break;
             case 5:
+                progressBar.style.width = '85%';
+                break;
+            case 6:
                 progressBar.style.width = '100%';
                 break;
             default:
@@ -83,8 +87,46 @@ const uploadFormValidation = () => {
     progressValidation()
 
     if(validation){
-        createForm[5].removeAttribute('disabled');
+        createForm[6].removeAttribute('disabled');
         document.querySelector('.submitBtn').style.opacity = 1;
+    }
+
+    let gender = createForm[1].value
+
+    /* for (let i = 1; i <= 8; i++) {
+        createForm[2][i].remove()
+    } */
+
+    console.log(gender.length);
+
+    let selectItems
+
+    if(document.querySelector('.categoryupload')){
+        selectItems = document.querySelector('.categoryupload')
+    }
+
+    /* selectItems.innerHTML = `<option selected="" disabled="" value="">Seleccionar</option>` */
+
+    if(gender.length !== 0){
+
+        createForm[2].removeAttribute('disabled')
+
+        getCategories(gender).then((el) => {
+
+        let categories = el;
+    
+        categories.forEach((el, index) => {
+
+          const option = document.createElement('option');
+
+          const { name } = el;
+    
+          option.innerHTML = name.charAt(0).toUpperCase() + name.slice(1);
+          option.setAttribute('value', name.toLowerCase())
+
+        selectItems.appendChild(option)
+        });
+      })
     }
 }
 
@@ -93,6 +135,7 @@ window.addEventListener('change', ()=>{
         uploadFormValidation()
     }
 })
+
 export function createElement(e) {
 
     // PREVENT DEFAULT PARA QUE NO RECARGUE LA PAGINA AL DARLE SUBMIT
@@ -103,12 +146,12 @@ export function createElement(e) {
 
     // ASIGNACION DE ELEMENTOS DEL FORM
     let name = createForm[0].value;
-    let categories = createForm[1];
-    let selectedCategory = createForm[1].value;
-    let price = createForm[2].value;
-    let description = createForm[3].value;
-    let category = categories[selectedCategory].innerHTML
-    let file = createForm[4].files[0];
+    let category = createForm[2].value;
+    let price = createForm[3].value;
+    let description = createForm[4].value;
+    let file = createForm[5].files[0];
+
+    category = category.charAt(0).toUpperCase() + category.slice(1);
 
     db.collection('products').add({
         name,
@@ -164,30 +207,6 @@ export function createElement(e) {
 
 export const Upload = () => {
 
-    getCategories('man').then((el) => {
-
-        let categories = el;
-    
-        let selectItems
-
-        categories.forEach((el, index) => {
-
-          const option = document.createElement('option');
-
-          /* Destrucuring sobre el objeto p */
-          const { name } = el;
-    
-          option.innerHTML = name
-          option.setAttribute('value', index+1)
-
-          if(document.querySelector('.categoryupload')){
-            selectItems = document.querySelector('.categoryupload')
-          }
-
-        selectItems.appendChild(option)
-        });
-      });
-
     return (
         `<div class="container">
         <div class="row" id="uploadpage">
@@ -215,52 +234,66 @@ export const Upload = () => {
                         Elige un nombre
                     </div>
                     </div>
-                
                     <div class="form-floating mb-3">
-                    <select class="form-select categoryupload" id="validationServer02"
-                        aria-describedby="validationServer04Feedback" required>
-                        <option selected disabled value="">Seleccionar</option>
-                    </select>
-                    <label for="validationServer02" style="padding-left: 1.3rem;" class="form-label">Categoria</label>
-                    <div class="valid-feedback">
-                        Correcto!
+                        <select class="form-select categorygender" id="validationServer02"
+                            aria-describedby="validationServer02Feedback" required>
+                            <option selected disabled value="">Seleccionar</option>
+                            <option value="man">Hombre</option>
+                            <option value="woman">Mujer</option>
+                        </select>
+                        <label for="validationServer02" style="padding-left: 1.3rem;" class="form-label">Género</label>
+                        <div class="valid-feedback">
+                            Correcto!
+                        </div>
+                        <div id="validationServer02Feedback" class="invalid-feedback">
+                            Selecciona un género
+                        </div>
                     </div>
-                    <div id="validationServer02Feedback" class="invalid-feedback">
-                        Selecciona una categoría
-                    </div>
+                    <div class="form-floating mb-3">
+                        <select class="form-select categoryupload" disabled="true" id="validationServer03"
+                            aria-describedby="validationServer03Feedback" required>
+                            <option selected disabled value="">Seleccionar</option>
+                        </select>
+                        <label for="validationServer03" style="padding-left: 1.3rem;" class="form-label">Categoria</label>
+                        <div class="valid-feedback">
+                            Correcto!
+                        </div>
+                        <div id="validationServer02Feedback" class="invalid-feedback">
+                            Selecciona una categoría
+                        </div>
                     </div>
                 
                     <div class="input-group mb-3">
-                    <label for="validationServer03" class="form-label" style="display: none;">Precio</label>
+                    <label for="validationServer04" class="form-label" style="display: none;">Precio</label>
                     <span class="input-group-text">$</span>
-                    <input type="number" class="form-control" id="validationServer03"
+                    <input type="number" class="form-control" id="validationServer04"
                         aria-label="Amount (to the nearest dollar)" required>
                     <span class="input-group-text">.00</span>
                     <div class="valid-feedback">
                         Correcto!
                     </div>
-                    <div id="validationServer03Feedback" class="invalid-feedback">
+                    <div id="validationServer04Feedback" class="invalid-feedback">
                         Introducir precio
                     </div>
                     </div>
                 
                     <div class="form-floating mb-3">
-                    <textarea class="form-control" id="validationServer04" placeholder="Required example textarea" required
+                    <textarea class="form-control" id="validationServer05" placeholder="Required example textarea" required
                         style="height: 100px"></textarea>
-                    <label for="validationServer04" style="padding-left: 1.3rem;">Descripción</label>
+                    <label for="validationServer05" style="padding-left: 1.3rem;">Descripción</label>
                     <div class="valid-feedback">
                         Correcto!
                     </div>
-                    <div id="validationServer04Feedback" class="invalid-feedback">
+                    <div id="validationServer05Feedback" class="invalid-feedback">
                         Escribe una descripción
                     </div>
                     </div>
                     <div class="mb-3">
-                    <input class="form-control" type="file" id="formFileMultiple" multiple>
+                    <input class="form-control" type="file" id="validationServer06" multiple>
                     <div class="valid-feedback">
                         Archivo seleccionado
                     </div>
-                    <div id="validationServer03Feedback" class="invalid-feedback">
+                    <div id="validationServer06Feedback" class="invalid-feedback">
                         Selecciona una imagen
                     </div>
                     </div>

@@ -1,27 +1,43 @@
-import { getCategories } from "../../firebase/products.js";
-import { getFirestore } from "../../firebase/firebase.js";
+import { getCategories } from "../../../firebase/products.js";
+import { getFirestore, storage } from "../../../firebase/firebase.js";
 
 let man = "categories_man"
 let woman = "categories_woman"
 
 let db = getFirestore();
+let storageRef = storage().ref();
 
-export const Categories = () => {
+export const ShowCategories = () => {
 
     window.addEventListener('click', (e)=>{
 
         if(e.target.classList.contains('deleteCat')){
-            let id = e.target.parentElement.parentElement.parentElement.parentElement.getAttribute('id');
+            let id = e.target.parentElement.getAttribute('id');
+            let gender = e.target.parentElement.getAttribute('gender')
+            let database = e.target.parentElement.getAttribute('db')
 
             let confirmacion = confirm("Desea eleminar el elemento?");
 
             if(confirmacion){
+
+            let focusImg = storageRef.child(`categories/${gender}/${id}`);
+
+            focusImg
+              .delete()
+              .then(function () {
+                console.log("imagen borrada");
+              })
+              .catch(function (error) {
+                console.log("error ->", error);
+              });
+
             let db = getFirestore();
-            db.collection('categories_man')
+
+            db.collection(`${database}`)
             .doc(id)
             .delete()
             .then(() => {
-            app.innerHTML = Categories();
+            app.innerHTML = ShowCategories();
             })
             .catch((error) => {
             console.error("error ->", error);
@@ -50,7 +66,7 @@ export const Categories = () => {
             })
             .then(() => {
               console.log("Document successfully updated!");
-              app.innerHTML = Categories()
+              app.innerHTML = ShowCategories()
             })
             .catch((error) => {
               // The document probably doesn't exist.
@@ -59,7 +75,7 @@ export const Categories = () => {
         }
     })
     
-  const setList = (db, categories, gender) => {
+  const setList = (db, categories, database, text) => {
     let catList = document.createElement("div");
       catList.className = "row pt-4";
 
@@ -80,10 +96,10 @@ export const Categories = () => {
             "col-6 col-md-4 d-flex justify-content-center mb-4 dbcard";
           card.innerHTML = `<div class="card" style="width: 15rem; height: 15rem;">
         <div class="card-body card-space p-0" style="background-image: url(${img})">
-          <div class="card-inner justify-content-evenly" style="height: 90%;" db="${gender}">
-            <h4 class="text-center fontzing2">${name.toUpperCase()}</h4>
+          <div class="card-inner justify-content-evenly" style="height: 90%;">
+            <h5 class="text-center fontzing2">${name.toUpperCase()}</h5>
             <input class="inputedit" type="text" value="${name.toUpperCase()}"/>
-              <span class="d-flex flex-column justify-content-center" id="${id}">
+              <span class="d-flex flex-column justify-content-center" gender="${text}" db="${database}" id="${id}">
                 <button type="button" class="btn mybutton2 editCat mb-2">
                         Editar<i class="bi bi-pencil ms-1"></i>
                 </button>
@@ -107,11 +123,11 @@ export const Categories = () => {
   }
 
   getCategories('man').then((categories) => {
-    setList("#categoriesman", categories, man)  
+    setList("#categoriesman", categories, man, 'man')  
   });
 
   getCategories('woman').then((categories) => {
-    setList("#categorieswoman", categories, woman)  
+    setList("#categorieswoman", categories, woman, 'woman')  
   });
 
   return `
@@ -128,18 +144,18 @@ export const Categories = () => {
       <div class="row p-0">
         <div class="col-12 my-5">
           <div class="col-12">
-            <h1 class="text-center mb-5">CATEGORIAS</h1>
+            <h1 class="text-center mb-5 fontzing">CATEGORIAS</h1>
           </div>
           <div class="col-12 d-flex justify-content-around flex-wrap">
             <div class="col-12 col-xl-5">
-              <h3 class="text-center mb-3">HOMBRE</h3>
+              <h3 class="text-center mb-3 fontzing">HOMBRE</h3>
               <div class="container" id="categoriesman">
               </div>
               <nav aria-label="Page navigation example" class="d-flex justify-content-center mt-3">
               </nav>
             </div>
             <div class="col-12 col-xl-5">
-              <h3 class="text-center mb-3">MUJER</h3>
+              <h3 class="text-center mb-3 fontzing">MUJER</h3>
               <div class="container" id="categorieswoman">
               </div>
               <nav aria-label="Page navigation example" class="d-flex justify-content-center mt-3">

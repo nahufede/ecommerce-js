@@ -1,5 +1,5 @@
-import { getItems } from "../../firebase/products.js";
-import { getFirestore, storage } from "../../firebase/firebase.js"
+import { getItems } from "../../../firebase/products.js";
+import { getFirestore, storage } from "../../../firebase/firebase.js"
 
 let db = getFirestore();
 let storageRef = storage().ref();
@@ -123,7 +123,7 @@ window.addEventListener("click", async (e) => {
   }
 });
 
-export const DBProducts = () => {
+export const AllProducts = () => {
   
   // LLAMADO FIREBASE DE PRODUCTOS
 
@@ -196,3 +196,5 @@ export const DBProducts = () => {
       </div>
 `;
 };
+
+export default AllProducts;

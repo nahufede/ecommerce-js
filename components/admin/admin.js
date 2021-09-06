@@ -38,12 +38,12 @@ export const Admin = () => {
                             <a id="home" class="contactbreadcrumb">Inicio</a>
                             <p>> Administrador</p>
                         </div>
-                        <h1 class="text-center">SESIÓN INICIADA</h1>
+                        <h1 class="text-center fontzing">SESIÓN INICIADA</h1>
                         <p class="text-center mt-3">${user.email}</p>
                         <div class="d-flex flex-column">
                             <button id="consultas" class="mybutton mb-2" type="button">Consultas</button>
                             <button id="productsdash" class="mybutton mb-2" type="button">Productos</button>
-                            <button id="editcategories" class="mybutton mb-2" type="button">Categorias</button>
+                            <button id="categoriesdash" class="mybutton mb-2" type="button">Categorias</button>
                             <button id="logout" class="mybutton mb-2" type="button">Cerrar Sesión</button>
                         </div>
                     </div>
