@@ -1,8 +1,9 @@
 import { auth } from "../firebase/firebase.js";
 import { getCategories } from "../firebase/products.js";
+import { capitalize } from "../script.js";
 
 const categoriesNav = () => {
-  getCategories('man').then((el) => {
+  getCategories('categories_hombre').then((el) => {
     let categoriesnav_man;
 
     if (document.getElementById("categoriesnav_man")) {
@@ -10,13 +11,14 @@ const categoriesNav = () => {
     }
 
     el.forEach((el) => {
+      let name = capitalize(el.name)
       let categoriesNav = document.createElement("li");
-      categoriesNav.innerHTML = `<a class="dropdown-item click-category" id="${el.name}" href="#">${el.name}</a>`;
+      categoriesNav.innerHTML = `<a class="dropdown-item click-category" id="${el.name}" href="#">${name}</a>`;
       categoriesnav_man.appendChild(categoriesNav);
     });
   });
 
-  getCategories('woman').then((el) => {
+  getCategories('categories_mujer').then((el) => {
     let categoriesnav_woman;
 
     if (document.getElementById("categoriesnav_woman")) {
@@ -24,8 +26,9 @@ const categoriesNav = () => {
     }
 
     el.forEach((el) => {
+      let name = capitalize(el.name)
       let categoriesNav = document.createElement("li");
-      categoriesNav.innerHTML = `<a class="dropdown-item click-category" id="${el.name}" href="#">${el.name}</a>`;
+      categoriesNav.innerHTML = `<a class="dropdown-item click-category" id="${el.name}" href="#">${name}</a>`;
       categoriesnav_woman.appendChild(categoriesNav);
     });
   });

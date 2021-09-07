@@ -1,24 +1,25 @@
-import { Contacto } from "../components/views/contact.js";
-import { Hombre } from "../components/views/hombre.js";
+import { Navbar } from "./nav.js";
+import { Footer } from "./footer.js";
+import { DBModal } from "./modal.js";
+import { Home } from "../components/views/home.js";
+import { Upload } from "./admin/products/upload.js";
+import { LogOut, LogIn } from "../firebase/user.js";
 import { Admin } from "../components/admin/admin.js";
 import { Mujer } from "../components/views/mujer.js";
-import { Home } from "../components/views/home.js";
-import { ItemList } from "../components/items/itemList.js";
-import { itemDetail } from "../components/items/itemDetail.js";
-import { LogOut, LogIn } from "../firebase/user.js";
+import { Hombre } from "../components/views/hombre.js";
+import { ShowGenders } from "./admin/genders/genders.js";
 import { Checkout } from "../components/cart/checkout.js";
-import { Upload } from "./admin/products/upload.js";
+import { Contacto } from "../components/views/contact.js";
 import { AllProducts } from "./admin/products/products.js";
-import { CategoriesDashboard } from "./admin/categories/dash.js";
+import { ItemList } from "../components/items/itemList.js";
 import { ProductsDashboard } from "./admin/products/dash.js";
 import { Consultas } from "../components/admin/consultas.js";
-import { ShowCategories } from "./admin/categories/categories.js";
+import { CreateGender } from "./admin/genders/create.js";
+import { itemDetail } from "../components/items/itemDetail.js";
 import { CreateCategories } from "./admin/categories/create.js";
-import { CreateGender } from "./admin/categories/creategender.js"
-import { Footer } from "./footer.js";
-import { Navbar } from "./nav.js";
-import { DBModal } from "./modal.js";
-import { ShowGenders } from "./admin/categories/genders.js";
+import { CategoriesDashboard } from "./admin/categories/dash.js";
+import { ShowCategories } from "./admin/categories/categories.js";
+import GendersDashboard from "./admin/genders/dash.js";
 
 let nav = document.querySelector("#nav");
 let app = document.querySelector("#app");
@@ -30,7 +31,7 @@ footer.innerHTML = Footer();
 modal.innerHTML = DBModal();
 
 if (app.innerHTML == "") {
-  app.innerHTML = Home();
+  app.innerHTML = ShowCategories();
 }
 
 export const Router = () => {
@@ -101,6 +102,11 @@ export const Router = () => {
       case "creategender":
         e.preventDefault();
         app.innerHTML = CreateGender();
+        break;
+        
+      case "gendersdash":
+        e.preventDefault();
+        app.innerHTML = GendersDashboard();
         break;
 
       case "productsdash":

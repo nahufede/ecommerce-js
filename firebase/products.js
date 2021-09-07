@@ -6,14 +6,12 @@ export const getCategories = async (x) => {
 
   let itemCollection
 
-  if(x === "man"){
-    itemCollection = db.collection('categories_man');
-  } else if (x === "woman"){
-    itemCollection = db.collection('categories_woman');
+  if(x){
+    itemCollection = db.collection(x);
   }
 
   if(itemCollection !== undefined){
-    const querySnapshot = await itemCollection.get();
+    const querySnapshot = await itemCollection.orderBy("name").get();
 
     let categories = querySnapshot.docs.map((doc) => ({
       ...doc.data(),
@@ -35,4 +33,17 @@ export const getItems = async () => {
   }));
 
   return allProducts;
+}
+
+export const getGenders= async () => {
+
+  const itemCollection = db.collection("genders");
+  const querySnapshot = await itemCollection.orderBy("name").get();
+
+  let allGenders = querySnapshot.docs.map((doc) => ({
+    ...doc.data(),
+    id: doc.id,
+  }));
+
+  return allGenders;
 }

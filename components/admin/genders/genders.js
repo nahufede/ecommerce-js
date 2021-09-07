@@ -71,17 +71,18 @@ export const ShowGenders = () => {
         genders.forEach((el) => {
         /* Destrucuring sobre el objeto */
     
-        const { name, id } = el;
+        const { name, id, img } = el;
     
         const card = document.createElement('div');
-        card.className = "col-12 col-md-4 d-flex justify-content-center mb-4"
+        card.className = "col-12 col-md-3 d-flex justify-content-center mb-4"
         card.innerHTML = 
         `<div class="card w-100" id=${id}>
             <div class="card-body d-flex flex-column consultcard">
               <span class="d-flex justify-content-between align-items-center">
-                <h5 class="card-title">${name}</h5>
+                <h5 class="card-title">${name.toUpperCase()}</h5>
                 <a href="" class="deleteGender"><i class="bi bi-trash-fill"></i></a>
               </span>
+              <img src="${img}" class="card-img-top" alt="...">
             </div>
         </div>
         `
@@ -98,15 +99,15 @@ export const ShowGenders = () => {
           <div class="d-flex flex-row justify-content-center">
             <a id="home" class="contactbreadcrumb">Inicio</a>
             <a id="admin" class="contactbreadcrumb">> Administrador</a>
-            <a id="categoriesdash" class="contactbreadcrumb">> Categorias</a>
-            <p>> GÉNEROS</p>
+            <a id="gendersdash" class="contactbreadcrumb">> Géneros</a>
+            <p>> Ver Géneros</p>
           </div>
         </div>
       </div>
       <div class="row p-0">
         <div class="col-12 my-5">
           <div class="col-12">
-            <h1 class="text-center mb-5">Géneros</h1>
+            <h1 class="text-center mb-5 fontzing">GÉNEROS</h1>
           </div>
           <div class="col-12" id="genders">
           </div>

@@ -1,4 +1,4 @@
-export const CategoriesDashboard = () => {
+export const GendersDashboard = () => {
 
   return (
           `<div class="container">
@@ -7,12 +7,12 @@ export const CategoriesDashboard = () => {
                       <div class="d-flex flex-row justify-content-center">
                           <a id="home" class="contactbreadcrumb">Inicio</a>
                           <a id="admin" class="contactbreadcrumb">> Administrador</a>
-                          <p>> Categorias</p>
+                          <p>> Géneros</p>
                       </div>
-                      <h1 class="text-center fontzing">CATEGORIAS</h1>
+                      <h1 class="text-center fontzing">GÉNEROS</h1>
                       <div class="d-flex flex-column">
-                        <button id="showcategories" class="mybutton mb-2" type="button">Ver Categorias</button>
-                        <button id="createcategory" class="mybutton mb-2" type="button">Añadir Categoria</button>
+                        <button id="showgenders" class="mybutton mb-2" type="button">Ver Géneros</button>
+                        <button id="creategender" class="mybutton mb-2" type="button">Añadir Género</button>
                       </div>
                   </div>
               </div>
@@ -21,4 +21,4 @@ export const CategoriesDashboard = () => {
 }
 
 
-export default CategoriesDashboard;
+export default GendersDashboard;

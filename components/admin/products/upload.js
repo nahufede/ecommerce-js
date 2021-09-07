@@ -13,7 +13,7 @@ window.addEventListener("keypress", function(event){
 window.addEventListener("click", (e) => {
     if (e.target.classList.contains("submitBtn")) {
       e.preventDefault();
-      createElement(e);
+      createElements(e);
     }
 });
 
@@ -136,7 +136,7 @@ window.addEventListener('change', ()=>{
     }
 })
 
-export function createElement(e) {
+export function createElements(e) {
 
     // PREVENT DEFAULT PARA QUE NO RECARGUE LA PAGINA AL DARLE SUBMIT
     e.preventDefault();

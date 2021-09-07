@@ -33,7 +33,7 @@ export const Admin = () => {
         return (
             `<div class="container">
                 <div class="row">
-                    <div class="col-12 col-sm-6 offset-sm-3 d-flex flex-column justify-content-between" style="height: 60vh;">
+                    <div class="col-12 col-sm-6 offset-sm-3 d-flex flex-column justify-content-between">
                         <div class="d-flex flex-row justify-content-center">
                             <a id="home" class="contactbreadcrumb">Inicio</a>
                             <p>> Administrador</p>
@@ -41,14 +41,18 @@ export const Admin = () => {
                         <h1 class="text-center fontzing">SESIÓN INICIADA</h1>
                         <p class="text-center mt-3">${user.email}</p>
                         <div class="d-flex flex-column">
-                            <button id="consultas" class="mybutton mb-2" type="button">Consultas</button>
-                            <button id="productsdash" class="mybutton mb-2" type="button">Productos</button>
                             <button id="categoriesdash" class="mybutton mb-2" type="button">Categorias</button>
+                            <button id="consultas" class="mybutton mb-2" type="button">Consultas</button>
+                            <button id="gendersdash" class="mybutton mb-2" type="button">Géneros</button>
+                            <button id="productsdash" class="mybutton mb-2" type="button">Productos</button>
                             <button id="logout" class="mybutton mb-2" type="button">Cerrar Sesión</button>
                         </div>
                     </div>
                 </div>
-            </div>`
+            </div>
+            <button id="categoriesdash" class="mybutton mb-2" type="button">Categorias</button>
+                    <button id="consultas" class="mybutton mb-2" type="button">Consultas</button>
+            `
     )
     }
 }

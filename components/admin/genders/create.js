@@ -15,7 +15,7 @@ const createGender = () => {
     let createGender = document.querySelector('#createGender')
 
     // ASIGNACION DE ELEMENTOS DEL FORM
-    let name = createGender[0].value;
+    let name = (createGender[0].value).toLowerCase();
     let file = createGender[1].files[0];
 
     db.collection(`genders`).add({
@@ -68,8 +68,8 @@ export const CreateGender = () => {
               <div class="d-flex flex-row justify-content-center">
                 <a id="home" class="contactbreadcrumb">Inicio</a>
                 <a id="admin" class="contactbreadcrumb">> Administrador</a>
-                <a id="categoriesdash" class="contactbreadcrumb">> Categorias</a>
-                <p>> Añadir Categoria</p>
+                <a id="gendersdash" class="contactbreadcrumb">> Géneros</a>
+                <p>> Añadir Género</p>
             </div>
             </div>
             <div class="col-12 my-5 d-flex flex-wrap justify-content-center">

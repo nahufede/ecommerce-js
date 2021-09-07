@@ -11,3 +11,7 @@ searchForm.addEventListener("submit", function (e) {
   let search = searchTerm.value;
   SearchResults(search);
 });
+
+export function capitalize(str) {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}

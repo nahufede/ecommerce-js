@@ -43,7 +43,7 @@ const contactFormValidation = () => {
                 let number = contactForm[i].value
                 number = number.replaceAll(" ", "").replaceAll("-", "")
                 
-                if(!isNaN(Number(number)) && number.length >= 10){
+                if(!isNaN(Number(number)) && number.length >= 6){
                     contactForm[i].classList.add('is-valid')
                     contactForm[i].classList.remove('is-invalid')
                 } else {

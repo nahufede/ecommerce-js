@@ -15,7 +15,7 @@ export function createCategory() {
     let createcategory = document.querySelector('#createcategory')
 
     // ASIGNACION DE ELEMENTOS DEL FORM
-    let name = createcategory[0].value;
+    let name = (createcategory[0].value).toLowerCase()
     let gender = (createcategory[1].value).toLowerCase();
     let file = createcategory[2].files[0];
 
@@ -94,8 +94,8 @@ export const CreateCategories = () => {
                         <select class="form-select categorygender" id="validationServer02"
                             aria-describedby="validationServer02Feedback" required>
                             <option selected disabled value="">Seleccionar</option>
-                            <option value="man">Hombre</option>
-                            <option value="woman">Mujer</option>
+                            <option value="hombre">Hombre</option>
+                            <option value="mujer">Mujer</option>
                         </select>
                         <label for="validationServer02" style="padding-left: 1.3rem;" class="form-label">Género</label>
                         <div class="valid-feedback">

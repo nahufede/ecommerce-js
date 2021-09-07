@@ -140,9 +140,8 @@ body {
     margin: 5rem 0;
 }
 
-.landingpageimgman {
+.landingpageimg {
     height: 23rem;
-    background-image: url('/img/hombre.jpg');
     background-position: center;
     background-size: contain;
     background-repeat: no-repeat;
@@ -155,22 +154,7 @@ body {
     transition: 0.8s;
 }
 
-.landingpageimgwoman {
-    height: 23rem;
-    background-image: url('/img/hombre.jpg');
-    background-position: center;
-    background-size: contain;
-    background-repeat: no-repeat;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-size: 3rem;
-    text-shadow: 1px 1px 10px black;
-    transition: 0.8s;
-}
-
-.landingpageimgwoman:hover, .landingpageimgman:hover{
+.landingpageimg:hover{
     font-size: 3.3rem;
     transition: 0.8s;
     height: 23.5rem;
@@ -503,8 +487,8 @@ opacity: 1;
     padding: 0.5rem 0.5rem 0 0;
     margin: 0;
     position: absolute;
-    bottom: 1rem;
-    right: 1rem;
+    bottom: 7.4rem;
+    right: 0.7rem;
 }
 
 .inputedit{
