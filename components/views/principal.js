@@ -1,16 +1,17 @@
 import { getCategories } from "../../firebase/products.js";
+import { ItemList } from "../items/itemList.js";
 
 let app = document.querySelector("#app");
 
-const categoriesPage = () => {
+const categoriesPage = (genero) => {
 
-  getCategories('woman').then((categories) => {
+  getCategories(genero).then((categories) => {
     let allCategories = document.createElement("div");
     allCategories.className = "col-12 d-flex flex-wrap all-categories mt-3";
 
     categories.forEach((el) => {
       let category = document.createElement("div");
-      category.className = "col-12 col-md-6 col-xl-4 my-3";
+      category.className = "col-12 col-md-6 col-xl-4 my-5";
       category.style.cssText = `
                                 display: flex; 
                                 justify-content: center; 
@@ -29,15 +30,15 @@ const categoriesPage = () => {
       allCategories.appendChild(category);
     });
 
-    if (document.querySelector(".womancategories")) {
-      let womanContainer = document.querySelector(".womancategories");
-      womanContainer.appendChild(allCategories);
+    if (document.querySelector(".thecategories")) {
+      let categoriesContainer = document.querySelector(".thecategories");
+      categoriesContainer.appendChild(allCategories);
     }
   });
 };
 
-export const Mujer = () => {
-  categoriesPage();
+export const Principal = (genero, landing) => {
+  categoriesPage(genero);
 
   window.addEventListener('click', (e)=>{
     let category = e.target.innerText;
@@ -51,12 +52,12 @@ export const Mujer = () => {
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
-                        <div class="landingwoman"></div>
+                        <div class="${landing}"></div>
                     </div>
                 </div>
-                <div class="row womancategories"></div>
+                <div class="row thecategories"></div>
             </div>
     `;
 };
 
-export default Mujer;
+export default Principal;

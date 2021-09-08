@@ -172,9 +172,9 @@ export const ShowCategories = () => {
           <div class="col-12">
             <h1 class="text-center mb-5 fontzing">CATEGORIAS</h1>
           </div>
-          <div class="col-12 d-flex justify-content-around flex-wrap">
+          <div class="col-10 offset-1 d-flex justify-content-around flex-wrap">
             <div class="col-12 col-xl-6">
-                <h3 class="text-center mb-3 fontzing">SELECCIONAR</h3>
+                <h3 class="text-center mb-3 fontzing">GÉNEROS</h3>
                   <div class="d-flex flex-column categoriesbuttons">
                     
                   </div>
@@ -182,6 +182,7 @@ export const ShowCategories = () => {
             <div class="col-12 col-xl-6">
               <h3 class="text-center mb-3 fontzing">LISTA</h3>
               <div class="container" id="categorieslist">
+                <h5 class="text-center fontzing">SELECCIONA UNA CATEGORIA</h5>
               </div>
             </div>
           </div>

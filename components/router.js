@@ -5,8 +5,7 @@ import { Home } from "../components/views/home.js";
 import { Upload } from "./admin/products/upload.js";
 import { LogOut, LogIn } from "../firebase/user.js";
 import { Admin } from "../components/admin/admin.js";
-import { Mujer } from "../components/views/mujer.js";
-import { Hombre } from "../components/views/hombre.js";
+import { Principal } from "./views/principal.js";
 import { ShowGenders } from "./admin/genders/genders.js";
 import { Checkout } from "../components/cart/checkout.js";
 import { Contacto } from "../components/views/contact.js";
@@ -19,7 +18,7 @@ import { itemDetail } from "../components/items/itemDetail.js";
 import { CreateCategories } from "./admin/categories/create.js";
 import { CategoriesDashboard } from "./admin/categories/dash.js";
 import { ShowCategories } from "./admin/categories/categories.js";
-import GendersDashboard from "./admin/genders/dash.js";
+import { GendersDashboard } from "./admin/genders/dash.js";
 
 let nav = document.querySelector("#nav");
 let app = document.querySelector("#app");
@@ -41,12 +40,12 @@ export const Router = () => {
     switch (id) {
       case "hombre":
         e.preventDefault();
-        app.innerHTML = Hombre();
+        app.innerHTML = Principal('categories_hombre', 'landingman');
         break;
 
       case "mujer":
         e.preventDefault();
-        app.innerHTML = Mujer();
+        app.innerHTML = Principal('categories_mujer', 'landingwoman');
         break;
 
       case "contact":
