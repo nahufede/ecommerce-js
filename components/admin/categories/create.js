@@ -1,4 +1,6 @@
 import { getFirestore, storage } from "../../../firebase/firebase.js";
+import { getGenders } from "../../../firebase/products.js"
+
 
 let db = getFirestore();
 let storageRef = storage().ref();
@@ -63,16 +65,37 @@ export function createCategory() {
 
 export const CreateCategories = () => {
 
+    window.addEventListener('DOMContentLoaded', ()=>{
+
+        let selectGender = document.querySelector(".addcategorygender");
+    
+        getGenders().then((genders) => {
+        
+            console.log(genders);
+    
+            genders.forEach((el) => {
+              const option = document.createElement("option");
+        
+              const { name } = el;
+        
+              option.innerHTML = name.charAt(0).toUpperCase() + name.slice(1);
+              option.setAttribute("value", name.toLowerCase());
+        
+              selectGender.appendChild(option);
+            });
+          });
+    })
+
     return (
         `<div class="container">
         <div class="row" id="">
             <div class="col-12">
-              <div class="d-flex flex-row justify-content-center">
-                <a id="home" class="contactbreadcrumb">Inicio</a>
-                <a id="admin" class="contactbreadcrumb">> Administrador</a>
-                <a id="categoriesdash" class="contactbreadcrumb">> Categorias</a>
-                <p>> Añadir Categoria</p>
-            </div>
+                <div class="d-flex flex-row justify-content-center">
+                    <a reference="home" class="contactbreadcrumb">Inicio</a>
+                    <a reference="admin" class="contactbreadcrumb">> Administrador</a>
+                    <a reference="categoriesdash" class="contactbreadcrumb">> Categorias</a>
+                    <p>> Añadir Categoria</p>
+                </div>
             </div>
             <div class="col-12 my-5 d-flex flex-wrap justify-content-center">
               <div class="col-10 col-md-6">
@@ -91,11 +114,9 @@ export const CreateCategories = () => {
                         </div>
                     </div>
                     <div class="form-floating mb-3">
-                        <select class="form-select categorygender" id="validationServer02"
+                        <select class="form-select addcategorygender" id="validationServer02"
                             aria-describedby="validationServer02Feedback" required>
                             <option selected disabled value="">Seleccionar</option>
-                            <option value="hombre">Hombre</option>
-                            <option value="mujer">Mujer</option>
                         </select>
                         <label for="validationServer02" style="padding-left: 1.3rem;" class="form-label">Género</label>
                         <div class="valid-feedback">

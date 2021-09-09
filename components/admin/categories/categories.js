@@ -120,7 +120,7 @@ export const ShowCategories = () => {
           const card = document.createElement("div");
           card.className =
             "col-6 col-md-4 d-flex justify-content-center mb-4 dbcard";
-          card.innerHTML = `<div class="card" style="width: 15rem; height: 15rem;">
+          card.innerHTML = `<div class="card" style="width: 15rem; height: 10rem;">
         <div class="card-body card-space p-0" style="background-image: url(${img})">
           <div class="card-inner justify-content-evenly" style="height: 90%;">
             <h5 class="text-center fontzing2">${name.toUpperCase()}</h5>
@@ -161,9 +161,10 @@ export const ShowCategories = () => {
       <div class="row">
         <div class="col-12">
           <div class="d-flex flex-row justify-content-center">
-            <a id="home" class="contactbreadcrumb">Inicio</a>
-            <a id="admin" class="contactbreadcrumb">> Administrador</a>
-            <p>> Categorias</p>
+              <a reference="home" class="contactbreadcrumb">Inicio</a>
+              <a reference="admin" class="contactbreadcrumb">> Administrador</a>
+              <a reference="categoriesdash" class="contactbreadcrumb">> Categorias</a>
+              <p>> Ver Categorias</p>
           </div>
         </div>
       </div>
@@ -180,7 +181,7 @@ export const ShowCategories = () => {
                   </div>
             </div>
             <div class="col-12 col-xl-6">
-              <h3 class="text-center mb-3 fontzing">LISTA</h3>
+              <h3 class="text-center fontzing">LISTA</h3>
               <div class="container" id="categorieslist">
                 <h5 class="text-center fontzing">SELECCIONA UNA CATEGORIA</h5>
               </div>

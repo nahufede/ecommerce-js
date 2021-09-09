@@ -1,226 +1,235 @@
-import { getCategories } from "../../../firebase/products.js";
-import { getFirestore, storage } from "../../../firebase/firebase.js"
+import { getCategories, getGenders } from "../../../firebase/products.js";
+import { getFirestore, storage } from "../../../firebase/firebase.js";
 
 let db = getFirestore();
 let storageRef = storage().ref();
 
-window.addEventListener("keypress", function(event){
+/* window.addEventListener("keypress", function(event){
     if (event.key === 'Enter'){
         event.preventDefault();
     }
-}, false);
+}, false); */
 
 window.addEventListener("click", (e) => {
-    if (e.target.classList.contains("submitBtn")) {
-      e.preventDefault();
-      createElements(e);
-    }
+  if (e.target.classList.contains("submitBtn")) {
+    e.preventDefault();
+    createElements(e);
+  }
 });
 
-const uploadFormValidation = () => {
+window.addEventListener('DOMContentLoaded', ()=>{
 
-    let createForm = document.querySelector('#createForm')
+    let selectGender = document.querySelector(".categorygender");
 
-    let validation
-
-    for (let i = 0; i < 6; i++) {
-
-        if(createForm[i].value === ""){
-            createForm[i].classList.add('is-invalid')
-            createForm[i].classList.remove('is-valid')
-        } else {
-            createForm[i].classList.add('is-valid')
-            createForm[i].classList.remove('is-invalid')
-        }   
-    }
-
-    if ((createForm[0].value != "")&&
-        (createForm[1].value != "")&&
-        (createForm[2].value != "")&&
-        (createForm[3].value != "")&&
-        (createForm[4].value != "")&&
-        (createForm[5].value != "")){
-        validation = true;
-    }   else {
-        validation = false;
-    }
-
-    let progressBar = document.querySelector('.progress-bar-1')
-
-    const progressValidation = () => {
-
-        let progressVal = [];
-
-        for (let i = 0; i < 6; i++) {
-            if (createForm[i].value.length != 0){
-                progressVal.push(1)
-            }
-        }
-
-        let progressForm = progressVal.reduce((a,b) => a + b , 0)
-
-        switch (progressForm) {
-            case 1:
-                progressBar.style.width = '17%';
-                break;
-            case 2:
-                progressBar.style.width = '33%';
-                break;
-            case 3:
-                progressBar.style.width = '50%';
-                break;
-            case 4:
-                progressBar.style.width = '65%';
-                break;
-            case 5:
-                progressBar.style.width = '85%';
-                break;
-            case 6:
-                progressBar.style.width = '100%';
-                break;
-            default:
-                progressBar.style.width = '0%';
-                break;
-        }
-    }
-
-    progressValidation()
-
-    if(validation){
-        createForm[6].removeAttribute('disabled');
-        document.querySelector('.submitBtn').style.opacity = 1;
-    }
-
-    let gender = createForm[1].value
-
-    /* for (let i = 1; i <= 8; i++) {
-        createForm[2][i].remove()
-    } */
-
-    console.log(gender.length);
-
-    let selectItems
-
-    if(document.querySelector('.categoryupload')){
-        selectItems = document.querySelector('.categoryupload')
-    }
-
-    /* selectItems.innerHTML = `<option selected="" disabled="" value="">Seleccionar</option>` */
-
-    if(gender.length !== 0){
-
-        createForm[2].removeAttribute('disabled')
-
-        getCategories(gender).then((el) => {
-
-        let categories = el;
+    getGenders().then((genders) => {
     
-        categories.forEach((el, index) => {
-
-          const option = document.createElement('option');
-
+        genders.forEach((el) => {
+          const option = document.createElement("option");
+    
           const { name } = el;
     
           option.innerHTML = name.charAt(0).toUpperCase() + name.slice(1);
-          option.setAttribute('value', name.toLowerCase())
-
-        selectItems.appendChild(option)
+          option.setAttribute("value", name.toLowerCase());
+    
+          selectGender.appendChild(option);
         });
-      })
-    }
-}
-
-window.addEventListener('change', ()=>{
-    if(document.querySelector('#uploadpage')){
-        uploadFormValidation()
-    }
+      });
 })
 
+const uploadFormValidation = () => {
+  let createForm = document.querySelector("#createForm");
+
+  let validation;
+
+  for (let i = 0; i < 6; i++) {
+    if (createForm[i].value === "") {
+      createForm[i].classList.add("is-invalid");
+      createForm[i].classList.remove("is-valid");
+      validation = false;
+    } else {
+      createForm[i].classList.add("is-valid");
+      createForm[i].classList.remove("is-invalid");
+      validation = true;
+    }
+  }
+
+  let progressBar = document.querySelector(".progress-bar-1");
+
+  const progressValidation = () => {
+    let progressVal = [];
+
+    for (let i = 0; i < 6; i++) {
+      if (createForm[i].value.length != 0) {
+        progressVal.push(1);
+      }
+    }
+
+    let progressForm = progressVal.reduce((a, b) => a + b, 0);
+
+    switch (progressForm) {
+      case 1:
+        progressBar.style.width = "17%";
+        break;
+      case 2:
+        progressBar.style.width = "33%";
+        break;
+      case 3:
+        progressBar.style.width = "50%";
+        break;
+      case 4:
+        progressBar.style.width = "65%";
+        break;
+      case 5:
+        progressBar.style.width = "85%";
+        break;
+      case 6:
+        progressBar.style.width = "100%";
+        break;
+      default:
+        progressBar.style.width = "0%";
+        break;
+    }
+  };
+
+  progressValidation();
+
+  if (validation) {
+    createForm[6].removeAttribute("disabled");
+    document.querySelector(".submitBtn").style.opacity = 1;
+  }
+
+  /* for (let i = 1; i <= 8; i++) {
+        createForm[2][i].remove()
+    } */
+
+  let gender = createForm[1].value;
+
+  let selectItems = document.querySelector(".categoryupload");
+  let selectGender = document.querySelector(".categorygender");
+
+  selectGender.addEventListener("change", () => {
+    selectItems.innerHTML = `<option selected="" disabled="" value="">Seleccionar</option>`;
+  });
+
+  if (gender.length !== 0) {
+    createForm[2].removeAttribute("disabled");
+
+    getCategories(`categories_${gender}`).then((el) => {
+      let categories = el;
+
+      categories.forEach((el, index) => {
+        const option = document.createElement("option");
+
+        const { name } = el;
+
+        option.innerHTML = name.charAt(0).toUpperCase() + name.slice(1);
+        option.setAttribute("value", name.toLowerCase());
+
+        selectItems.appendChild(option);
+      });
+    });
+  }
+};
+
+window.addEventListener("change", () => {
+  if (document.querySelector("#uploadpage")) {
+    uploadFormValidation();
+  }
+});
+
 export function createElements(e) {
+  // PREVENT DEFAULT PARA QUE NO RECARGUE LA PAGINA AL DARLE SUBMIT
+  e.preventDefault();
+  document.querySelector(".submitBtn").style.display = "none";
+  document.querySelector(".loadingbtn").style.display = "block";
+  document.querySelector(".progress-bar-1").parentElement.style.display =
+    "none";
 
-    // PREVENT DEFAULT PARA QUE NO RECARGUE LA PAGINA AL DARLE SUBMIT
-    e.preventDefault();
-    document.querySelector('.submitBtn').style.display = 'none';
-    document.querySelector('.loadingbtn').style.display = 'block';
-    document.querySelector('.progress-bar-1').parentElement.style.display = "none"
+  // ASIGNACION DE ELEMENTOS DEL FORM
+  let name = createForm[0].value;
+  let category = createForm[2].value;
+  let price = createForm[3].value;
+  let description = createForm[4].value;
+  let file = createForm[5].files[0];
 
-    // ASIGNACION DE ELEMENTOS DEL FORM
-    let name = createForm[0].value;
-    let category = createForm[2].value;
-    let price = createForm[3].value;
-    let description = createForm[4].value;
-    let file = createForm[5].files[0];
+  category = category.charAt(0).toUpperCase() + category.slice(1);
 
-    category = category.charAt(0).toUpperCase() + category.slice(1);
-
-    db.collection('products').add({
-        name,
-        price,
-        description,
-        category,
-        img: ""
+  db.collection("products")
+    .add({
+      name,
+      price,
+      description,
+      category,
+      img: "",
     })
     .then((docRef) => {
+      let progressBar = document.querySelector(".progress-bar-2");
 
-        let progressBar = document.querySelector('.progress-bar-2');
+      var uploadTask = storageRef
+        .child(`products/${category.toLowerCase()}/${docRef.id}`)
+        .put(file);
 
-        var uploadTask = storageRef.child(`products/${category.toLowerCase()}/${docRef.id}`).put(file);
+      uploadTask.on(
+        "state_changed",
+        function (snapshot) {
+          var progress = Math.round(
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+          );
 
-        uploadTask.on('state_changed', function (snapshot) {
-            var progress = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100)
+          progressBar.style.width = `${progress}%`;
 
-            progressBar.style.width = `${progress}%`
+          console.log(progressBar.style.width);
 
-            console.log(progressBar.style.width);
+          console.log("Upload is " + progress + "% done");
+          switch (snapshot.state) {
+            case firebase.storage.TaskState.PAUSED:
+              console.log("Upload is paused");
+              break;
+            case firebase.storage.TaskState.RUNNING:
+              console.log("Upload is running");
+              break;
+          }
+        },
+        function (error) {
+          console.log(error);
+        },
+        function () {
+          // Upload completed successfully, now we can get the download URL
+          uploadTask.snapshot.ref.getDownloadURL().then(function (downloadURL) {
+            db.collection("products")
+              .doc(docRef.id)
+              .update({
+                img: downloadURL,
+              })
+              .then(() => {
+                console.log("Document successfully updated!");
+                progressBar.classList.add("bg-warning");
 
-            console.log('Upload is ' + progress + '% done');
-            switch (snapshot.state) {
-                case firebase.storage.TaskState.PAUSED:
-                    console.log('Upload is paused');
-                    break;
-                case firebase.storage.TaskState.RUNNING:
-                    console.log('Upload is running');
-                    break;
-            }
-        }, function (error) {
-            console.log(error);
-        }, function() {
-            // Upload completed successfully, now we can get the download URL
-            uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL) {
-                db.collection("products").doc(docRef.id).update({
-                    "img": downloadURL
-                })
-                .then(() => {
-                    console.log("Document successfully updated!");
-                    progressBar.classList.add('bg-warning')
-
-                    app.innerHTML = Upload();
-                    
-                });
-            });
-        });    
+                app.innerHTML = Upload();
+              });
+          });
+        }
+      );
     })
     .catch((error) => {
-        console.error("Error adding document: ", error);
+      console.error("Error adding document: ", error);
     });
 }
 
 export const Upload = () => {
-
-    return (
-        `<div class="container">
+  return `<div class="container">
         <div class="row" id="uploadpage">
             <div class="col-12">
               <div class="d-flex flex-row justify-content-center">
-                <a id="home" class="contactbreadcrumb">Inicio</a>
-                <a id="admin" class="contactbreadcrumb">> Administrador</a>
-                <a id="admindashboard" class="contactbreadcrumb">> Productos</a>
+                <a reference="home" class="contactbreadcrumb">Inicio</a>
+                <a reference="admin" class="contactbreadcrumb">> Administrador</a>
+                <a reference="productsdash" class="contactbreadcrumb">> Productos</a>
                 <p>> Subir Item</p>
             </div>
             </div>
             <div class="col-12 my-5 d-flex flex-wrap justify-content-center">
               <div class="col-10 col-md-6">
-                <h1>SUBIR PRODUCTOS</h1>
+                <h1 class="fontzing">SUBIR PRODUCTOS</h1>
               </div>
               <div class="col-10 col-md-6 form">
               <form class="row g-3" id="createForm">
@@ -237,9 +246,7 @@ export const Upload = () => {
                     <div class="form-floating mb-3">
                         <select class="form-select categorygender" id="validationServer02"
                             aria-describedby="validationServer02Feedback" required>
-                            <option selected disabled value="">Seleccionar</option>
-                            <option value="man">Hombre</option>
-                            <option value="woman">Mujer</option>
+                            <option selected disabled value="0">Seleccionar</option>
                         </select>
                         <label for="validationServer02" style="padding-left: 1.3rem;" class="form-label">Género</label>
                         <div class="valid-feedback">
@@ -314,8 +321,7 @@ export const Upload = () => {
               </div>
             </div>
         </div>
-    </div>`
-    )
-}
+    </div>`;
+};
 
 export default Upload;

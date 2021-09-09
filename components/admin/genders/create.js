@@ -66,9 +66,9 @@ export const CreateGender = () => {
         <div class="row" id="">
             <div class="col-12">
               <div class="d-flex flex-row justify-content-center">
-                <a id="home" class="contactbreadcrumb">Inicio</a>
-                <a id="admin" class="contactbreadcrumb">> Administrador</a>
-                <a id="gendersdash" class="contactbreadcrumb">> Géneros</a>
+                <a reference="home" class="contactbreadcrumb">Inicio</a>
+                <a reference="admin" class="contactbreadcrumb">> Administrador</a>
+                <a reference="gendersdash" class="contactbreadcrumb">> Géneros</a>
                 <p>> Añadir Género</p>
             </div>
             </div>

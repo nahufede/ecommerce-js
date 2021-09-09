@@ -30,7 +30,7 @@ window.addEventListener("click", async (e) => {
         .delete()
         .then(() => {
           console.log("documento eliminado");
-          app.innerHTML = DBProducts();
+          app.innerHTML = AllProducts();
         })
         .catch((error) => {
           console.error("error ->", error);
@@ -177,9 +177,9 @@ export const AllProducts = () => {
       <div class="row">
         <div class="col-12">
           <div class="d-flex flex-row justify-content-center">
-            <a id="home" class="contactbreadcrumb">Inicio</a>
-            <a id="admin" class="contactbreadcrumb">> Administrador</a>
-            <a id="admindashboard" class="contactbreadcrumb">> Productos</a>
+            <a reference="home" class="contactbreadcrumb">Inicio</a>
+            <a reference="admin" class="contactbreadcrumb">> Administrador</a>
+            <a reference="productsdash" class="contactbreadcrumb">> Productos</a>
             <p>> Editar Items</p>
           </div>
         </div>
@@ -187,7 +187,7 @@ export const AllProducts = () => {
       <div class="row p-0">
         <div class="col-12 my-5">
           <div class="col-12">
-            <h1 class="text-center mb-5">MIS PRODUCTOS</h1>
+            <h1 class="text-center mb-5 fontzing">MIS PRODUCTOS</h1>
           </div>
             <div class="container" id="dbproducts">
             </div>

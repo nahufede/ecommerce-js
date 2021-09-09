@@ -35,9 +35,9 @@ export const Footer = () => {
                         <i class="bi bi-facebook"></i>
                     </div>
                     <div class="col-8 offset-2 footerlinks mt-5">
-                        <a href="#navbar" id="hombre">Hombre</a>
-                        <a href="#navbar" id="mujer">Mujer</a>
-                        <a href="#navbar" id="contact">Contacto</a>
+                        <a href="#navbar" reference="hombre">Hombre</a>
+                        <a href="#navbar" reference="mujer">Mujer</a>
+                        <a href="#navbar" reference="contact">Contacto</a>
                     </div>
                     <div class="col-12 info">
                         <div>

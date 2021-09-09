@@ -52,9 +52,9 @@ export const Navbar = () => {
     conditionalDisplay = "";
   }
 
-  return `<nav class="navbar navbar-expand-lg navbar-light d-none d-lg-block" id="navbar">
+  return `<nav class="navbar navbar-expand-lg navbar-light d-none d-lg-block" reference="navbar">
             <div class="container-fluid mynav">
-              <a href="" class="navbar-brand" id="home">LUCCA</a>
+              <a href="" class="navbar-brand" reference="home">LUCCA</a>
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
               </button>
@@ -65,7 +65,7 @@ export const Navbar = () => {
                       HOMBRE
                     </a>
                     <ul class="dropdown-menu" id="categoriesnav_man" aria-labelledby="navbarDropdown">
-                      <li><a class="dropdown-item" id="hombre" href="#">Principal</a></li>
+                      <li><a class="dropdown-item" reference="hombre" href="#">Principal</a></li>
                     </ul>
                   </li>
                   <li class="nav-item dropdown">
@@ -73,18 +73,18 @@ export const Navbar = () => {
                       MUJER
                     </a>
                     <ul class="dropdown-menu" id="categoriesnav_woman" aria-labelledby="navbarDropdown">
-                      <li><a class="dropdown-item" id="mujer" href="#">Principal</a></li>
+                      <li><a class="dropdown-item" reference="mujer" href="#">Principal</a></li>
                     </ul>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link active navcontact" aria-current="page" id="contact" href="#">CONTACTO</a>
+                    <a class="nav-link active navcontact" aria-current="page" reference="contact" href="#">CONTACTO</a>
                   </li>
                   <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle navadmin" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                       ADMIN
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                      <li><a class="dropdown-item" id="admin" href="#">Principal</a></li>
+                      <li><a class="dropdown-item" reference="admin" href="#">Principal</a></li>
                     </ul>
                   </li>
                 </ul>
@@ -92,7 +92,7 @@ export const Navbar = () => {
                   <input class="form-control me-4" id="search" type="search" placeholder="Buscar" aria-label="Search">
                 </form>
                 <a>
-                  <i class="bi bi-cart3 carrito" id=cart></i>
+                  <i class="bi bi-cart3 carrito" reference="cart"></i>
                   <span class='badge badge-warning ${conditionalDisplay} scale-up-center' id='lblCartCount'> ${productQuantity} </span>
                 </a>
               </div>
@@ -100,7 +100,7 @@ export const Navbar = () => {
           </nav>
           <nav class="navbar navbar-expand-lg navbar-light d-md-block d-lg-none">
             <div class="container-fluid mynav">
-              <a class="navbar-brand" id="home" href="">LUCCA</a>
+              <a class="navbar-brand" reference="home" href="">LUCCA</a>
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -114,11 +114,11 @@ export const Navbar = () => {
                         HOMBRE
                       </a>
                       <ul class="dropdown-menu linkborder" id="categoriesnav_man" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" id="hombre" href="#">Principal</a></li>
+                        <li><a class="dropdown-item" reference="hombre" href="#">Principal</a></li>
                       </ul>
                     </span>
                     <a>
-                      <i class="bi bi-cart3 carrito" id=cart></i>
+                      <i class="bi bi-cart3 carrito" reference=cart></i>
                       <span class='badge badge-warning ${conditionalDisplay} scale-up-center' id='lblCartCount'>
                         ${productQuantity} </span>
                     </a>
@@ -128,11 +128,11 @@ export const Navbar = () => {
                       MUJER
                     </a>
                     <ul class="dropdown-menu linkborder" id="categoriesnav_woman" aria-labelledby="navbarDropdown">
-                      <li><a class="dropdown-item" id="mujer" href="#">Principal</a></li>
+                      <li><a class="dropdown-item" reference="mujer" href="#">Principal</a></li>
                     </ul>
                   </li>
                   <li class="nav-item d-flex justify-content-between">
-                    <a class="nav-link active" aria-current="page" id="contact" href="#">CONTACTO</a>
+                    <a class="nav-link active" aria-current="page" reference="contact" href="#">CONTACTO</a>
                     <form id="search-form" class="d-flex justify-content-end">
                       <input class="form-control" id="search" type="search" placeholder="Buscar" aria-label="Search">
                     </form>

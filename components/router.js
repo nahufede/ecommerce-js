@@ -30,14 +30,14 @@ footer.innerHTML = Footer();
 modal.innerHTML = DBModal();
 
 if (app.innerHTML == "") {
-  app.innerHTML = ShowCategories();
+  app.innerHTML = Upload();
 }
 
 export const Router = () => {
   window.addEventListener("click", (e) => {
-    let id = e.target.getAttribute("id");
+    let reference = e.target.getAttribute("reference");
 
-    switch (id) {
+    switch (reference) {
       case "hombre":
         e.preventDefault();
         app.innerHTML = Principal('categories_hombre', 'landingman');
@@ -133,14 +133,6 @@ export const Router = () => {
       itemDetail.render(productId).then((response) => {
         app.innerHTML = response;
       });
-    }
-
-    if (id === "login") {
-      LogIn();
-    }
-
-    if (id === "logout") {
-      LogOut();
     }
   });
 };

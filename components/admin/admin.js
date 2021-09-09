@@ -1,4 +1,22 @@
 import { auth } from "../../firebase/firebase.js";
+import { LogIn, LogOut } from "../../firebase/user.js"
+
+let app = document.querySelector('#app')
+
+window.addEventListener("click", (e) => {
+
+    e.preventDefault()
+
+    let reference = e.target.getAttribute("reference");
+
+    if (reference === "login") {
+      LogIn();
+    }
+
+    if (reference === "logout") {
+      LogOut();
+    }
+  });
 
 export const Admin = () => {
 
@@ -10,7 +28,7 @@ export const Admin = () => {
             <div class="row">
                 <div class="col-12 col-sm-6 offset-sm-3 userdiv">
                     <div class="d-flex flex-row justify-content-center">
-                        <a id="home" class="contactbreadcrumb">Inicio</a>
+                        <a reference="home" class="contactbreadcrumb">Inicio</a>
                         <p>> Administrador</p>
                     </div>
                     <h1 class="text-center mt-3">INICIAR SESIÓN</h1>
@@ -24,7 +42,7 @@ export const Admin = () => {
                             <input type="password" class="form-control" id="floatingPassword" placeholder="Contraseña">
                             <label for="floatingPassword">Contraseña</label>
                         </div>
-                        <button id="login" class="mybutton" type="submit">INICIAR SESIÓN</button>
+                        <button reference="login" class="mybutton" type="submit">INICIAR SESIÓN</button>
                     </form>
                 </div>
             </div>
@@ -35,23 +53,21 @@ export const Admin = () => {
                 <div class="row">
                     <div class="col-12 col-sm-6 offset-sm-3 d-flex flex-column justify-content-between">
                         <div class="d-flex flex-row justify-content-center">
-                            <a id="home" class="contactbreadcrumb">Inicio</a>
+                            <a reference="home" class="contactbreadcrumb">Inicio</a>
                             <p>> Administrador</p>
                         </div>
                         <h1 class="text-center fontzing">SESIÓN INICIADA</h1>
                         <p class="text-center mt-3">${user.email}</p>
                         <div class="d-flex flex-column">
-                            <button id="categoriesdash" class="mybutton mb-2" type="button">Categorias</button>
-                            <button id="consultas" class="mybutton mb-2" type="button">Consultas</button>
-                            <button id="gendersdash" class="mybutton mb-2" type="button">Géneros</button>
-                            <button id="productsdash" class="mybutton mb-2" type="button">Productos</button>
-                            <button id="logout" class="mybutton mb-2" type="button">Cerrar Sesión</button>
+                            <button reference="categoriesdash" class="mybutton mb-2" type="button">Categorias</button>
+                            <button reference="consultas" class="mybutton mb-2" type="button">Consultas</button>
+                            <button reference="gendersdash" class="mybutton mb-2" type="button">Géneros</button>
+                            <button reference="productsdash" class="mybutton mb-2" type="button">Productos</button>
+                            <button reference="logout" class="mybutton mb-2" type="button">Cerrar Sesión</button>
                         </div>
                     </div>
                 </div>
             </div>
-            <button id="categoriesdash" class="mybutton mb-2" type="button">Categorias</button>
-                    <button id="consultas" class="mybutton mb-2" type="button">Consultas</button>
             `
     )
     }
