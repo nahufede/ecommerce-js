@@ -125,10 +125,11 @@ export const Router = () => {
 
     if (e.target.classList.contains("click-category")) {
       let category = e.target.attributes.id.value;
-      ItemList(category);
+      ItemList(category)
     }
 
     if (e.target.classList.contains("card-img")) {
+      e.preventDefault();
       let productId = e.target.attributes.id.value;
       itemDetail.render(productId).then((response) => {
         app.innerHTML = response;
