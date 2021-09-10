@@ -5,16 +5,16 @@ let app = document.querySelector('#app')
 
 window.addEventListener("click", (e) => {
 
-    e.preventDefault()
-
     let reference = e.target.getAttribute("reference");
 
-    if (reference === "login") {
-      LogIn();
+    if(reference === "login") {
+        e.preventDefault()
+        LogIn();
     }
 
-    if (reference === "logout") {
-      LogOut();
+    if(reference === "logout") {
+        e.preventDefault()
+        LogOut();
     }
   });
 

@@ -17,25 +17,6 @@ window.addEventListener("click", (e) => {
   }
 });
 
-window.addEventListener('DOMContentLoaded', ()=>{
-
-    let selectGender = document.querySelector(".categorygender");
-
-    getGenders().then((genders) => {
-    
-        genders.forEach((el) => {
-          const option = document.createElement("option");
-    
-          const { name } = el;
-    
-          option.innerHTML = name.charAt(0).toUpperCase() + name.slice(1);
-          option.setAttribute("value", name.toLowerCase());
-    
-          selectGender.appendChild(option);
-        });
-      });
-})
-
 const uploadFormValidation = () => {
   let createForm = document.querySelector("#createForm");
 
@@ -98,38 +79,63 @@ const uploadFormValidation = () => {
     document.querySelector(".submitBtn").style.opacity = 1;
   }
 
-  /* for (let i = 1; i <= 8; i++) {
-        createForm[2][i].remove()
-    } */
+  let name = createForm[0].value;
 
-  let gender = createForm[1].value;
+  if(name.length > 0){
+    createForm[1].removeAttribute("disabled");
+  }
 
-  let selectItems = document.querySelector(".categoryupload");
   let selectGender = document.querySelector(".categorygender");
 
-  selectGender.addEventListener("change", () => {
-    selectItems.innerHTML = `<option selected="" disabled="" value="">Seleccionar</option>`;
-  });
+  if(selectGender.length === 1 ){
+      getGenders().then((genders) => {
 
-  if (gender.length !== 0) {
-    createForm[2].removeAttribute("disabled");
-
-    getCategories(`categories_${gender}`).then((el) => {
-      let categories = el;
-
-      categories.forEach((el, index) => {
-        const option = document.createElement("option");
-
-        const { name } = el;
-
-        option.innerHTML = name.charAt(0).toUpperCase() + name.slice(1);
-        option.setAttribute("value", name.toLowerCase());
-
-        selectItems.appendChild(option);
+        genders.forEach((el) => {
+          const option = document.createElement("option");
+    
+          const { name } = el;
+    
+          option.innerHTML = name.charAt(0).toUpperCase() + name.slice(1);
+          option.setAttribute("value", name.toLowerCase());
+          option.className = "genderselect"
+    
+          selectGender.appendChild(option);
+        });
       });
-    });
   }
 };
+
+window.addEventListener('click', (e)=>{
+  if(e.target.classList.contains('genderselect')){
+   
+    let createForm = document.querySelector("#createForm");
+
+    let selectItems = document.querySelector(".categoryupload");
+
+    selectItems.innerHTML = '<option selected="" disabled="" value="">Seleccionar</option>'
+
+    let gender = createForm[1];
+
+    if (gender.length > 1) {
+      createForm[2].removeAttribute("disabled");
+
+      getCategories(`categories_${gender.value}`).then((el) => {
+        let categories = el;
+
+        categories.forEach((el) => {
+          const option = document.createElement("option");
+
+          const { name } = el;
+
+          option.innerHTML = name.charAt(0).toUpperCase() + name.slice(1);
+          option.setAttribute("value", name.toLowerCase());
+
+          selectItems.appendChild(option);
+        });
+      });
+    }
+  }
+})
 
 window.addEventListener("change", () => {
   if (document.querySelector("#uploadpage")) {
@@ -217,6 +223,7 @@ export function createElements(e) {
 }
 
 export const Upload = () => {
+
   return `<div class="container">
         <div class="row" id="uploadpage">
             <div class="col-12">
@@ -244,9 +251,9 @@ export const Upload = () => {
                     </div>
                     </div>
                     <div class="form-floating mb-3">
-                        <select class="form-select categorygender" id="validationServer02"
+                        <select class="form-select categorygender" disabled="true" id="validationServer02"
                             aria-describedby="validationServer02Feedback" required>
-                            <option selected disabled value="0">Seleccionar</option>
+                            <option selected disabled value="">Seleccionar</option>
                         </select>
                         <label for="validationServer02" style="padding-left: 1.3rem;" class="form-label">Género</label>
                         <div class="valid-feedback">

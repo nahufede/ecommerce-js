@@ -12,6 +12,39 @@ window.addEventListener("click", (e) => {
     }
 });
 
+window.addEventListener('change', ()=>{
+
+    let selectGender = document.querySelector(".addcategorygender");
+
+    if(document.querySelector('#createcategory')){
+
+        let createcategory = document.querySelector('#createcategory');
+
+        if(createcategory[0].value.length > 0){
+        createcategory[1].removeAttribute("disabled")
+        }
+
+        if(createcategory[1].length === 1){
+
+        getGenders().then((genders) => {
+        
+            console.log(genders);
+
+            genders.forEach((el) => {
+            const option = document.createElement("option");
+        
+            const { name } = el;
+        
+            option.innerHTML = name.charAt(0).toUpperCase() + name.slice(1);
+            option.setAttribute("value", name.toLowerCase());
+        
+            selectGender.appendChild(option);
+            });
+        });
+        }
+    }
+})
+
 export function createCategory() {
 
     let createcategory = document.querySelector('#createcategory')
@@ -65,27 +98,6 @@ export function createCategory() {
 
 export const CreateCategories = () => {
 
-    window.addEventListener('DOMContentLoaded', ()=>{
-
-        let selectGender = document.querySelector(".addcategorygender");
-    
-        getGenders().then((genders) => {
-        
-            console.log(genders);
-    
-            genders.forEach((el) => {
-              const option = document.createElement("option");
-        
-              const { name } = el;
-        
-              option.innerHTML = name.charAt(0).toUpperCase() + name.slice(1);
-              option.setAttribute("value", name.toLowerCase());
-        
-              selectGender.appendChild(option);
-            });
-          });
-    })
-
     return (
         `<div class="container">
         <div class="row" id="">
@@ -114,7 +126,7 @@ export const CreateCategories = () => {
                         </div>
                     </div>
                     <div class="form-floating mb-3">
-                        <select class="form-select addcategorygender" id="validationServer02"
+                        <select class="form-select addcategorygender" disabled="true" id="validationServer02"
                             aria-describedby="validationServer02Feedback" required>
                             <option selected disabled value="">Seleccionar</option>
                         </select>
