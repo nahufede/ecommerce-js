@@ -315,10 +315,6 @@ export const Upload = () => {
                     <div class="progress-bar progress-bar-striped progress-bar-animated bg-dark progress-bar-1" role="progressbar" style="width: 0%"
                         aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
-                    <div class="progress mb-3 px-0">
-                    <div class="progress-bar progress-bar-striped progress-bar-animated progress-bar-2" role="progressbar" style="width: 0%"
-                        aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
                     <button type="submitBtn" class="mybutton submitBtn" disabled="true" style="opacity:0.6;">Subir</button>
                     <button class="mybutton loadingbtn" type="button" disabled style="display:none;">
                     <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>

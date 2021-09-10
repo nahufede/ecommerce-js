@@ -8,6 +8,8 @@ export const ShowCategories = () => {
 
     getGenders().then((el)=>{
 
+      if(document.querySelector('.categoriespage')){
+        
       document.querySelector('.categoriesbuttons').innerText = ""
 
       let categoriesbuttons = document.querySelector(".categoriesbuttons")
@@ -21,7 +23,7 @@ export const ShowCategories = () => {
         button.setAttribute('id', 'catlist')
 
         categoriesbuttons.appendChild(button)
-      })
+      })}
     })
 
     window.addEventListener('click', (e)=>{
@@ -54,7 +56,7 @@ export const ShowCategories = () => {
             .then(() => {
               document.querySelector('#categorieslist').innerHTML = ""
 
-              getCategories(`categories_hombre`).then((categories) => {
+              getCategories(`categories_${gender}`).then((categories) => {
                 setList("#categorieslist", categories, gender)  
               })
             })
