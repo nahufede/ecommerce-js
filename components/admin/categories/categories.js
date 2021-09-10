@@ -54,7 +54,7 @@ export const ShowCategories = () => {
             .then(() => {
               document.querySelector('#categorieslist').innerHTML = ""
 
-              getCategories(`categories_hombre`).then((categories) => {
+              getCategories(`categories_${gender}`).then((categories) => {
                 setList("#categorieslist", categories, gender)  
               })
             })

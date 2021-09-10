@@ -44,7 +44,7 @@ export const Principal = (genero, landing) => {
     let category = e.target.innerText;
     if(e.target.classList.contains('focuscategoryimages')){
       e.preventDefault()
-      app.innerHTML = ItemList(category)
+      ItemList(category)
     }
   })
 

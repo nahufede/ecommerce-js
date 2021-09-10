@@ -5,7 +5,7 @@ let app = document.querySelector("#app");
 
 export async function ItemList(category) {
   app.innerHTML = "";
-
+  
   let allProducts = [];
   let itemListContainer = document.createElement("div");
   itemListContainer.className = "container";
