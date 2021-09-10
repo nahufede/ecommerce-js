@@ -17,7 +17,7 @@ export const ShowCategories = () => {
 
         let button = document.createElement('button')
         button.innerHTML = name.toUpperCase()
-        button.className = "mybutton mb-2"
+        button.className = "mybutton mb-2 fontzing"
         button.setAttribute('id', 'catlist')
 
         categoriesbuttons.appendChild(button)
@@ -52,7 +52,11 @@ export const ShowCategories = () => {
             .doc(id)
             .delete()
             .then(() => {
-            app.innerHTML = ShowCategories();
+              document.querySelector('#categorieslist').innerHTML = ""
+
+              getCategories(`categories_hombre`).then((categories) => {
+                setList("#categorieslist", categories, gender)  
+              })
             })
             .catch((error) => {
             console.error("error ->", error);
@@ -70,6 +74,7 @@ export const ShowCategories = () => {
         if(e.target.classList.contains('saveCat')){
           
           let id = e.target.parentElement.getAttribute('id')
+          let gender = e.target.parentElement.getAttribute('gender')
           let database = e.target.parentElement.getAttribute('db');
           let newname = e.target.parentElement.parentElement.children[1].value.toLowerCase();
 
@@ -80,8 +85,12 @@ export const ShowCategories = () => {
               name: newname
             })
             .then(() => {
-              console.log("Document successfully updated!");
-              app.innerHTML = ShowCategories()
+            
+              document.querySelector('#categorieslist').innerHTML = ""
+
+              getCategories(`${database}`).then((categories) => {
+                setList("#categorieslist", categories, gender)  
+              })
             })
             .catch((error) => {
               // The document probably doesn't exist.
@@ -119,7 +128,7 @@ export const ShowCategories = () => {
 
           const card = document.createElement("div");
           card.className =
-            "col-6 col-md-4 d-flex justify-content-center mb-4 dbcard";
+            "col-6 col-sm-4 col-xl-2 d-flex justify-content-center mb-4 dbcard";
           card.innerHTML = `<div class="card" style="width: 15rem; height: 10rem;">
         <div class="card-body card-space p-0" style="background-image: url(${img})">
           <div class="card-inner justify-content-evenly" style="height: 90%;">
@@ -148,14 +157,6 @@ export const ShowCategories = () => {
       setCategories();
   }
 
-  /* getCategories('man').then((categories) => {
-    setList("#categoriesman", categories, man, 'man')  
-  }); */
-
-  /* getCategories('categories_woman').then((categories) => {
-    setList("#categorieslist", categories, woman, 'woman')  
-  }); */
-
   return `
     <div class="container-fluid categoriespage">
       <div class="row">
@@ -164,7 +165,7 @@ export const ShowCategories = () => {
               <a reference="home" class="contactbreadcrumb">Inicio</a>
               <a reference="admin" class="contactbreadcrumb">> Administrador</a>
               <a reference="categoriesdash" class="contactbreadcrumb">> Categorias</a>
-              <p>> Ver Categorias</p>
+              <p class="d-none d-sm-block">> Ver Categorias</p>
           </div>
         </div>
       </div>
@@ -173,14 +174,13 @@ export const ShowCategories = () => {
           <div class="col-12">
             <h1 class="text-center mb-5 fontzing">CATEGORIAS</h1>
           </div>
-          <div class="col-10 offset-1 d-flex justify-content-around flex-wrap">
-            <div class="col-12 col-xl-6">
+          <div class="col-12 d-flex justify-content-around flex-wrap">
+            <div class="col-12 col-sm-3">
                 <h3 class="text-center mb-3 fontzing">GÉNEROS</h3>
-                  <div class="d-flex flex-column categoriesbuttons">
-                    
+                  <div class="d-flex flex-column categoriesbuttons py-3">
                   </div>
             </div>
-            <div class="col-12 col-xl-6">
+            <div class="col-12 col-sm-9">
               <h3 class="text-center fontzing">LISTA</h3>
               <div class="container" id="categorieslist">
                 <h5 class="text-center fontzing">SELECCIONA UNA CATEGORIA</h5>

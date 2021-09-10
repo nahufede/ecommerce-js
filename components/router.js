@@ -30,7 +30,7 @@ footer.innerHTML = Footer();
 modal.innerHTML = DBModal();
 
 if (app.innerHTML == "") {
-  app.innerHTML = Upload();
+  app.innerHTML = ShowCategories();
 }
 
 export const Router = () => {

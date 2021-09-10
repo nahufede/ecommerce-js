@@ -231,7 +231,7 @@ export const Upload = () => {
                 <a reference="home" class="contactbreadcrumb">Inicio</a>
                 <a reference="admin" class="contactbreadcrumb">> Administrador</a>
                 <a reference="productsdash" class="contactbreadcrumb">> Productos</a>
-                <p>> Subir Item</p>
+                <p class="d-none d-sm-block">> Subir Item</p>
             </div>
             </div>
             <div class="col-12 my-5 d-flex flex-wrap justify-content-center">
@@ -312,7 +312,7 @@ export const Upload = () => {
                     </div>
                     </div>
                     <div class="progress mb-3 px-0">
-                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning progress-bar-1" role="progressbar" style="width: 0%"
+                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-dark progress-bar-1" role="progressbar" style="width: 0%"
                         aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                     <div class="progress mb-3 px-0">

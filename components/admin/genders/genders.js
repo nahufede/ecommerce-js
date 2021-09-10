@@ -74,12 +74,12 @@ export const ShowGenders = () => {
         const { name, id, img } = el;
     
         const card = document.createElement('div');
-        card.className = "col-12 col-md-3 d-flex justify-content-center mb-4"
+        card.className = "col-6 col-md-3 d-flex justify-content-center mb-4"
         card.innerHTML = 
-        `<div class="card w-100" id=${id}>
+        `<div class="card" id=${id}>
             <div class="card-body d-flex flex-column consultcard">
-              <span class="d-flex justify-content-between align-items-center">
-                <h5 class="card-title">${name.toUpperCase()}</h5>
+              <span class="d-flex justify-content-between">
+                <h5 class="card-title fontzing">${name.toUpperCase()}</h5>
                 <a href="" class="deleteGender"><i class="bi bi-trash-fill"></i></a>
               </span>
               <img src="${img}" class="card-img-top" alt="...">
@@ -100,16 +100,16 @@ export const ShowGenders = () => {
             <a reference="home" class="contactbreadcrumb">Inicio</a>
             <a reference="admin" class="contactbreadcrumb">> Administrador</a>
             <a reference="gendersdash" class="contactbreadcrumb">> Géneros</a>
-            <p>> Ver Géneros</p>
+            <p class="d-none d-sm-block">> Ver Géneros</p>
           </div>
         </div>
       </div>
       <div class="row p-0">
         <div class="col-12 my-5">
           <div class="col-12">
-            <h1 class="text-center mb-5 fontzing">GÉNEROS</h1>
+            <h1 class="text-center mb-2 fontzing">GÉNEROS</h1>
           </div>
-          <div class="col-12" id="genders">
+          <div class="col-10 offset-1" id="genders">
           </div>
         </div>
       </div>

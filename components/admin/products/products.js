@@ -180,7 +180,7 @@ export const AllProducts = () => {
             <a reference="home" class="contactbreadcrumb">Inicio</a>
             <a reference="admin" class="contactbreadcrumb">> Administrador</a>
             <a reference="productsdash" class="contactbreadcrumb">> Productos</a>
-            <p>> Editar Items</p>
+            <p class="d-none d-sm-block">> Editar Items</p>
           </div>
         </div>
       </div>

@@ -69,7 +69,7 @@ export const CreateGender = () => {
                 <a reference="home" class="contactbreadcrumb">Inicio</a>
                 <a reference="admin" class="contactbreadcrumb">> Administrador</a>
                 <a reference="gendersdash" class="contactbreadcrumb">> Géneros</a>
-                <p>> Añadir Género</p>
+                <p class="d-none d-sm-block">> Añadir Género</p>
             </div>
             </div>
             <div class="col-12 my-5 d-flex flex-wrap justify-content-center">

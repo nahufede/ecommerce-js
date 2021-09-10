@@ -1,117 +1,199 @@
-import { getFirestore, storage } from "../../../firebase/firebase.js";
-import { getGenders } from "../../../firebase/products.js"
-
+import {
+    getFirestore,
+    storage
+} from "../../../firebase/firebase.js";
+import {
+    getGenders
+} from "../../../firebase/products.js";
 
 let db = getFirestore();
 let storageRef = storage().ref();
 
 window.addEventListener("click", (e) => {
     if (e.target.classList.contains("createCatBtn")) {
-      e.preventDefault();
-      createCategory();
+        e.preventDefault();
+        createCategory();
     }
 });
 
-window.addEventListener('change', ()=>{
+const categoryFormValidation = () => {
+    let categoryForm = document.querySelector("#createcategory");
 
-    let selectGender = document.querySelector(".addcategorygender");
+    let validation;
 
-    if(document.querySelector('#createcategory')){
-
-        let createcategory = document.querySelector('#createcategory');
-
-        if(createcategory[0].value.length > 0){
-        createcategory[1].removeAttribute("disabled")
-        }
-
-        if(createcategory[1].length === 1){
-
-        getGenders().then((genders) => {
-        
-            console.log(genders);
-
-            genders.forEach((el) => {
-            const option = document.createElement("option");
-        
-            const { name } = el;
-        
-            option.innerHTML = name.charAt(0).toUpperCase() + name.slice(1);
-            option.setAttribute("value", name.toLowerCase());
-        
-            selectGender.appendChild(option);
-            });
-        });
+    for (let i = 0; i < 2; i++) {
+        if (categoryForm[i].value === "") {
+            categoryForm[i].classList.add("is-invalid");
+            categoryForm[i].classList.remove("is-valid");
+            validation = false;
+        } else {
+            categoryForm[i].classList.add("is-valid");
+            categoryForm[i].classList.remove("is-invalid");
+            validation = true;
         }
     }
-})
 
-export function createCategory() {
+    let progressBar = document.querySelector(".progress-bar-1");
 
-    let createcategory = document.querySelector('#createcategory')
+    const progressValidation = () => {
+        let progressVal = [];
 
-    // ASIGNACION DE ELEMENTOS DEL FORM
-    let name = (createcategory[0].value).toLowerCase()
-    let gender = (createcategory[1].value).toLowerCase();
-    let file = createcategory[2].files[0];
-
-    db.collection(`categories_${gender}`).add({
-        name,
-        gender,
-        img: ""
-    })
-    .then((docRef) => {
-
-        var uploadTask = storageRef.child(`categories/${gender}/${docRef.id}`).put(file);
-
-        uploadTask.on('state_changed', function (snapshot) {
-            var progress = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
-
-            console.log('Upload is ' + progress + '% done');
-            switch (snapshot.state) {
-                case firebase.storage.TaskState.PAUSED:
-                    console.log('Upload is paused');
-                    break;
-                case firebase.storage.TaskState.RUNNING:
-                    console.log('Upload is running');
-                    break;
+        for (let i = 0; i < 3; i++) {
+            if (categoryForm[i].value.length != 0) {
+                progressVal.push(1);
             }
-        }, function (error) {
-            console.log(error);
-        }, function() {
-            // Upload completed successfully, now we can get the download URL
-            uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL) {
-                db.collection(`categories_${gender}`).doc(docRef.id).update({
-                    "img": downloadURL
-                })
-                .then(() => {
-                    console.log("Document successfully updated!");
-                    app.innerHTML = CreateCategories();
-                    
+        }
+
+        let progressForm = progressVal.reduce((a, b) => a + b, 0);
+
+        switch (progressForm) {
+            case 1:
+                progressBar.style.width = "33%";
+                break;
+            case 2:
+                progressBar.style.width = "66%";
+                break;
+            case 3:
+                progressBar.style.width = "100%";
+                break;
+            default:
+                progressBar.style.width = "0%";
+                break;
+        }
+    };
+
+    progressValidation();
+
+    if (validation) {
+        categoryForm[3].removeAttribute("disabled");
+        categoryForm[3].style.opacity = 1;
+    }
+};
+
+window.addEventListener("change", () => {
+
+    if (document.querySelector('#createCategories')){
+
+        let selectGender = document.querySelector(".addcategorygender");
+
+    if (document.querySelector("#createcategory")) {
+        let createcategory = document.querySelector("#createcategory");
+
+        if (createcategory[0].value.length > 0) {
+            createcategory[1].removeAttribute("disabled");
+        }
+
+        if (createcategory[1].length === 1) {
+            getGenders().then((genders) => {
+                console.log(genders);
+
+                genders.forEach((el) => {
+                    const option = document.createElement("option");
+
+                    const {
+                        name
+                    } = el;
+
+                    option.innerHTML = name.charAt(0).toUpperCase() + name.slice(1);
+                    option.setAttribute("value", name.toLowerCase());
+
+                    selectGender.appendChild(option);
                 });
             });
-        });    
-    })
-    .catch((error) => {
-        console.error("Error adding document: ", error);
-    });
+        }
+    }
+
+    categoryFormValidation();}
+});
+
+export function createCategory() {
+    let createcategory = document.querySelector("#createcategory");
+    let progressBar = document.querySelector(".progress-bar-1");
+
+    progressBar.style.width = '0%'
+
+    document.querySelector(".createCatBtn").style.display = "none";
+    document.querySelector(".loadingbtn").style.display = "block";
+
+    /* document.querySelector('.progress-bar-2').parentElement.style.display = "block"; */
+
+    // ASIGNACION DE ELEMENTOS DEL FORM
+    let name = createcategory[0].value.toLowerCase();
+    let gender = createcategory[1].value.toLowerCase();
+    let file = createcategory[2].files[0];
+
+    db.collection(`categories_${gender}`)
+        .add({
+            name,
+            gender,
+            img: "",
+        })
+        .then((docRef) => {
+
+
+            var uploadTask = storageRef
+                .child(`categories/${gender}/${docRef.id}`)
+                .put(file);
+
+            uploadTask.on(
+                "state_changed",
+                function (snapshot) {
+                    var progress = Math.round(
+                        (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+                    );
+
+                    progressBar.style.width = `${progress}%`;
+
+                    console.log(progressBar.style.width);
+
+                    console.log("Upload is " + progress + "% done");
+                    switch (snapshot.state) {
+                        case firebase.storage.TaskState.PAUSED:
+                            console.log("Upload is paused");
+                            break;
+                        case firebase.storage.TaskState.RUNNING:
+                            console.log("Upload is running");
+                            break;
+                    }
+                },
+                function (error) {
+                    console.log(error);
+                },
+                function () {
+                    // Upload completed successfully, now we can get the download URL
+                    uploadTask.snapshot.ref.getDownloadURL().then(function (downloadURL) {
+                        db.collection(`categories_${gender}`)
+                            .doc(docRef.id)
+                            .update({
+                                img: downloadURL,
+                            })
+                            .then(() => {
+                                console.log("Document successfully updated!");
+                                app.innerHTML = CreateCategories();
+                            });
+                    });
+                }
+            );
+        })
+        .catch((error) => {
+            console.error("Error adding document: ", error);
+        });
 }
 
 export const CreateCategories = () => {
-
-    return (
-        `<div class="container">
-        <div class="row" id="">
+    return `<div class="container">
+        <div class="row" id="createCategories">
             <div class="col-12">
                 <div class="d-flex flex-row justify-content-center">
                     <a reference="home" class="contactbreadcrumb">Inicio</a>
                     <a reference="admin" class="contactbreadcrumb">> Administrador</a>
                     <a reference="categoriesdash" class="contactbreadcrumb">> Categorias</a>
-                    <p>> Añadir Categoria</p>
+                    <p class="d-none d-sm-block">> Añadir Categoria</p>
                 </div>
             </div>
             <div class="col-12 my-5 d-flex flex-wrap justify-content-center">
               <div class="col-10 col-md-6">
-                <h1 class="fontzing">CREAR CATEGORIA</h1>
+                <h1 class="fontzing mb-4">CREAR CATEGORIA</h1>
               </div>
               <div class="col-10 col-md-6 form">
               <form class="row g-3" id="createcategory">
@@ -147,13 +229,20 @@ export const CreateCategories = () => {
                             Selecciona una imagen
                         </div>
                     </div>
-                    <button type="submitBtn" class="mybutton createCatBtn">Añadir</button>
+                    <div class="progress mb-3 px-0">
+                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-dark progress-bar-1" role="progressbar" style="width: 0%"
+                        aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <button type="submitBtn" class="mybutton createCatBtn" disabled="true" style="opacity:0.6;">Añadir</button>
+                    <button class="mybutton loadingbtn" type="button" disabled style="display:none;">
+                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                    Subiendo
+                    </button>
                 </form>
               </div>
             </div>
         </div>
-    </div>`
-    )
-}
+    </div>`;
+};
 
 export default CreateCategories;
