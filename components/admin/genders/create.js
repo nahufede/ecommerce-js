@@ -10,9 +10,73 @@ window.addEventListener("click", (e) => {
     }
 });
 
+const genderFormValidation = () => {
+    let genderForm = document.querySelector("#createGender");
+
+    let validation;
+
+    for (let i = 0; i < 2; i++) {
+        if (genderForm[i].value === "") {
+            genderForm[i].classList.add("is-invalid");
+            genderForm[i].classList.remove("is-valid");
+            validation = false;
+        } else {
+            genderForm[i].classList.add("is-valid");
+            genderForm[i].classList.remove("is-invalid");
+            validation = true;
+        }
+    }
+
+    let progressBar = document.querySelector(".progress-bar-1");
+
+    const progressValidation = () => {
+        let progressVal = [];
+
+        for (let i = 0; i < 2; i++) {
+            if(genderForm[i].classList.contains('is-valid')){
+                progressVal.push(1);
+            }
+        }
+
+        let progressForm = progressVal.reduce((a, b) => a + b, 0);
+
+        switch (progressForm) {
+            case 1:
+                progressBar.style.width = "50%";
+                break;
+            case 2:
+                progressBar.style.width = "100%";
+                break;
+            default:
+                progressBar.style.width = "0%";
+                break;
+        }
+    };
+
+    progressValidation();
+
+    if (validation) {
+        genderForm[2].removeAttribute("disabled");
+        genderForm[2].style.opacity = 1;
+    }
+};
+
+window.addEventListener('change', ()=>{
+    if(document.querySelector('#genderpage')){
+        genderFormValidation()
+    }
+})
+
 const createGender = () => {
 
     let createGender = document.querySelector('#createGender')
+
+    let progressBar = document.querySelector(".progress-bar-1");
+
+    progressBar.style.width = "0%";
+
+    document.querySelector(".createGenderBtn").style.display = "none";
+    document.querySelector(".loadingbtn").style.display = "block";
 
     // ASIGNACION DE ELEMENTOS DEL FORM
     let name = (createGender[0].value).toLowerCase();
@@ -29,7 +93,8 @@ const createGender = () => {
         uploadTask.on('state_changed', function (snapshot) {
             var progress = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
 
-            console.log('Upload is ' + progress + '% done');
+            progressBar.style.width = `${progress}%`;
+            
             switch (snapshot.state) {
                 case firebase.storage.TaskState.PAUSED:
                     console.log('Upload is paused');
@@ -47,9 +112,13 @@ const createGender = () => {
                     "img": downloadURL
                 })
                 .then(() => {
-                    console.log("Document successfully updated!");
-                    app.innerHTML = CreateGender();
-                    
+                    createGender.reset();
+                    document.querySelector("#alertsuccess").style.display = "block";
+                    document.querySelector(".loadingbtn").style.display = "none";
+                    document.querySelector(".progress").style.display = "none";
+                    setTimeout(() => {
+                        app.innerHTML = CreateGender();;
+                    }, 5000);
                 });
             });
         });    
@@ -62,8 +131,8 @@ const createGender = () => {
 export const CreateGender = () => {
 
     return (
-        `<div class="container">
-        <div class="row" id="">
+        `<div class="container-fluid p-0">
+        <div class="row" id="genderpage">
             <div class="col-12">
               <div class="d-flex flex-row justify-content-center">
                 <a reference="home" class="contactbreadcrumb">Inicio</a>
@@ -72,7 +141,7 @@ export const CreateGender = () => {
                 <p class="d-none d-sm-block">> Añadir Género</p>
             </div>
             </div>
-            <div class="col-12 my-5 d-flex flex-wrap justify-content-center">
+            <div class="col-12 col-sm-10 offset-sm-1 my-5 d-flex flex-wrap justify-content-center">
               <div class="col-10 col-md-6">
                 <h1 class="fontzing">CREAR GÉNERO</h1>
               </div>
@@ -97,10 +166,31 @@ export const CreateGender = () => {
                             Selecciona una imagen
                         </div>
                     </div>
-                    <button type="submitBtn" class="mybutton createGenderBtn">Añadir</button>
+                    <div class="progress mb-3 px-0">
+                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-dark progress-bar-1" role="progressbar" style="width: 0%"
+                        aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <button type="submitBtn" class="mybutton createGenderBtn" disabled="true" style="opacity:0.6;">Añadir</button>
+                    <button class="mybutton loadingbtn" type="button" disabled style="display:none;">
+                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                    Subiendo
+                    </button>
                 </form>
               </div>
             </div>
+            <div class="col-12" id="alertsuccess" style="display:none;">
+            <svg xmlns="http://www.w3.org/2000/svg" style="display:none;">
+                <symbol id="check-circle-fill" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+                </symbol>
+            </svg>
+            <div class="alert alert-success d-flex align-items-center justify-content-center mt-3" role="alert">
+                <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
+                <div>
+                Nuevo género creado con éxito!
+                </div>
+            </div>
+        </div>
         </div>
     </div>`
     )

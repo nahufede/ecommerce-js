@@ -43,7 +43,7 @@ export const Navbar = () => {
   let productQuantity = 0;
   let i;
   for (i = 0; i < cart.length; i++) {
-    productQuantity += cart[i].cantidad;
+    productQuantity += cart[i].quantity;
   }
 
   let conditionalDisplay = "d-none";

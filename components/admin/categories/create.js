@@ -1,187 +1,180 @@
-import {
-    getFirestore,
-    storage
-} from "../../../firebase/firebase.js";
-import {
-    getGenders
-} from "../../../firebase/products.js";
+import { getFirestore, storage } from "../../../firebase/firebase.js";
+import { getGenders } from "../../../firebase/products.js";
 
 let db = getFirestore();
 let storageRef = storage().ref();
 
 window.addEventListener("click", (e) => {
-    if (e.target.classList.contains("createCatBtn")) {
-        e.preventDefault();
-        createCategory();
-    }
+  if (e.target.classList.contains("createCatBtn")) {
+    e.preventDefault();
+    createCategory();
+  }
 });
 
 const categoryFormValidation = () => {
-    let categoryForm = document.querySelector("#createcategory");
+  let categoryForm = document.querySelector("#createcategory");
 
-    let validation;
+  let validation;
 
-    for (let i = 0; i < 2; i++) {
-        if (categoryForm[i].value === "") {
-            categoryForm[i].classList.add("is-invalid");
-            categoryForm[i].classList.remove("is-valid");
-            validation = false;
-        } else {
-            categoryForm[i].classList.add("is-valid");
-            categoryForm[i].classList.remove("is-invalid");
-            validation = true;
-        }
+  for (let i = 0; i < 3; i++) {
+    if (categoryForm[i].value === "") {
+      categoryForm[i].classList.add("is-invalid");
+      categoryForm[i].classList.remove("is-valid");
+      validation = false;
+    } else {
+      categoryForm[i].classList.add("is-valid");
+      categoryForm[i].classList.remove("is-invalid");
+      validation = true;
+    }
+  }
+
+  let progressBar = document.querySelector(".progress-bar-1");
+
+  const progressValidation = () => {
+    let progressVal = [];
+
+    for (let i = 0; i < 3; i++) {
+      if(categoryForm[i].classList.contains('is-valid')){
+        progressVal.push(1);
+      }
     }
 
-    let progressBar = document.querySelector(".progress-bar-1");
+    let progressForm = progressVal.reduce((a, b) => a + b, 0);
 
-    const progressValidation = () => {
-        let progressVal = [];
-
-        for (let i = 0; i < 3; i++) {
-            if (categoryForm[i].value.length != 0) {
-                progressVal.push(1);
-            }
-        }
-
-        let progressForm = progressVal.reduce((a, b) => a + b, 0);
-
-        switch (progressForm) {
-            case 1:
-                progressBar.style.width = "33%";
-                break;
-            case 2:
-                progressBar.style.width = "66%";
-                break;
-            case 3:
-                progressBar.style.width = "100%";
-                break;
-            default:
-                progressBar.style.width = "0%";
-                break;
-        }
-    };
-
-    progressValidation();
-
-    if (validation) {
-        categoryForm[3].removeAttribute("disabled");
-        categoryForm[3].style.opacity = 1;
+    switch (progressForm) {
+      case 1:
+        progressBar.style.width = "33%";
+        break;
+      case 2:
+        progressBar.style.width = "66%";
+        break;
+      case 3:
+        progressBar.style.width = "100%";
+        break;
+      default:
+        progressBar.style.width = "0%";
+        break;
     }
+  };
+
+  progressValidation();
+
+  if (validation) {
+    categoryForm[3].removeAttribute("disabled");
+    categoryForm[3].style.opacity = 1;
+  }
 };
 
 window.addEventListener("change", () => {
-
-    if (document.querySelector('#createCategories')){
-
-        let selectGender = document.querySelector(".addcategorygender");
+  if (document.querySelector("#createCategories")) {
+    let selectGender = document.querySelector(".addcategorygender");
 
     if (document.querySelector("#createcategory")) {
-        let createcategory = document.querySelector("#createcategory");
+      let createcategory = document.querySelector("#createcategory");
 
-        if (createcategory[0].value.length > 0) {
-            createcategory[1].removeAttribute("disabled");
-        }
+      if (createcategory[0].value.length > 0) {
+        createcategory[1].removeAttribute("disabled");
+      }
 
-        if (createcategory[1].length === 1) {
-            getGenders().then((genders) => {
-                console.log(genders);
+      if (createcategory[1].length === 1) {
+        getGenders().then((genders) => {
+          genders.forEach((el) => {
+            const option = document.createElement("option");
 
-                genders.forEach((el) => {
-                    const option = document.createElement("option");
+            const { name } = el;
 
-                    const {
-                        name
-                    } = el;
+            option.innerHTML = name.charAt(0).toUpperCase() + name.slice(1);
+            option.setAttribute("value", name.toLowerCase());
 
-                    option.innerHTML = name.charAt(0).toUpperCase() + name.slice(1);
-                    option.setAttribute("value", name.toLowerCase());
-
-                    selectGender.appendChild(option);
-                });
-            });
-        }
+            selectGender.appendChild(option);
+          });
+        });
+      }
     }
 
-    categoryFormValidation();}
+    categoryFormValidation();
+  }
 });
 
 export function createCategory() {
-    let createcategory = document.querySelector("#createcategory");
-    let progressBar = document.querySelector(".progress-bar-1");
+  let createcategory = document.querySelector("#createcategory");
+  let progressBar = document.querySelector(".progress-bar-1");
 
-    progressBar.style.width = '0%'
+  progressBar.style.width = "0%";
 
-    document.querySelector(".createCatBtn").style.display = "none";
-    document.querySelector(".loadingbtn").style.display = "block";
+  document.querySelector(".createCatBtn").style.display = "none";
+  document.querySelector(".loadingbtn").style.display = "block";
 
-    /* document.querySelector('.progress-bar-2').parentElement.style.display = "block"; */
+  /* document.querySelector('.progress-bar-2').parentElement.style.display = "block"; */
 
-    // ASIGNACION DE ELEMENTOS DEL FORM
-    let name = createcategory[0].value.toLowerCase();
-    let gender = createcategory[1].value.toLowerCase();
-    let file = createcategory[2].files[0];
+  // ASIGNACION DE ELEMENTOS DEL FORM
+  let name = createcategory[0].value.toLowerCase();
+  let gender = createcategory[1].value.toLowerCase();
+  let file = createcategory[2].files[0];
 
-    db.collection(`categories_${gender}`)
-        .add({
-            name,
-            gender,
-            img: "",
-        })
-        .then((docRef) => {
+  db.collection(`categories_${gender}`)
+    .add({
+      name,
+      gender,
+      img: "",
+    })
+    .then((docRef) => {
+      var uploadTask = storageRef
+        .child(`categories/${gender}/${docRef.id}`)
+        .put(file);
 
+      uploadTask.on(
+        "state_changed",
+        function (snapshot) {
+          var progress = Math.round(
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+          );
 
-            var uploadTask = storageRef
-                .child(`categories/${gender}/${docRef.id}`)
-                .put(file);
+          progressBar.style.width = `${progress}%`;
 
-            uploadTask.on(
-                "state_changed",
-                function (snapshot) {
-                    var progress = Math.round(
-                        (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-                    );
+          console.log(progressBar.style.width);
 
-                    progressBar.style.width = `${progress}%`;
-
-                    console.log(progressBar.style.width);
-
-                    console.log("Upload is " + progress + "% done");
-                    switch (snapshot.state) {
-                        case firebase.storage.TaskState.PAUSED:
-                            console.log("Upload is paused");
-                            break;
-                        case firebase.storage.TaskState.RUNNING:
-                            console.log("Upload is running");
-                            break;
-                    }
-                },
-                function (error) {
-                    console.log(error);
-                },
-                function () {
-                    // Upload completed successfully, now we can get the download URL
-                    uploadTask.snapshot.ref.getDownloadURL().then(function (downloadURL) {
-                        db.collection(`categories_${gender}`)
-                            .doc(docRef.id)
-                            .update({
-                                img: downloadURL,
-                            })
-                            .then(() => {
-                                console.log("Document successfully updated!");
-                                app.innerHTML = CreateCategories();
-                            });
-                    });
-                }
-            );
-        })
-        .catch((error) => {
-            console.error("Error adding document: ", error);
-        });
+          console.log("Upload is " + progress + "% done");
+          switch (snapshot.state) {
+            case firebase.storage.TaskState.PAUSED:
+              console.log("Upload is paused");
+              break;
+            case firebase.storage.TaskState.RUNNING:
+              console.log("Upload is running");
+              break;
+          }
+        },
+        function (error) {
+          console.log(error);
+        },
+        function () {
+          // Upload completed successfully, now we can get the download URL
+          uploadTask.snapshot.ref.getDownloadURL().then(function (downloadURL) {
+            db.collection(`categories_${gender}`)
+              .doc(docRef.id)
+              .update({
+                img: downloadURL,
+              })
+              .then(() => {
+                createcategory.reset();
+                document.querySelector("#alertsuccess").style.display = "block";
+                document.querySelector(".loadingbtn").style.display = "none";
+                document.querySelector(".progress").style.display = "none";
+                setTimeout(() => {
+                  app.innerHTML = CreateCategories();
+                }, 5000);
+              });
+          });
+        }
+      );
+    })
+    .catch((error) => {
+      console.error("Error adding document: ", error);
+    });
 }
 
 export const CreateCategories = () => {
-    return `<div class="container">
+  return `<div class="container-fluid p-0">
         <div class="row" id="createCategories">
             <div class="col-12">
                 <div class="d-flex flex-row justify-content-center">
@@ -191,7 +184,7 @@ export const CreateCategories = () => {
                     <p class="d-none d-sm-block">> Añadir Categoria</p>
                 </div>
             </div>
-            <div class="col-12 my-5 d-flex flex-wrap justify-content-center">
+            <div class="col-12 col-sm-10 offset-1 my-5 d-flex flex-wrap justify-content-center">
               <div class="col-10 col-md-6">
                 <h1 class="fontzing mb-4">CREAR CATEGORIA</h1>
               </div>
@@ -221,7 +214,7 @@ export const CreateCategories = () => {
                         </div>
                     </div>
                     <div class="mb-3">
-                        <input class="form-control" type="file" id="validationServer03" multiple>
+                        <input class="form-control" type="file" id="validationServer03">
                         <div class="valid-feedback">
                             Archivo seleccionado
                         </div>
@@ -240,6 +233,19 @@ export const CreateCategories = () => {
                     </button>
                 </form>
               </div>
+            </div>
+        </div>
+        <div class="col-12" id="alertsuccess" style="display:none;">
+            <svg xmlns="http://www.w3.org/2000/svg" style="display:none;">
+                <symbol id="check-circle-fill" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+                </symbol>
+            </svg>
+            <div class="alert alert-success d-flex align-items-center justify-content-center mt-3" role="alert">
+                <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
+                <div>
+                Nueva categoría creada con éxito!
+                </div>
             </div>
         </div>
     </div>`;

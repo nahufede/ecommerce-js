@@ -30,7 +30,7 @@ footer.innerHTML = Footer();
 modal.innerHTML = DBModal();
 
 if (app.innerHTML == "") {
-  app.innerHTML = ShowCategories();
+  app.innerHTML = Checkout();
 }
 
 export const Router = () => {
@@ -121,7 +121,6 @@ export const Router = () => {
   });
 
   window.addEventListener("click", (e) => {
-    let id = e.target.getAttribute("id");
 
     if (e.target.classList.contains("click-category")) {
       let category = e.target.attributes.id.value;

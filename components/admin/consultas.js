@@ -42,6 +42,10 @@ export const Consultas = () => {
         ...doc.data(),
         id: doc.id,
         }));
+
+        if(consultas.length > 0){
+          document.querySelector('#consultas h4').style.display = 'none'
+        }
       
         return consultas;
     };
@@ -99,9 +103,10 @@ export const Consultas = () => {
       <div class="row p-0">
         <div class="col-12 my-5">
           <div class="col-12">
-            <h1 class="text-center mb-5">CONSULTAS</h1>
+            <h1 class="text-center fontzing mb-5">CONSULTAS</h1>
           </div>
           <div class="col-12" id="consultas">
+            <h4 class="text-center mb-5">NO HAY CONSULTAS NUEVAS</h4>
           </div>
         </div>
       </div>

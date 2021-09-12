@@ -62,7 +62,7 @@ export const ShowGenders = () => {
 
         let gendersContainer 
         let viewList = document.createElement('div')
-        viewList.className = "row justify-content-center pt-4"
+        viewList.className = "col-12 justify-content-evenly d-flex pt-4"
 
         if (document.querySelector("#genders")) {
         gendersContainer  = document.querySelector("#genders")
@@ -76,13 +76,12 @@ export const ShowGenders = () => {
         const card = document.createElement('div');
         card.className = "col-6 col-md-3 d-flex justify-content-center mb-4"
         card.innerHTML = 
-        `<div class="card" id=${id}>
-            <div class="card-body d-flex flex-column consultcard">
+        `<div class="card gendercard" id=${id}>
+            <div class="card-body d-flex flex-column genderimg" style="background-image: url('${img}')">
               <span class="d-flex justify-content-between">
                 <h5 class="card-title fontzing">${name.toUpperCase()}</h5>
-                <a href="" class="deleteGender"><i class="bi bi-trash-fill"></i></a>
+                <a href="" class="deleteGender"><i class="bi bi-trash-fill text-white"></i></a>
               </span>
-              <img src="${img}" class="card-img-top" alt="...">
             </div>
         </div>
         `
@@ -105,7 +104,7 @@ export const ShowGenders = () => {
         </div>
       </div>
       <div class="row p-0">
-        <div class="col-12 my-5">
+        <div class="col-12 my-3">
           <div class="col-12">
             <h1 class="text-center mb-2 fontzing">GÉNEROS</h1>
           </div>

@@ -40,7 +40,7 @@ const uploadFormValidation = () => {
     let progressVal = [];
 
     for (let i = 0; i < 6; i++) {
-      if (createForm[i].value.length != 0) {
+      if(createForm[i].classList.contains('is-valid')){
         progressVal.push(1);
       }
     }
@@ -303,7 +303,7 @@ export const Upload = () => {
                     </div>
                     </div>
                     <div class="mb-3">
-                    <input class="form-control" type="file" id="validationServer06" multiple>
+                    <input class="form-control" type="file" id="validationServer06">
                     <div class="valid-feedback">
                         Archivo seleccionado
                     </div>

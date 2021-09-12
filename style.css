@@ -43,6 +43,10 @@ body {
     margin-left: 3rem;
 }
 
+.navitems li:hover{
+   color: black;
+}
+
 .navman, .navwoman, .navcontact {
     border-left: 1px solid;
     padding: 0 1rem;
@@ -303,6 +307,11 @@ body {
     margin-right: 0.3rem;
     text-decoration: none;
     color: black;
+    cursor: pointer;
+}
+
+.contactbreadcrumb:hover {
+    color: black;
 }
 
 .focuscategoryimages {
@@ -343,6 +352,26 @@ body {
 
 #carrito-checkout {
     text-align: center;
+    border-collapse: separate;
+    border-spacing: 10px 5px;
+}
+
+#carrito-checkout td{
+    height: 6rem;
+}
+
+.checkout-img{
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+#carrito-checkout th{
+    width: 20%
+}
+
+.btn-remove-product{
+    cursor: pointer;
 }
 
 .itemList-product a {
@@ -476,10 +505,32 @@ opacity: 1;
     padding: 0;
 }
 
+.gendercard{
+    height: 15rem;
+    width: 15rem;
+    color: white;
+    text-shadow: 1px 1px 5px black;
+}
+
+.genderimg a{
+    text-decoration: none;
+    color: black;
+}
+
+.genderimg {
+    background-size: cover;
+}
+
 .consultcard a{
     text-decoration: none;
     color: black;
 }
+
+.consultcard {
+    height: 10rem;
+    justify-content: space-between;
+}
+
 
 #caracterestextarea{
     text-align: end;

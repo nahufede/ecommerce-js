@@ -1,5 +1,6 @@
 import { getCategories, getGenders } from "../../../firebase/products.js";
 import { getFirestore, storage } from "../../../firebase/firebase.js";
+import { Navbar } from "../../nav.js"
 
 let db = getFirestore();
 let storageRef = storage().ref();
@@ -59,6 +60,7 @@ export const ShowCategories = () => {
               getCategories(`categories_${gender}`).then((categories) => {
                 setList("#categorieslist", categories, gender)  
               })
+              nav.innerHTML = Navbar();
             })
             .catch((error) => {
             console.error("error ->", error);
@@ -89,6 +91,8 @@ export const ShowCategories = () => {
             .then(() => {
             
               document.querySelector('#categorieslist').innerHTML = ""
+
+              nav.innerHTML = Navbar();
 
               getCategories(`${database}`).then((categories) => {
                 setList("#categorieslist", categories, gender)  

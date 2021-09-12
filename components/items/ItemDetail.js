@@ -1,5 +1,5 @@
 import { getFirestore } from "../../firebase/firebase.js";
-import { ItemList, RelatedItems } from "./ItemList.js";
+import { RelatedItems } from "./ItemList.js";
 
 let db = getFirestore();
 
@@ -19,7 +19,6 @@ export const itemDetail = {
 
     await RelatedItems(product.category).then((res) => {
       relatedProducts.append(res);
-      console.log(relatedProducts)
     });
 
     return `<div class="container container-itemDetail">
