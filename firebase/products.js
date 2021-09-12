@@ -35,7 +35,7 @@ export const getItems = async () => {
   return allProducts;
 }
 
-export const getGenders= async () => {
+export const getGenders = async () => {
 
   const itemCollection = db.collection("genders");
   const querySnapshot = await itemCollection.orderBy("name").get();

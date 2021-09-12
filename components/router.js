@@ -29,9 +29,7 @@ nav.innerHTML = Navbar();
 footer.innerHTML = Footer();
 modal.innerHTML = DBModal();
 
-if (app.innerHTML == "") {
-  app.innerHTML = Checkout();
-}
+if (app.innerHTML == "") {app.innerHTML = Home()}
 
 export const Router = () => {
   window.addEventListener("click", (e) => {
