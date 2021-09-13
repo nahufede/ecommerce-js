@@ -38,7 +38,7 @@ export const getItems = async () => {
 export const getGenders = async () => {
 
   const itemCollection = db.collection("genders");
-  const querySnapshot = await itemCollection.orderBy("name").get();
+  const querySnapshot = await itemCollection.orderBy("name", "desc").get();
 
   let allGenders = querySnapshot.docs.map((doc) => ({
     ...doc.data(),
