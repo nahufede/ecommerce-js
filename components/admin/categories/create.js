@@ -1,5 +1,5 @@
 import { getFirestore, storage } from "../../../firebase/firebase.js";
-import { getGenders } from "../../../firebase/products.js";
+import { getGenders } from "../../../firebase/db-calls.js";
 
 let db = getFirestore();
 let storageRef = storage().ref();

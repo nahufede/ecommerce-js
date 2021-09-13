@@ -1,4 +1,4 @@
-import { getGenders } from "../../firebase/products.js"
+import { getGenders } from "../../firebase/db-calls.js"
 
 export const Home = () => {
 

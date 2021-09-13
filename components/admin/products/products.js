@@ -1,4 +1,4 @@
-import { getItems } from "../../../firebase/products.js";
+import { getItems } from "../../../firebase/db-calls.js";
 import { getFirestore, storage } from "../../../firebase/firebase.js"
 
 let db = getFirestore();

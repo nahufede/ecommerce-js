@@ -159,9 +159,10 @@ window.addEventListener('change', ()=>{
 })
 
 window.addEventListener("click", (e) => {
+
   let checkoutForm = document.querySelector("#checkoutForm");
 
-  if (e.target.getAttribute("id") === "checkoutbutton") {
+  if (e.target.getAttribute("id") === "checkoutbutton"){
     
     e.preventDefault();
     
@@ -172,11 +173,13 @@ window.addEventListener("click", (e) => {
     let email = checkoutForm[1].value;
     let phone = Number(checkoutForm[2].value);
     let date = new Date().toLocaleDateString();
-  
-    db.collection("orders")
+
+    console.log(articulosCarrito);
+
+    /* db.collection("orders")
       .add({
         user: {name, email, phone},
-        products: articulosCarrito,
+        articulosCarrito,
         date
       })
       .then(() => {
@@ -189,7 +192,7 @@ window.addEventListener("click", (e) => {
       })
       .catch((error) => {
         console.error("Error adding document: ", error);
-      });
+      }); */
   }
 });
 

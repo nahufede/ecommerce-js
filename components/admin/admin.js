@@ -62,6 +62,7 @@ export const Admin = () => {
                             <button reference="categoriesdash" class="mybutton mb-2" type="button">Categorias</button>
                             <button reference="consultas" class="mybutton mb-2" type="button">Consultas</button>
                             <button reference="gendersdash" class="mybutton mb-2" type="button">Géneros</button>
+                            <button reference="ordenes" class="mybutton mb-2" type="button">Pedidos</button>
                             <button reference="productsdash" class="mybutton mb-2" type="button">Productos</button>
                             <button reference="logout" class="mybutton mb-2" type="button">Cerrar Sesión</button>
                         </div>

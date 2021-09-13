@@ -1,4 +1,4 @@
-import { getCategories } from "../../firebase/products.js";
+import { getCategories } from "../../firebase/db-calls.js";
 import { ItemList } from "../items/itemList.js";
 
 let app = document.querySelector("#app");

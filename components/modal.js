@@ -1,4 +1,4 @@
-import { getCategories } from "../firebase/products.js";
+import { getCategories } from "../firebase/db-calls.js";
 
 export const DBModal = () => {
 

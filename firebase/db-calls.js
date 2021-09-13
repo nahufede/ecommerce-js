@@ -47,3 +47,31 @@ export const getGenders = async () => {
 
   return allGenders;
 }
+
+export const getOrders = async () => {
+
+  const itemCollection = db.collection("orders");
+  const querySnapshot = await itemCollection.get();
+
+  let allorders = querySnapshot.docs.map((doc) => ({
+    ...doc.data(),
+    id: doc.id,
+  }));
+
+  return allorders;
+}
+
+export const getConsultas = async () => {
+
+  let itemCollection
+
+  itemCollection = db.collection('consultas');
+  const querySnapshot = await itemCollection.get();
+
+  let consultas = querySnapshot.docs.map((doc) => ({
+  ...doc.data(),
+  id: doc.id,
+  }));
+
+  return consultas;
+};

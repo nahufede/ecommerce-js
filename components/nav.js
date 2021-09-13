@@ -1,5 +1,5 @@
 import { auth } from "../firebase/firebase.js";
-import { getCategories, getGenders } from "../firebase/products.js";
+import { getCategories, getGenders } from "../firebase/db-calls.js";
 import { capitalize } from "../script.js";
 
 const categoriesNav = () => {
@@ -31,7 +31,7 @@ const categoriesNav = () => {
       navItem.className = 'nav-item dropdown'
       navItem.innerHTML = `
       <a class="nav-link dropdown-toggle navman" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">${name.toUpperCase()}</a>
-      <ul class="dropdown-menu" id="categoriesnav_${name}" aria-labelledby="navbarDropdown">
+      <ul class="dropdown-menu linkborder" id="categoriesnav_${name}" aria-labelledby="navbarDropdown">
         <li><a class="dropdown-item" reference="${name}" href="#">Principal</a></li>
       </ul>`
   
@@ -120,7 +120,7 @@ export const Navbar = () => {
                     <a class="nav-link dropdown-toggle navadmin" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                       ADMIN
                     </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <ul class="dropdown-menu linkborder" aria-labelledby="navbarDropdown">
                       <li><a class="dropdown-item" reference="admin" href="#">Principal</a></li>
                     </ul>
                   </li>

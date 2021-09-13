@@ -1,4 +1,4 @@
-import { getCategories, getGenders } from "../../../firebase/products.js";
+import { getCategories, getGenders } from "../../../firebase/db-calls.js";
 import { getFirestore, storage } from "../../../firebase/firebase.js";
 import { Navbar } from "../../nav.js"
 

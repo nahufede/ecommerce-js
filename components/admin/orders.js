@@ -1,5 +1,5 @@
+import { getOrders } from "../../firebase/db-calls.js";
 import { getFirestore } from "../../firebase/firebase.js";
-import { getConsultas } from "../../firebase/db-calls.js"
 
 let db = getFirestore();
 
@@ -16,12 +16,12 @@ window.addEventListener("click", async (e) => {
 
     if (confirmacion) {
 
-      db.collection("consultas")
+      db.collection("orders")
         .doc(id)
         .delete()
         .then(() => {
           console.log("documento eliminado");
-          app.innerHTML = Consultas();
+          app.innerHTML = Orders();
         })
         .catch((error) => {
           console.error("error ->", error);
@@ -30,22 +30,27 @@ window.addEventListener("click", async (e) => {
   }
 })
 
-export const Consultas = () => {
+export const Orders = () => {
 
-    getConsultas().then((consultas)=>{
+    getOrders().then((orders)=>{
 
-        let consultasContainer 
-        let viewList = document.createElement('div')
-        viewList.className = "row justify-content-center pt-4"
-
-        if (document.querySelector("#consultas")) {
-        consultasContainer  = document.querySelector("#consultas")
+        if(orders.length > 0){
+          document.querySelector('#orders h4').style.display = 'none'
         }
 
-        consultas.forEach((el) => {
+        let ordersContainer
+
+        let orderList = document.createElement('div')
+        orderList.className = "row justify-content-center pt-4"
+
+        if (document.querySelector("#orders")) {
+        ordersContainer  = document.querySelector("#orders")
+        }
+
+        orders.forEach((el) => {
         /* Destrucuring sobre el objeto */
     
-        const { name, email, phone, message, date, id } = el;
+        const { user, date, id } = el;
     
         const card = document.createElement('div');
         card.className = "col-6 d-flex justify-content-center mb-4"
@@ -53,26 +58,22 @@ export const Consultas = () => {
         `<div class="card w-100" id=${id}>
             <div class="card-body d-flex flex-column consultcard">
             <span class="d-flex justify-content-between align-items-center">
-              <h5 class="card-title"><i class="bi bi-person me-2"></i>${name}</h5>
+              <h5 class="card-title"><i class="bi bi-person me-2"></i>${user.name}</h5>
               <a href="" class="deleteConsult"><i class="bi bi-trash-fill"></i></a>
             </span>
-            <p class="card-text">${message}</p>
+            <p class="card-text">${user.email}</p>
             <span class="d-flex justify-content-between align-items-center">
-              <h6 class="card-subtitle"><i class="bi bi-envelope me-2"></i>${email}</h6>
-              <a href="https://wa.me/+549${phone}" target="_blank"><i class="bi bi-telephone-forward me-2"></i>${phone}</a>
+              <h6 class="card-subtitle"><i class="bi bi-envelope me-2"></i></h6>
+              <a href="" target="_blank"><i class="bi bi-telephone-forward me-2"></i></a>
               <p class="card-text align-self-end"><i class="bi bi-calendar-check-fill me-2"></i>${date}</p>
             </span>
             </div>
         </div>
         `
-        viewList.appendChild(card);
+        orderList.appendChild(card);
         });
     
-        consultasContainer.appendChild(viewList)
-
-        if(consultas.length > 0){
-          document.querySelector('#consultas h4').style.display = 'none'
-        }
+        ordersContainer.appendChild(orderList)
     })
 
     return (`
@@ -82,19 +83,21 @@ export const Consultas = () => {
           <div class="d-flex flex-row justify-content-center">
             <a reference="home" class="contactbreadcrumb">Inicio</a>
             <a reference="admin" class="contactbreadcrumb">> Administrador</a>
-            <p class="d-none d-sm-block">> Consultas</p>
+            <p class="d-none d-sm-block">> Órdenes</p>
           </div>
         </div>
       </div>
       <div class="row p-0">
         <div class="col-12 my-5">
           <div class="col-12">
-            <h1 class="text-center fontzing mb-5">CONSULTAS</h1>
+            <h1 class="text-center fontzing mb-5">ÓRDENES</h1>
           </div>
-          <div class="col-12" id="consultas">
-            <h4 class="text-center mb-5">NO HAY CONSULTAS NUEVAS</h4>
+          <div class="col-12" id="orders">
+            <h4 class="text-center mb-5">NO HAY ÓRDENES NUEVAS</h4>
           </div>
         </div>
       </div>
     </div>`)
 }
+
+export default Orders;
