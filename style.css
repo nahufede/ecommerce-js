@@ -410,6 +410,12 @@ body {
     color: black;
 }
 
+.itemList-imgContainer {
+    max-height: 330px;
+    overflow: hidden;
+    object-fit: cover;
+}
+
 .itemList-product {
     background-repeat: no-repeat;
     background-size: contain;
