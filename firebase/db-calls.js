@@ -48,10 +48,17 @@ export const getGenders = async () => {
   return allGenders;
 }
 
-export const getOrders = async () => {
+export const getOrders = async (parametro) => {
 
   const itemCollection = db.collection("orders");
-  const querySnapshot = await itemCollection.get();
+
+  let querySnapshot
+
+  if(parametro){
+    querySnapshot = await itemCollection.where("send", "==", true).get();
+  } else {
+    querySnapshot = await itemCollection.where("send", "==", false).get();
+  }
 
   let allorders = querySnapshot.docs.map((doc) => ({
     ...doc.data(),

@@ -60,7 +60,7 @@ export async function RelatedItems(category) {
   products.className = "row";
 
   const itemCollection = db.collection("products");
-  let filteredItems = itemCollection.where("category", "==", category);
+  let filteredItems = itemCollection.where("category", "==", category).limit(3);
 
   const querySnapshot = await filteredItems.get();
 
@@ -97,7 +97,7 @@ export async function SearchResults(search) {
   itemListContainer.className = "container";
   itemListContainer.classList.add("container-itemList");
   itemListContainer.innerHTML = `
-                        <h3>Mostrando resultados de "${search}"</h3>
+                        <h3 class="py-4 fontzing">Mostrando resultados de "${search}"</h3>
                       `;
 
   let products = document.createElement("div");

@@ -33,7 +33,11 @@ export const itemDetail = {
         <div><p>${product.description}</p></div>
       </div>
     </div>
-    <hr class="horizontalLine" />
+    <div class="container-fluid">
+        <div class="col-12">
+            <div class="line"></div>
+        </div>
+    </div>
     <div class="container-itemDetail__related">
       <div><h2>PRODUCTOS RELACIONADOS</h2></div>
       ${relatedProducts.innerHTML}

@@ -2,20 +2,72 @@ import { getOrders } from "../../firebase/db-calls.js";
 import { getFirestore } from "../../firebase/firebase.js";
 
 let db = getFirestore();
+let app = document.querySelector("#app");
 
 window.addEventListener("click", async (e) => {
   let focus = e.target;
-  
+
+  if (focus.getAttribute("id") === "entregado") {
+    e.preventDefault();
+
+    let orderId =
+      focus.parentElement.parentElement.parentElement.getAttribute("id-order");
+
+    let confirmacion = confirm("Desea marcar la órden como enviada?");
+
+    if (confirmacion) {
+      var docRef = db.collection("orders").doc(orderId);
+
+      return docRef
+        .update({
+          send: true,
+        })
+        .then(()=>{
+          app.innerHTML = Orders();
+        })
+        .catch((error) => {
+          // The document probably doesn't exist.
+          console.error("Error updating document: ", error);
+        });
+    }
+  }
+
+  if (focus.getAttribute("id") === "renew") {
+    e.preventDefault();
+
+    let orderId =
+      focus.parentElement.parentElement.parentElement.getAttribute("id-order");
+
+    let confirmacion = confirm("Desea marcar la órden como nueva?");
+
+    if (confirmacion) {
+      var docRef = db.collection("orders").doc(orderId);
+
+      return docRef
+        .update({
+          send: false,
+        })
+        .then(()=>{
+          app.innerHTML = Orders();
+        })
+        .catch((error) => {
+          // The document probably doesn't exist.
+          console.error("Error updating document: ", error);
+        });
+    }
+  }
+
   if (focus.parentElement.classList.contains("deleteConsult")) {
+    e.preventDefault();
 
-    e.preventDefault()
-
-    let id = focus.parentElement.parentElement.parentElement.parentElement.getAttribute('id');
+    let id =
+      focus.parentElement.parentElement.parentElement.parentElement.getAttribute(
+        "id"
+      );
 
     let confirmacion = confirm("Desea eleminar el elemento?");
 
     if (confirmacion) {
-
       db.collection("orders")
         .doc(id)
         .delete()
@@ -28,55 +80,167 @@ window.addEventListener("click", async (e) => {
         });
     }
   }
-})
+});
 
 export const Orders = () => {
+  getOrders().then((orders) => {
+    if (orders.length > 0) {
+      document.querySelector("#new-orders h5").style.display = "none";
+    }
 
-    getOrders().then((orders)=>{
+    let newOrdersContainer;
 
-        if(orders.length > 0){
-          document.querySelector('#orders h4').style.display = 'none'
-        }
+    let orderList = document.createElement("div");
+    orderList.className = "row justify-content-center";
 
-        let ordersContainer
+    if (document.querySelector("#new-orders")) {
+      newOrdersContainer = document.querySelector("#new-orders");
+    }
 
-        let orderList = document.createElement('div')
-        orderList.className = "row justify-content-center pt-4"
+    orders.forEach((el, index) => {
+      /* Destrucuring sobre el objeto */
 
-        if (document.querySelector("#orders")) {
-        ordersContainer  = document.querySelector("#orders")
-        }
+      const { user, date, id, products } = el;
+      const { name, email, phone } = user;
 
-        orders.forEach((el) => {
-        /* Destrucuring sobre el objeto */
-    
-        const { user, date, id } = el;
-    
-        const card = document.createElement('div');
-        card.className = "col-6 d-flex justify-content-center mb-4"
-        card.innerHTML = 
-        `<div class="card w-100" id=${id}>
-            <div class="card-body d-flex flex-column consultcard">
-            <span class="d-flex justify-content-between align-items-center">
-              <h5 class="card-title"><i class="bi bi-person me-2"></i>${user.name}</h5>
-              <a href="" class="deleteConsult"><i class="bi bi-trash-fill"></i></a>
-            </span>
-            <p class="card-text">${user.email}</p>
-            <span class="d-flex justify-content-between align-items-center">
-              <h6 class="card-subtitle"><i class="bi bi-envelope me-2"></i></h6>
-              <a href="" target="_blank"><i class="bi bi-telephone-forward me-2"></i></a>
-              <p class="card-text align-self-end"><i class="bi bi-calendar-check-fill me-2"></i>${date}</p>
-            </span>
+      let cartList = document.createElement("tbody");
+
+      products.forEach((product) => {
+        const { name, img, quantity, id } = product;
+
+        const row = document.createElement("tr");
+        row.setAttribute("id", id);
+        row.innerHTML = `<td>
+                        ${name}
+                    </td>
+                    <td>
+                        ${quantity}
+                    </td>
+                    <td class="checkout-img" style="background-image: url('${img}')">
+                    </td>
+                `;
+        cartList.appendChild(row);
+      });
+
+      const card = document.createElement("div");
+      card.className = "accordion accordion-flush";
+      card.setAttribute("id", "accordionFlushExample");
+      card.innerHTML = `<div class="accordion-item">
+        <h2 class="accordion-header" id="flush-heading${id}">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse${id}" aria-expanded="false" aria-controls="flush-collapse${id}"><i class="bi bi-calendar3 me-2"></i>${date}</button>
+        </h2>
+        <div id="flush-collapse${id}" class="accordion-collapse collapse" aria-labelledby="flush-heading${id}" data-bs-parent="#accordionFlushExample">
+          <div class="accordion-body" id-order="${id}">
+            <div class="col-12 d-flex" style="min-height: 12rem;">
+              <div class="col-4 d-flex flex-column justify-content-between">
+               <p class="m-0"><i class="bi bi-person me-2"></i>${name}</p>
+               <p class="m-0"><i class="bi bi-envelope me-2"></i>${email}</p>
+               <a href="https://wa.me/+549${phone}" target="_blank"><i class="bi bi-telephone-forward me-2"></i>${phone}</a>
+               <a href="" id="entregado"><i class="bi bi-bag-check me-2"></i>Marcar como entregado</a>
+              </div>
+              <div class="col-8 orderCard_products">
+                <table id="orderCards" class="u-full-width w-100">
+                  <thead>
+                    <tr>
+                      <th>Nombre</th>
+                      <th>Cantidad</th>
+                      <th>Imagen</th>
+                      ${cartList.innerHTML}
+                    </tr>
+                  </thead>
+                </table>
+              </div>
             </div>
+          </div>
         </div>
-        `
-        orderList.appendChild(card);
-        });
-    
-        ordersContainer.appendChild(orderList)
-    })
+      </div>
+      `;
+      orderList.appendChild(card);
+    });
 
-    return (`
+    newOrdersContainer.appendChild(orderList);
+  });
+
+  getOrders(true).then((orders) => {
+    if (orders.length > 0) {
+      document.querySelector("#old-orders h5").style.display = "none";
+    }
+
+    let oldOrdersContainer;
+
+    let orderList = document.createElement("div");
+    orderList.className = "row justify-content-center";
+
+    if (document.querySelector("#old-orders")) {
+      oldOrdersContainer = document.querySelector("#old-orders");
+    }
+
+    orders.forEach((el, index) => {
+      /* Destrucuring sobre el objeto */
+
+      const { user, date, id, products } = el;
+      const { name, email, phone } = user;
+
+      let cartList = document.createElement("tbody");
+
+      products.forEach((product) => {
+        const { name, img, quantity, id } = product;
+
+        const row = document.createElement("tr");
+        row.setAttribute("id", id);
+        row.innerHTML = `<td>
+                      ${name}
+                  </td>
+                  <td>
+                      ${quantity}
+                  </td>
+                  <td class="checkout-img" style="background-image: url('${img}')">
+                  </td>
+              `;
+        cartList.appendChild(row);
+      });
+
+      const card = document.createElement("div");
+      card.className = "accordion accordion-flush";
+      card.setAttribute("id", "accordionFlushExample");
+      card.innerHTML = `<div class="accordion-item">
+      <h2 class="accordion-header" id="flush-heading${id}">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse${id}" aria-expanded="false" aria-controls="flush-collapse${id}"><i class="bi bi-calendar3 me-2"></i>${date}</button>
+      </h2>
+      <div id="flush-collapse${id}" class="accordion-collapse collapse" aria-labelledby="flush-heading${id}" data-bs-parent="#accordionFlushExample">
+        <div class="accordion-body" id-order="${id}">
+          <div class="col-12 d-flex" style="min-height: 12rem;">
+            <div class="col-4 d-flex flex-column justify-content-between">
+             <p class="m-0"><i class="bi bi-person me-2"></i>${name}</p>
+             <p class="m-0"><i class="bi bi-envelope me-2"></i>${email}</p>
+             <a href="https://wa.me/+549${phone}" target="_blank"><i class="bi bi-telephone-forward me-2"></i>${phone}</a>
+             <p class="m-0"><i class="bi bi-bag-check me-2"></i>Articulo entregado</p>
+             <a href="" id="renew"><i class="bi bi-node-plus me-2"></i>Marcar como nuevo</a>
+            </div>
+            <div class="col-8 orderCard_products">
+              <table id="orderCards" class="u-full-width w-100">
+                <thead>
+                  <tr>
+                    <th>Nombre</th>
+                    <th>Cantidad</th>
+                    <th>Imagen</th>
+                    ${cartList.innerHTML}
+                  </tr>
+                </thead>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    `;
+      orderList.appendChild(card);
+    });
+
+    oldOrdersContainer.appendChild(orderList);
+  });
+
+  return `
     <div class="container">
       <div class="row">
         <div class="col-12">
@@ -92,12 +256,17 @@ export const Orders = () => {
           <div class="col-12">
             <h1 class="text-center fontzing mb-5">ÓRDENES</h1>
           </div>
-          <div class="col-12" id="orders">
-            <h4 class="text-center mb-5">NO HAY ÓRDENES NUEVAS</h4>
+          <div class="col-12 my-5" id="new-orders">
+            <h2 class="my-3 fontzing">NUEVAS</h2>
+            <h5 class="my-5">NO HAY PEDIDOS NUEVOS</h5>
+          </div>
+          <div class="col-12 my-5" id="old-orders">
+            <h2 class="my-3 fontzing">ANTIGUAS</h2>
+            <h5 class="my-5">NO HAY PEDIDOS ANTIGUOS</h5>
           </div>
         </div>
       </div>
-    </div>`)
-}
+    </div>`;
+};
 
 export default Orders;

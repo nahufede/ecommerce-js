@@ -357,7 +357,7 @@ body {
 }
 
 #carrito-checkout td{
-    height: 6rem;
+    height: 3rem;
 }
 
 .checkout-img{
@@ -368,6 +368,37 @@ body {
 
 #carrito-checkout th{
     width: 20%
+}
+
+#orderCards {
+    text-align: center;
+    border-collapse: separate;
+    border-spacing: 1px;
+}
+
+#orderCards td{
+    height: 3rem;
+    transition: 0.6s;
+}
+
+#orderCards td:hover{
+    height: 10rem;
+    transition: 0.6s;
+}
+
+.accordion-body a{
+    text-decoration: none;
+    color: black;
+}
+
+.checkout-img{
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+#orderCards th{
+    width: 33%
 }
 
 .btn-remove-product{

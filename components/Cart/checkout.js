@@ -34,12 +34,13 @@ function addProduct(e) {
 function removeProduct(e) {
   e.preventDefault();
   const productoId = e.target.getAttribute("data-id");
+  console.log(productoId);
   articulosCarrito = articulosCarrito.filter(
     (producto) => producto.id !== productoId
   );
-  app.innerHTML = Checkout();
+  /* app.innerHTML = Checkout();
   guardarStorage();
-  nav.innerHTML = Navbar();
+  nav.innerHTML = Navbar(); */
 }
 
 function obtenerDatosProducto(producto) {
@@ -173,17 +174,17 @@ window.addEventListener("click", (e) => {
     let email = checkoutForm[1].value;
     let phone = Number(checkoutForm[2].value);
     let date = new Date().toLocaleDateString();
+    let products = articulosCarrito;
 
-    console.log(articulosCarrito);
-
-    /* db.collection("orders")
+    db.collection("orders")
       .add({
         user: {name, email, phone},
-        articulosCarrito,
-        date
+        products,
+        date,
+        send: false
       })
       .then(() => {
-        articulosCarrito = "";
+        articulosCarrito = [];
         guardarStorage();
         checkoutForm.reset();
         document.querySelector("#alertsuccess").style.display = "block";
@@ -192,7 +193,7 @@ window.addEventListener("click", (e) => {
       })
       .catch((error) => {
         console.error("Error adding document: ", error);
-      }); */
+      });
   }
 });
 

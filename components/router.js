@@ -3,7 +3,6 @@ import { Footer } from "./footer.js";
 import { DBModal } from "./modal.js";
 import { Home } from "../components/views/home.js";
 import { Upload } from "./admin/products/upload.js";
-import { LogOut, LogIn } from "../firebase/user.js";
 import { Admin } from "../components/admin/admin.js";
 import { Principal } from "./views/principal.js";
 import { ShowGenders } from "./admin/genders/genders.js";
@@ -30,7 +29,7 @@ nav.innerHTML = Navbar();
 footer.innerHTML = Footer();
 modal.innerHTML = DBModal();
 
-if (app.innerHTML == "") {app.innerHTML = Home()}
+if (app.innerHTML == "") {app.innerHTML = Orders()}
 
 export const Router = () => {
   window.addEventListener("click", (e) => {
