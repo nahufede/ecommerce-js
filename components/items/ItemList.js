@@ -113,13 +113,9 @@ export async function SearchResults(search) {
     id: doc.id,
   }));
 
-  let categoryFilter = allProducts.filter((item) =>
-    item.category.toLowerCase().includes(search.toLowerCase())
-  );
-  let nameFilter = allProducts.map((item) =>
+  const filteredItems = allProducts.map((item) =>
     item.name.toLowerCase().includes(search.toLowerCase())
   );
-  const filteredItems = categoryFilter.concat(nameFilter);
   filteredItems.forEach((el) => {
     let prodContainer = document.createElement("div");
     prodContainer.className = "col-md-4 col-6";
