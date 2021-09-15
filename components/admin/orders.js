@@ -1,5 +1,6 @@
 import { getOrders } from "../../firebase/db-calls.js";
 import { getFirestore } from "../../firebase/firebase.js";
+import { auth } from "../../firebase/firebase.js";
 
 let db = getFirestore();
 let app = document.querySelector("#app");
@@ -84,8 +85,11 @@ window.addEventListener("click", async (e) => {
 
 export const Orders = () => {
   getOrders().then((orders) => {
-    if (orders.length > 0) {
-      document.querySelector("#new-orders h5").style.display = "none";
+
+    document.querySelector(".spinner1").style.display = "none";
+
+    if (orders.length === 0) {
+      document.querySelector("#new-orders h5").style.display = "block";
     }
 
     let newOrdersContainer;
@@ -162,8 +166,11 @@ export const Orders = () => {
   });
 
   getOrders(true).then((orders) => {
-    if (orders.length > 0) {
-      document.querySelector("#old-orders h5").style.display = "none";
+
+    document.querySelector(".spinner2").style.display = "none";
+
+    if (orders.length === 0) {
+      document.querySelector("#old-orders h5").style.display = "block";
     }
 
     let oldOrdersContainer;
@@ -213,7 +220,7 @@ export const Orders = () => {
             <div class="col-4 d-flex flex-column justify-content-between">
              <p class="m-0"><i class="bi bi-person me-2"></i>${name}</p>
              <p class="m-0"><i class="bi bi-envelope me-2"></i>${email}</p>
-             <a href="https://wa.me/+549${phone}" target="_blank"><i class="bi bi-telephone-forward me-2"></i>${phone}</a>
+             <a href="https://wa.me/${phone}" target="_blank"><i class="bi bi-telephone-forward me-2"></i>${phone}</a>
              <p class="m-0"><i class="bi bi-bag-check me-2"></i>Articulo entregado</p>
              <a href="" id="renew"><i class="bi bi-node-plus me-2"></i>Marcar como nuevo</a>
             </div>
@@ -240,6 +247,34 @@ export const Orders = () => {
     oldOrdersContainer.appendChild(orderList);
   });
 
+  const user = auth().currentUser;
+
+  if(user === null){
+  return (
+          `<div class="container">
+          <div class="row">
+              <div class="col-12 col-sm-6 offset-sm-3 userdiv">
+                  <div class="d-flex flex-row justify-content-center">
+                      <a reference="home" class="contactbreadcrumb">Inicio</a>
+                      <p>> Administrador</p>
+                  </div>
+                  <h1 class="text-center mt-3">INICIAR SESIÓN</h1>
+                  <p class="text-center mt-3">ACCESO DE USUARIO</p>
+                  <form id="userForm" class="d-flex flex-column mt-5">
+                      <div class="form-floating mb-3">
+                          <input type="email" class="form-control" id="floatingEmail" placeholder="Email">
+                          <label for="floatingInput">Email</label>
+                      </div>
+                      <div class="form-floating mb-3" id="userpass">
+                          <input type="password" class="form-control" id="floatingPassword" placeholder="Contraseña">
+                          <label for="floatingPassword">Contraseña</label>
+                      </div>
+                      <button reference="login" class="mybutton" type="submit">INICIAR SESIÓN</button>
+                  </form>
+              </div>
+          </div>
+      </div>`
+  )} else {
   return `
     <div class="container">
       <div class="row">
@@ -258,15 +293,26 @@ export const Orders = () => {
           </div>
           <div class="col-12 my-5" id="new-orders">
             <h2 class="my-3 fontzing">NUEVAS</h2>
-            <h5 class="my-5">NO HAY PEDIDOS NUEVOS</h5>
+            <h5 class="my-5 ps-3" style="display:none">NO HAY PEDIDOS NUEVOS</h5>
+            <div class="text-center spinner1">
+              <div class="spinner-border" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+            </div>
           </div>
           <div class="col-12 my-5" id="old-orders">
             <h2 class="my-3 fontzing">ANTIGUAS</h2>
-            <h5 class="my-5">NO HAY PEDIDOS ANTIGUOS</h5>
+            <h5 class="my-5 ps-3" style="display:none">NO HAY PEDIDOS ANTIGUOS</h5>
+            <div class="text-center spinner2">
+              <div class="spinner-border" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>`;
+  };
 };
 
 export default Orders;

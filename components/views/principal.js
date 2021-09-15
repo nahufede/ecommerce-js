@@ -6,6 +6,9 @@ let app = document.querySelector("#app");
 const categoriesPage = (genero) => {
 
   getCategories(genero).then((categories) => {
+
+    document.querySelector(".spinner").style.display = "none";
+
     let allCategories = document.createElement("div");
     allCategories.className = "col-12 d-flex flex-wrap all-categories mt-3";
 
@@ -56,7 +59,12 @@ export const Principal = (genero, landing) => {
                     </div>
                 </div>
                 <div class="row thecategories"></div>
-            </div>
+                  <div class="text-center spinner pt-5 mt-5">
+                    <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                  </div>
+              </div>
     `;
 };
 

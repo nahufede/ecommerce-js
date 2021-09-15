@@ -280,7 +280,7 @@ export const Checkout = () => {
                 Correcto!
               </div>
               <div id="validationServer03Feedback" class="invalid-feedback ps-2">
-                Introduce un número válido. Código de área sin 0 ni 15. Ej. 115 842 0029
+                Introduce un número válido. Código de área sin 0 ni 15. Ej. +54 9 115 842 0029
               </div>
             </div>
             <div class="progress mb-3 px-0" style="width: 97%">

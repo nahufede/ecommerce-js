@@ -315,8 +315,8 @@ body {
 }
 
 .focuscategoryimages {
-    height: 21rem;
-    width: 21rem;
+    height: 18rem;
+    width: 18rem;
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -326,13 +326,11 @@ body {
     font-size: 3rem;
     color: white;
     transition: 0.5s;
-    border-radius: 2rem;
 }
 
 .focuscategoryimages:hover{
-    height: 22rem;
-    width: 22rem;
-    border-radius: 15rem;
+    height: 19rem;
+    width: 19rem;
     transition: 1s;
     color: white;
 }
@@ -476,10 +474,6 @@ body {
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-}
-
-#dbproducts, #categoriesman, #categorieswoman {
-    border: 0.1rem solid black;
 }
 
 .card-space::after {

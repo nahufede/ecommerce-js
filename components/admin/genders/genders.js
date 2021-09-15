@@ -1,4 +1,5 @@
 import { getFirestore, storage } from "../../../firebase/firebase.js";
+import { auth } from "../../../firebase/firebase.js";
 
 let db = getFirestore();
 let storageRef = storage().ref();
@@ -60,6 +61,8 @@ export const ShowGenders = () => {
 
     getGenders().then((genders)=>{
 
+        document.querySelector(".spinner1").style.display = "none";
+
         let gendersContainer 
         let viewList = document.createElement('div')
         viewList.className = "col-12 justify-content-evenly d-flex pt-4"
@@ -91,6 +94,35 @@ export const ShowGenders = () => {
         gendersContainer.appendChild(viewList)
     })
 
+    const user = auth().currentUser;
+
+    if(user === null){
+    return (
+            `<div class="container">
+            <div class="row">
+                <div class="col-12 col-sm-6 offset-sm-3 userdiv">
+                    <div class="d-flex flex-row justify-content-center">
+                        <a reference="home" class="contactbreadcrumb">Inicio</a>
+                        <p>> Administrador</p>
+                    </div>
+                    <h1 class="text-center mt-3">INICIAR SESIÓN</h1>
+                    <p class="text-center mt-3">ACCESO DE USUARIO</p>
+                    <form id="userForm" class="d-flex flex-column mt-5">
+                        <div class="form-floating mb-3">
+                            <input type="email" class="form-control" id="floatingEmail" placeholder="Email">
+                            <label for="floatingInput">Email</label>
+                        </div>
+                        <div class="form-floating mb-3" id="userpass">
+                            <input type="password" class="form-control" id="floatingPassword" placeholder="Contraseña">
+                            <label for="floatingPassword">Contraseña</label>
+                        </div>
+                        <button reference="login" class="mybutton" type="submit">INICIAR SESIÓN</button>
+                    </form>
+                </div>
+            </div>
+        </div>`
+    )} else {
+
     return (`
     <div class="container">
       <div class="row">
@@ -106,13 +138,19 @@ export const ShowGenders = () => {
       <div class="row p-0">
         <div class="col-12 my-3">
           <div class="col-12">
-            <h1 class="text-center mb-2 fontzing">GÉNEROS</h1>
+            <h1 class="text-center mb-3 fontzing">GÉNEROS</h1>
           </div>
-          <div class="col-10 offset-1" id="genders">
+          <div class="col-10 offset-1 d-flex flex-column align-items-center" id="genders">
+          </div>
+          <div class="text-center pt-5 spinner1">
+            <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
           </div>
         </div>
       </div>
     </div>`)
-}
+  }
+};
 
 export default ShowGenders;
