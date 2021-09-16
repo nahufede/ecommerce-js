@@ -48,10 +48,8 @@ window.addEventListener("click", async (e) => {
 
     let selectItems;
 
-    /* let modal = document.querySelector('.modal-backdrop')
-    
-    modal.className = "modal-backdrop fade show"
-    modal.style.display = "block" */
+    document.querySelector(".saveEdit").style.display = "block";
+    document.querySelector("#alertsuccess").style.display = "none";
 
     if (document.querySelector(".categoryoptions")) {
       selectItems = document.querySelector(".categoryoptions");
@@ -122,6 +120,9 @@ window.addEventListener("click", async (e) => {
 
     let exampleModal
 
+    document.querySelector(".saveEdit").style.display = "none";
+    document.querySelector(".loadingbtn").style.display = "block";
+
     if(document.querySelector('#dbproductsmodal')){
         exampleModal = document.querySelector('#dbproductsmodal')
     }
@@ -130,7 +131,7 @@ window.addEventListener("click", async (e) => {
 
     editForm = document.querySelector(".editForm");
 
-    let id = e.target.parentElement.getAttribute("id");
+    let id = e.target.parentElement.parentElement.getAttribute("id");
 
     var docRef = db.collection("products").doc(id);
 
@@ -145,23 +146,30 @@ window.addEventListener("click", async (e) => {
         description: editForm[3].value,
       })
       .then(() => {
-        let body = document.querySelector('body');
 
-        body.className = "";
-        body.style = "";
+        document.querySelector("#alertsuccess").style.display = "block";
+        document.querySelector(".loadingbtn").style.display = "none";
+    
+        setTimeout(()=> {
+          let body = document.querySelector('body');
 
-        let modal = document.querySelector('.modal-backdrop');
-        /* modal.className = "modal-backdrop fade";
-        modal.style.display = "none"; */
-        modal.remove();
+          body.className = "";
+          body.style = "";
 
-        let dbp = document.querySelector('#dbproductsmodal');
-        dbp.className = "modal fade";
-        dbp.style.display = "none";
-        dbp.setAttribute("aria-hidden","true");
-        dbp.setAttribute("role","");
-      
-        app.innerHTML = AllProducts();
+          let modal = document.querySelector('.modal-backdrop');
+          /* modal.className = "modal-backdrop fade";
+          modal.style.display = "none"; */
+          modal.remove();
+
+          let dbp = document.querySelector('#dbproductsmodal');
+          dbp.className = "modal fade";
+          dbp.style.display = "none";
+          dbp.setAttribute("aria-hidden","true");
+          dbp.setAttribute("role","");
+          app.innerHTML = AllProducts()},
+          3000
+          )
+        
       })
       .catch((error) => {
         // The document probably doesn't exist.
