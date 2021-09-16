@@ -1,26 +1,4 @@
-import { getCategories } from "../firebase/db-calls.js";
-
 export const DBModal = () => {
-
-    getCategories('man').then((categories) => {
-      let selectItems;
-
-      categories.forEach((el, index) => {
-        const option = document.createElement("option");
-
-        /* Destrucuring sobre el objeto p */
-        const { name } = el;
-
-        option.innerHTML = name;
-        option.setAttribute("value", index + 1);
-
-        if (document.querySelector(".categoryoptions")) {
-          selectItems = document.querySelector(".categoryoptions");
-        }
-
-        selectItems.appendChild(option);
-      });
-    });
 
     return `
     <div class="modal fade" id="dbproductsmodal" tabindex="-1" aria-labelledby="dbproductsmodal" aria-hidden="true">

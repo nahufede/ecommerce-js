@@ -10,7 +10,7 @@ const categoriesPage = (genero) => {
     document.querySelector(".spinner").style.display = "none";
 
     let allCategories = document.createElement("div");
-    allCategories.className = "col-12 d-flex flex-wrap all-categories mt-3";
+    allCategories.className = "col-12 d-flex flex-wrap all-categories";
 
     categories.forEach((el) => {
       let category = document.createElement("div");
@@ -53,7 +53,7 @@ export const Principal = (genero, landing) => {
 
   return `
             <div class="container-fluid">
-                <div class="row">
+                <div class="row d-none d-md-block">
                     <div class="col-12">
                         <div class="${landing}"></div>
                     </div>

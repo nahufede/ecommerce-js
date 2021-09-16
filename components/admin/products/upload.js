@@ -154,6 +154,7 @@ export function createElements(e) {
 
   // ASIGNACION DE ELEMENTOS DEL FORM
   let name = createForm[0].value;
+  let gender = createForm[1].value;
   let category = createForm[2].value;
   let price = createForm[3].value;
   let description = createForm[4].value;
@@ -165,6 +166,7 @@ export function createElements(e) {
     .add({
       name,
       price,
+      gender,
       description,
       category,
       img: "",

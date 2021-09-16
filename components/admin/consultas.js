@@ -21,7 +21,6 @@ window.addEventListener("click", async (e) => {
         .doc(id)
         .delete()
         .then(() => {
-          console.log("documento eliminado");
           app.innerHTML = Consultas();
         })
         .catch((error) => {
@@ -55,20 +54,28 @@ export const Consultas = () => {
         const { name, email, phone, message, date, id } = el;
     
         const card = document.createElement('div');
-        card.className = "col-6 d-flex justify-content-center mb-4"
+        card.className = "col-12 col-md-6 d-flex justify-content-center mb-4"
         card.innerHTML = 
         `<div class="card w-100" id=${id}>
-            <div class="card-body d-flex flex-column consultcard">
-            <span class="d-flex justify-content-between align-items-center">
-              <h5 class="card-title"><i class="bi bi-person me-2"></i>${name}</h5>
-              <a href="" class="deleteConsult"><i class="bi bi-trash-fill"></i></a>
-            </span>
-            <p class="card-text">${message}</p>
-            <span class="d-flex justify-content-between align-items-center">
-              <h6 class="card-subtitle"><i class="bi bi-envelope me-2"></i>${email}</h6>
-              <a href="https://wa.me/+${phone}" target="_blank"><i class="bi bi-telephone-forward me-2"></i>${phone}</a>
-              <p class="card-text align-self-end"><i class="bi bi-calendar-check-fill me-2"></i>${date}</p>
-            </span>
+            <div class="card-body d-flex flex-wrap align-items-center consultcard">
+              <div class="col-12 d-flex justify-content-between">
+                  <h5 class="card-title"><i class="bi bi-person me-2"></i>${name}</h5>
+                  <a href="" class="deleteConsult"><i class="bi bi-trash-fill"></i></a>
+              </div>
+              <div class="col-12 py-3">
+                <p class="card-text">${message}</p>
+              </div>
+              <div class="col-12 d-flex flex-wrap">
+                <div class="col-12 py-3">
+                  <h6 class="card-subtitle"><i class="bi bi-envelope me-2"></i>${email}</h6>
+                </div>
+                <div class="col-6">
+                  <a href="https://wa.me/+${phone}" target="_blank"><i class="bi bi-telephone-forward me-2"></i>${phone}</a>
+                </div>
+                <div class="col-6">
+                  <p class="card-text text-end"><i class="bi bi-calendar-check-fill me-2"></i>${date}</p>
+                </div>
+              </div>
             </div>
         </div>
         `

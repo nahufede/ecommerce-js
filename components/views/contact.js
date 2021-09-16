@@ -178,7 +178,7 @@ export const Contacto = () => {
             </div>
         </div>
         <div class="row">
-            <div class="col-12 col-sm-6 offset-sm-3">
+            <div class="col-12 col-sm-6 offset-sm-3 px-3">
                 <h1 class="text-center mt-3 fontzing">CONTACTO</h1>
                 <p class="text-center mt-3">Dejanos tu consulta y te responderemos a la brevedad</p>
                 <form id="contactForm" class="row g-3 d-flex flex-column align-items-center mt-3">

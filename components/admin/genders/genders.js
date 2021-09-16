@@ -65,7 +65,7 @@ export const ShowGenders = () => {
 
         let gendersContainer 
         let viewList = document.createElement('div')
-        viewList.className = "col-12 justify-content-evenly d-flex pt-4"
+        viewList.className = "col-12 d-flex pt-3 justify-content-evenly flex-wrap"
 
         if (document.querySelector("#genders")) {
         gendersContainer  = document.querySelector("#genders")
@@ -77,7 +77,7 @@ export const ShowGenders = () => {
         const { name, id, img } = el;
     
         const card = document.createElement('div');
-        card.className = "col-6 col-md-3 d-flex justify-content-center mb-4"
+        card.className = "col-12 col-md-5 offset-md-1 d-flex justify-content-center mb-4"
         card.innerHTML = 
         `<div class="card gendercard" id=${id}>
             <div class="card-body d-flex flex-column genderimg" style="background-image: url('${img}')">
@@ -138,7 +138,7 @@ export const ShowGenders = () => {
       <div class="row p-0">
         <div class="col-12 my-3">
           <div class="col-12">
-            <h1 class="text-center mb-3 fontzing">GÉNEROS</h1>
+            <h1 class="text-center py-3 m-0 fontzing">GÉNEROS</h1>
           </div>
           <div class="col-10 offset-1 d-flex flex-column align-items-center" id="genders">
           </div>

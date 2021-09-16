@@ -42,15 +42,15 @@ export const Footer = () => {
                     <div class="col-12 info">
                         <div>
                             <i class="bi bi-whatsapp"></i>
-                            <a href="https://wa.me/34645049621" target="_blank" class="socialmedia mb-3">357894473</a>
+                            <a href="https://wa.me/+5491121561691" target="_blank" class="socialmedia mb-3">Hablemos!</a>
                         </div>
                         <div>
                             <i class="bi bi-envelope"></i>
-                            <p>blabla@gmail.com</p>
+                            <p>luccaweb.indumentaria@gmail.com</p>
                         </div>
                         <div>
                             <i class="bi bi-geo-alt"></i>
-                            <a href="https://goo.gl/maps/RYdLajm3pCPf3m5o9" target="_blank" class="socialmedia mb-3">San Telmo</a>
+                            <a href="https://goo.gl/maps/bK3MBzwnR89Pt8Qx9" target="_blank" class="socialmedia mb-3">Showroom</a>
                         </div>
                     </div>
                     <div class="col-12 mt-3 last-title mb-3">

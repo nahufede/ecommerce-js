@@ -1,6 +1,9 @@
 import { getItems } from "../../../firebase/db-calls.js";
 import { getFirestore, storage } from "../../../firebase/firebase.js";
 import { auth } from "../../../firebase/firebase.js";
+import { capitalize } from "../../../script.js"
+import { getCategories } from "../../../firebase/db-calls.js";
+
 
 let db = getFirestore();
 let storageRef = storage().ref();
@@ -41,6 +44,35 @@ window.addEventListener("click", async (e) => {
 
   if (focus.classList.contains("editBtn")) {
 
+    let gender = focus.parentElement.getAttribute('gender');
+
+    let selectItems;
+
+    /* let modal = document.querySelector('.modal-backdrop')
+    
+    modal.className = "modal-backdrop fade show"
+    modal.style.display = "block" */
+
+    if (document.querySelector(".categoryoptions")) {
+      selectItems = document.querySelector(".categoryoptions");
+    }
+
+   selectItems.innerHTML = `<option selected="">Seleccionar</option>`
+
+    getCategories(`categories_${gender}`).then((categories) => {
+
+      categories.forEach((el, index) => {
+        const option = document.createElement("option");
+
+        const { name } = el;
+        
+        option.innerHTML = capitalize(name);
+        option.setAttribute("value", index + 1);
+
+        selectItems.appendChild(option);
+      });
+    });
+
     let exampleModal
 
     if(document.querySelector('#dbproductsmodal')){
@@ -66,7 +98,7 @@ window.addEventListener("click", async (e) => {
           let categoryLength = editForm[1].length;
 
           for (let i = 0; i < categoryLength; i++) {
-            if (editForm[1][i].innerHTML === category) {
+            if (editForm[1][i].innerHTML === capitalize(category)) {
               editForm[1].value = i;
             }
           }
@@ -86,7 +118,7 @@ window.addEventListener("click", async (e) => {
   }
 
   if (focus.classList.contains("saveEdit")) {
-    e.preventDefault();
+    e.preventDefault()
 
     let exampleModal
 
@@ -113,9 +145,23 @@ window.addEventListener("click", async (e) => {
         description: editForm[3].value,
       })
       .then(() => {
-        console.log("Document successfully updated!");
-        location.reload()
-        app.innerHTML = DBProducts()
+        let body = document.querySelector('body');
+
+        body.className = "";
+        body.style = "";
+
+        let modal = document.querySelector('.modal-backdrop');
+        /* modal.className = "modal-backdrop fade";
+        modal.style.display = "none"; */
+        modal.remove();
+
+        let dbp = document.querySelector('#dbproductsmodal');
+        dbp.className = "modal fade";
+        dbp.style.display = "none";
+        dbp.setAttribute("aria-hidden","true");
+        dbp.setAttribute("role","");
+      
+        app.innerHTML = AllProducts();
       })
       .catch((error) => {
         // The document probably doesn't exist.
@@ -146,16 +192,16 @@ export const AllProducts = () => {
       products.forEach((el) => {
       /* Destrucuring sobre el objeto */
 
-      const { name, img, category, id } = el;
+      const { name, img, category, gender, id } = el;
 
       const card = document.createElement('div');
       card.className = "col-6 col-md-4 col-lg-3 d-flex justify-content-center mb-4 dbcard"
       card.innerHTML = 
-      `<div class="card" style="width: 10rem; height: 13rem; border:none;">
+      `<div class="card" style="width: 13rem; height: 13rem; border:none;">
         <div class="card-body card-space p-0" style="background-image: url(${img})">
-          <div class="card-inner" id="${id}">
+          <div class="card-inner" id="${id}" gender="${gender}">
             <h5 class="text-center fontzing">${name}</h5>
-            <p>${category}</p>
+            <p>${capitalize(category)}</p>
               <button type="button" class="btn editBtn mybutton2 mb-2" data-bs-toggle="modal" data-bs-target="#dbproductsmodal">
               Editar
               </button>

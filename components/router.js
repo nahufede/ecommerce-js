@@ -18,7 +18,7 @@ import { CreateCategories } from "./admin/categories/create.js";
 import { CategoriesDashboard } from "./admin/categories/dash.js";
 import { ShowCategories } from "./admin/categories/categories.js";
 import { GendersDashboard } from "./admin/genders/dash.js";
-import Orders from "./admin/orders.js";
+import { Orders } from "./admin/orders.js";
 
 let nav = document.querySelector("#nav");
 let app = document.querySelector("#app");
