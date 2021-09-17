@@ -29,7 +29,7 @@ nav.innerHTML = Navbar();
 footer.innerHTML = Footer();
 modal.innerHTML = DBModal();
 
-if (app.innerHTML == "") {app.innerHTML = Home()}
+if (app.innerHTML == "") {app.innerHTML = Upload()}
 
 export const Router = () => {
   window.addEventListener("click", (e) => {

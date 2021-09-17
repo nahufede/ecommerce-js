@@ -5,12 +5,6 @@ import { auth } from "../../../firebase/firebase.js";
 let db = getFirestore();
 let storageRef = storage().ref();
 
-/* window.addEventListener("keypress", function(event){
-    if (event.key === 'Enter'){
-        event.preventDefault();
-    }
-}, false); */
-
 window.addEventListener("click", (e) => {
   if (e.target.classList.contains("submitBtn")) {
     e.preventDefault();
@@ -89,54 +83,60 @@ const uploadFormValidation = () => {
   let selectGender = document.querySelector(".categorygender");
 
   if(selectGender.length === 1 ){
-      getGenders().then((genders) => {
+    getGenders().then((genders) => {
 
-        genders.forEach((el) => {
-          const option = document.createElement("option");
-    
-          const { name } = el;
-    
-          option.innerHTML = name.charAt(0).toUpperCase() + name.slice(1);
-          option.setAttribute("value", name.toLowerCase());
-          option.className = "genderselect"
-    
-          selectGender.appendChild(option);
-        });
+      genders.forEach((el) => {
+        const option = document.createElement("option");
+  
+        const { name } = el;
+  
+        option.innerHTML = name.charAt(0).toUpperCase() + name.slice(1);
+        option.setAttribute("value", name.toLowerCase());
+        option.className = "genderselect"
+  
+        selectGender.appendChild(option);
       });
+    });
+  }
+
+  let selectItems = document.querySelector(".categoryupload");
+
+  selectGender.addEventListener('change', ()=>{
+    selectItems.innerHTML = '<option selected="" disabled="" value="">Seleccionar</option>'
+  })
+
+  let gender = createForm[1];
+
+  console.log(selectItems);
+
+  if (gender.length > 1) {
+    createForm[2].removeAttribute("disabled");
+
+    getCategories(`categories_${gender.value}`).then((el) => {
+      let categories = el;
+
+      categories.forEach((el) => {
+        const option = document.createElement("option");
+
+        const { name } = el;
+
+        option.innerHTML = name.charAt(0).toUpperCase() + name.slice(1);
+        option.setAttribute("value", name.toLowerCase());
+
+        selectItems.appendChild(option);
+      });
+    });
   }
 };
 
-window.addEventListener('click', (e)=>{
+/* window.addEventListener('click', (e)=>{
   if(e.target.classList.contains('genderselect')){
    
     let createForm = document.querySelector("#createForm");
 
-    let selectItems = document.querySelector(".categoryupload");
-
-    selectItems.innerHTML = '<option selected="" disabled="" value="">Seleccionar</option>'
-
-    let gender = createForm[1];
-
-    if (gender.length > 1) {
-      createForm[2].removeAttribute("disabled");
-
-      getCategories(`categories_${gender.value}`).then((el) => {
-        let categories = el;
-
-        categories.forEach((el) => {
-          const option = document.createElement("option");
-
-          const { name } = el;
-
-          option.innerHTML = name.charAt(0).toUpperCase() + name.slice(1);
-          option.setAttribute("value", name.toLowerCase());
-
-          selectItems.appendChild(option);
-        });
-      });
-    }
+    
   }
-})
+}) */
 
 window.addEventListener("change", () => {
   if (document.querySelector("#uploadpage")) {

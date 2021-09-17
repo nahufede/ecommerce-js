@@ -287,7 +287,7 @@ export const Orders = () => {
         </div>
       </div>
       <div class="row p-0">
-        <div class="col-12 my-5">
+        <div class="col-12 my-5 px-4">
           <div class="col-12">
             <h1 class="text-center fontzing mb-5">ÓRDENES</h1>
           </div>

@@ -43,54 +43,38 @@ const categoriesNav = () => {
 
     navItems.prepend(navItem)
     })
+
+    gender.forEach((el)=>{
+
+      const { name } = el
+      
+      getCategories(`categories_${name}`).then((el) => {
+    
+        let categoriesnav = document.querySelector(`#categoriesnav_${name}`);
+        let categoriesmininav = document.querySelector(`#categoriesmininav_${name}`);
+        
+        el.forEach((el) => {
+          let name = capitalize(el.name)
+          let categoriesNav = document.createElement("li");
+          categoriesNav.innerHTML = `<a class="dropdown-item click-category" id="${el.name}" href="#">${name}</a>`;
+          categoriesnav.appendChild(categoriesNav);
+        });
+    
+        el.forEach((el) => {
+          let name = capitalize(el.name)
+          let categoriesNav = document.createElement("li");
+          categoriesNav.innerHTML = `<a class="dropdown-item click-category" id="${el.name}" href="#">${name}</a>`;
+          categoriesmininav.appendChild(categoriesNav);
+        });
+      });
+
+    })
   })
-
-  getCategories('categories_hombre').then((el) => {
-    
-    let categoriesnav_hombre = document.querySelector("#categoriesnav_hombre");
-    let categoriesmininav_hombre = document.querySelector("#categoriesmininav_hombre");
-    
-    el.forEach((el) => {
-      let name = capitalize(el.name)
-      let categoriesNav = document.createElement("li");
-      categoriesNav.innerHTML = `<a class="dropdown-item click-category" id="${el.name}" href="#">${name}</a>`;
-      categoriesnav_hombre.appendChild(categoriesNav);
-    });
-
-    el.forEach((el) => {
-      let name = capitalize(el.name)
-      let categoriesNav = document.createElement("li");
-      categoriesNav.innerHTML = `<a class="dropdown-item click-category" id="${el.name}" href="#">${name}</a>`;
-      categoriesmininav_hombre.appendChild(categoriesNav);
-    });
-  });
-
-  getCategories('categories_mujer').then((el) => {
-    
-    let categoriesnav_mujer = document.querySelector("#categoriesnav_mujer");
-    let categoriesmininav_mujer = document.querySelector("#categoriesmininav_mujer");
-
-    el.forEach((el) => {
-      let name = capitalize(el.name)
-      let categoriesNav = document.createElement("li");
-      categoriesNav.innerHTML = `<a class="dropdown-item click-category" id="${el.name}" href="#">${name}</a>`;
-      categoriesnav_mujer.appendChild(categoriesNav);
-    });
-
-    el.forEach((el) => {
-      let name = capitalize(el.name)
-      let categoriesNav = document.createElement("li");
-      categoriesNav.innerHTML = `<a class="dropdown-item click-category" id="${el.name}" href="#">${name}</a>`;
-      categoriesmininav_mujer.appendChild(categoriesNav);
-    });
-  });
 };
 
 export const Navbar = () => {
 
   categoriesNav();
-
-  const user = auth().currentUser;
 
   let cart = JSON.parse(localStorage.getItem("carrito")) || [];
   let productQuantity = 0;
@@ -121,7 +105,7 @@ export const Navbar = () => {
                       ADMIN
                     </a>
                     <ul class="dropdown-menu linkborder" aria-labelledby="navbarDropdown">
-                      <li><a class="dropdown-item" reference="admin" href="#">Principal</a></li>
+                      <li><a class="dropdown-item" reference="admin" href="#">Inicia sesión</a></li>
                     </ul>
                   </li>
                 </ul>
