@@ -290,7 +290,7 @@ export const Checkout = () => {
             <button id="checkoutbutton" class="mybutton" style="opacity:0.6;" disabled="true"
               onkeypress="(e)=>{if(e.which === 13){return false}}" type="submit">FINALIZAR MI PEDIDO</button>
             <button class="mybutton loadingbtn" type="button" disabled style="display:none;">
-              <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+              <span class="spinner-border spinner-border-sm me-1" role="status" aria-hidden="true"></span>
               Enviando
             </button>
           </form>

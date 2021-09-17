@@ -107,8 +107,6 @@ const uploadFormValidation = () => {
 
   let gender = createForm[1];
 
-  console.log(selectItems);
-
   if (gender.length > 1) {
     createForm[2].removeAttribute("disabled");
 
@@ -129,15 +127,6 @@ const uploadFormValidation = () => {
   }
 };
 
-/* window.addEventListener('click', (e)=>{
-  if(e.target.classList.contains('genderselect')){
-   
-    let createForm = document.querySelector("#createForm");
-
-    
-  }
-}) */
-
 window.addEventListener("change", () => {
   if (document.querySelector("#uploadpage")) {
     uploadFormValidation();
@@ -149,8 +138,7 @@ export function createElements(e) {
   e.preventDefault();
   document.querySelector(".submitBtn").style.display = "none";
   document.querySelector(".loadingbtn").style.display = "block";
-  document.querySelector(".progress-bar-1").parentElement.style.display =
-    "none";
+  document.querySelector(".progress-bar-1").style.width = "0%"
 
   // ASIGNACION DE ELEMENTOS DEL FORM
   let name = createForm[0].value;
@@ -172,7 +160,7 @@ export function createElements(e) {
       img: "",
     })
     .then((docRef) => {
-      let progressBar = document.querySelector(".progress-bar-2");
+      let progressBar = document.querySelector(".progress-bar-1");
 
       var uploadTask = storageRef
         .child(`products/${category.toLowerCase()}/${docRef.id}`)
@@ -186,8 +174,6 @@ export function createElements(e) {
           );
 
           progressBar.style.width = `${progress}%`;
-
-          console.log(progressBar.style.width);
 
           console.log("Upload is " + progress + "% done");
           switch (snapshot.state) {
@@ -211,10 +197,14 @@ export function createElements(e) {
                 img: downloadURL,
               })
               .then(() => {
-                console.log("Document successfully updated!");
-                progressBar.classList.add("bg-warning");
-
-                app.innerHTML = Upload();
+                createForm.reset();
+                document.querySelector("#alertsuccess").style.display = "block";
+                document.querySelector(".loadingbtn").style.display = "none";
+                document.querySelector(".progress-bar-1").parentElement.style.display = "none";
+                setTimeout(()=>{
+                  app.innerHTML = Upload();
+                },
+                5000)
               });
           });
         }
@@ -256,7 +246,8 @@ export const Upload = () => {
         </div>`
     )} else {
 
-  return `<div class="container">
+  return `
+      <div class="container-fluid">
         <div class="row" id="uploadpage">
             <div class="col-12">
               <div class="d-flex flex-row justify-content-center">
@@ -264,14 +255,14 @@ export const Upload = () => {
                 <a reference="admin" class="contactbreadcrumb">> Administrador</a>
                 <a reference="productsdash" class="contactbreadcrumb">> Productos</a>
                 <p class="d-none d-sm-block">> Subir Item</p>
-            </div>
-            </div>
-            <div class="col-12 my-5 d-flex flex-wrap justify-content-center">
-              <div class="col-10 col-md-6">
-                <h1 class="fontzing">SUBIR PRODUCTOS</h1>
               </div>
-              <div class="col-10 col-md-6 form">
-              <form class="row g-3" id="createForm">
+            </div>
+            <div class="col-12 my-5 d-flex flex-wrap justify-content-center p-0">
+              <div class="col-10 col-md-6">
+                <h1 class="fontzing text-center">SUBIR PRODUCTOS</h1>
+              </div>
+              <div class="col-10 col-md-6 form px-3">
+                <form class="row g-3" id="createForm">
                     <div class="form-floating mb-3">
                     <input type="text" class="form-control" id="validationServer01" placeholder="Traje de baño" required>
                     <label for="validationServer01" class="form-label" style="padding-left: 1.3rem;">Nombre</label>
@@ -347,16 +338,28 @@ export const Upload = () => {
                     <div class="progress-bar progress-bar-striped progress-bar-animated bg-dark progress-bar-1" role="progressbar" style="width: 0%"
                         aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
-                    <button type="submitBtn" class="mybutton submitBtn" disabled="true" style="opacity:0.6;">Subir</button>
+                    <button type="submit" class="mybutton submitBtn" disabled="true" style="opacity:0.6;">Subir</button>
                     <button class="mybutton loadingbtn" type="button" disabled style="display:none;">
-                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                    <span class="spinner-border spinner-border-sm me-1" role="status" aria-hidden="true"></span>
                     Subiendo
                     </button>
                 </form>
               </div>
+              <div class="col-12" id="alertsuccess" style="display:none;">
+                <svg xmlns="http://www.w3.org/2000/svg" style="display:none;">
+                    <symbol id="check-circle-fill" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+                    </symbol>
+                </svg>
+                <div class="alert alert-success d-flex align-items-center justify-content-center mt-3" role="alert">
+                  <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
+                  <div>
+                  Nuevo anúncio creado con éxito!
+                  </div>
+              </div>
             </div>
         </div>
-    </div>`;
+      </div>`;
   };
 };
 
