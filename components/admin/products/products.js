@@ -264,7 +264,6 @@ export const AllProducts = () => {
         <div class="col-12">
           <div class="d-flex flex-row justify-content-center">
             <a reference="home" class="contactbreadcrumb">Inicio</a>
-            <a reference="admin" class="contactbreadcrumb">> Administrador</a>
             <a reference="productsdash" class="contactbreadcrumb">> Productos</a>
             <p class="d-none d-sm-block">> Editar Items</p>
           </div>

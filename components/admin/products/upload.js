@@ -98,19 +98,18 @@ const uploadFormValidation = () => {
       });
     });
   }
-
-  let selectItems = document.querySelector(".categoryupload");
-
+  
   selectGender.addEventListener('change', ()=>{
-    selectItems.innerHTML = '<option selected="" disabled="" value="">Seleccionar</option>'
-  })
+    
+    let gender = createForm[1];
+    let selectItems = document.querySelector(".categoryupload");
 
-  let gender = createForm[1];
-
-  if (gender.length > 1) {
     createForm[2].removeAttribute("disabled");
 
     getCategories(`categories_${gender.value}`).then((el) => {
+
+      selectItems.innerHTML = '<option selected="" disabled="" value="">Seleccionar</option>'
+
       let categories = el;
 
       categories.forEach((el) => {
@@ -124,7 +123,7 @@ const uploadFormValidation = () => {
         selectItems.appendChild(option);
       });
     });
-  }
+  })
 };
 
 window.addEventListener("change", () => {
@@ -252,7 +251,6 @@ export const Upload = () => {
             <div class="col-12">
               <div class="d-flex flex-row justify-content-center">
                 <a reference="home" class="contactbreadcrumb">Inicio</a>
-                <a reference="admin" class="contactbreadcrumb">> Administrador</a>
                 <a reference="productsdash" class="contactbreadcrumb">> Productos</a>
                 <p class="d-none d-sm-block">> Subir Item</p>
               </div>

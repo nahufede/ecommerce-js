@@ -119,7 +119,6 @@ return (`
     <div class="col-12">
       <div class="d-flex flex-row justify-content-center">
         <a reference="home" class="contactbreadcrumb">Inicio</a>
-        <a reference="admin" class="contactbreadcrumb">> Administrador</a>
         <p class="d-none d-sm-block">> Consultas</p>
       </div>
     </div>

@@ -9,6 +9,17 @@ body {
     font-family: 'Poppins', sans-serif;
 }
 
+#spinnerdiv{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.5);
+    cursor: wait;
+}
+
 #nav{
     position: fixed;
     background-color: white;
@@ -37,6 +48,24 @@ body {
 
 .mynav {
     padding: 0.5rem 3rem;
+}
+
+.admin-nav{
+    margin: 0;
+    padding: 0;
+}
+
+.admin-nav li{
+    list-style: none;
+}
+
+.admin-nav a{
+    color: black;
+    padding-left: 1rem;
+}
+
+.admin-nav i{
+    font-size: 1.7rem;
 }
 
 .navitems {

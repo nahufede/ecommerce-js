@@ -4,7 +4,11 @@ export const Home = () => {
 
     getGenders().then((genders) => {
 
-        document.querySelector(".spinner1").style.display = "none";
+        setTimeout(()=>{
+            document.querySelector("#spinnerdiv").style.display = "none";
+            document.querySelector("nav").style.pointerEvents = "visible";
+        }, 2500)
+        
 
         let landingContainer 
     
@@ -43,9 +47,6 @@ export const Home = () => {
                     <h3 class="title">LUCCA</h3>
                 </div>
                 <div class="col-12 d-flex justify-content-evenly flex-wrap imgPrincipales">
-                    <div class="spinner-border spinner1" style="width: 3rem; height: 3rem;" role="status">
-                        <span class="visually-hidden">Loading...</span>
-                    </div>
                 </div>
             </div>
         </div>

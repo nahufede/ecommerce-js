@@ -166,7 +166,6 @@ export const CreateGender = () => {
             <div class="col-12">
               <div class="d-flex flex-row justify-content-center">
                 <a reference="home" class="contactbreadcrumb">Inicio</a>
-                <a reference="admin" class="contactbreadcrumb">> Administrador</a>
                 <a reference="gendersdash" class="contactbreadcrumb">> Géneros</a>
                 <p class="d-none d-sm-block">> Añadir Género</p>
             </div>

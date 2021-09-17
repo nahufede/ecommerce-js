@@ -1,4 +1,3 @@
-import { auth } from "../firebase/firebase.js";
 import { getCategories, getGenders } from "../firebase/db-calls.js";
 import { capitalize } from "../script.js";
 
@@ -6,6 +5,8 @@ const categoriesNav = () => {
 
   getGenders().then((gender)=>{
     gender.forEach((el) => {
+
+      if(document.querySelector('.loadingnav')){document.querySelector('.loadingnav').remove()}
 
       const { name } = el
 
@@ -97,16 +98,14 @@ export const Navbar = () => {
               </button>
               <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 navitems">
+                  <li class="nav-item d-flex align-items-center loadingnav pe-2">
+                    <a class="nav-link active navcontact px-2" aria-current="page" reference="contact" href="#">Cargando</a>
+                    <div class="spinner-border spinner-border-sm" role="status">
+                      <span class="visually-hidden">Loading...</span>
+                    </div>
+                  </li> 
                   <li class="nav-item">
                     <a class="nav-link active navcontact" aria-current="page" reference="contact" href="#">CONTACTO</a>
-                  </li>
-                  <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle navadmin" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      ADMIN
-                    </a>
-                    <ul class="dropdown-menu linkborder" aria-labelledby="navbarDropdown">
-                      <li><a class="dropdown-item" reference="admin" href="#">Inicia sesión</a></li>
-                    </ul>
                   </li>
                 </ul>
                 <form id="search-form" class="d-flex justify-content-end">
@@ -116,6 +115,15 @@ export const Navbar = () => {
                   <i class="bi bi-cart3 carrito" reference="cart"></i>
                   <span class='badge badge-warning ${conditionalDisplay} scale-up-center' id='lblCartCount'> ${productQuantity} </span>
                 </a>
+                <span class="admin-nav">
+                  <li class="nav-item dropdown admindrop">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-display="static" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-person"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end adminlog" aria-labelledby="navbarDropdown">
+                      <li><a class="dropdown-item" reference="admin" href="#">Iniciar sesión</a></li>
+                    </ul>
+                  </li>
+                </span>
               </div>
             </div>
           </nav>
@@ -128,14 +136,6 @@ export const Navbar = () => {
               </button>
               <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mt-3 navitemsmin">
-                  <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      ADMIN
-                    </a>
-                    <ul class="dropdown-menu linkborder" aria-labelledby="navbarDropdown">
-                      <li><a class="dropdown-item" reference="admin" href="#">Principal</a></li>
-                    </ul>
-                  </li>
                   <li class="nav-item d-flex justify-content-between">
                     <a class="nav-link active" aria-current="page" reference="contact" href="#">CONTACTO</a>
                     <span class="d-flex">
@@ -149,10 +149,22 @@ export const Navbar = () => {
                       </a>
                     </span>
                   </li>
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-person"></i>
+                    </a>
+                    <ul class="dropdown-menu adminlog1 linkborder" aria-labelledby="navbarDropdown">
+                      <li><a class="dropdown-item" reference="admin" href="#">Iniciar sesión</a></li>
+                    </ul>
+                  </li>
                 </ul>
               </div>
             </div>
-          </nav>`;
+          </nav>
+          <div id="spinnerdiv">
+            <div class="spinner-border" style="width: 4.5rem; height: 4.5rem;" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+          </div>`;
 };
 
 export default Navbar;
