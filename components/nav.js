@@ -108,7 +108,7 @@ export const Navbar = () => {
                     <a class="nav-link active navcontact" aria-current="page" reference="contact" href="#">CONTACTO</a>
                   </li>
                 </ul>
-                <form id="search-form" class="d-flex justify-content-end">
+                <form id="search-form" class="d-flex justify-content-end" onkeypress="if(event.keyCode == 13) event.returnValue = false;">
                   <input class="form-control me-4" id="search" type="search" placeholder="Buscar" aria-label="Search">
                 </form>
                 <a>

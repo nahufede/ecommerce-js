@@ -26,9 +26,9 @@ export const Home = () => {
           const card = document.createElement('div');
           card.className = "col-10 col-sm-4 mb-3"
           card.innerHTML = 
-          ` <a href="">
+          ` <a reference="${name}" style="cursor:pointer">
                 <div class="landingpageimg" style="background-image: url('${img}')" reference="${name}">
-                    <p class="fontzing">${name.toUpperCase()}</p>
+                    <p reference="${name}" class="fontzing">${name.toUpperCase()}</p>
                 </div>
             </a>
           `

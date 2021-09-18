@@ -219,7 +219,7 @@ export const CreateCategories = () => {
                 <h1 class="fontzing mb-4">CREAR CATEGORIA</h1>
               </div>
               <div class="col-10 col-md-6 form">
-              <form class="row g-3" id="createcategory">
+              <form class="row g-3" id="createcategory" onkeypress="if(event.keyCode == 13) event.returnValue = false;">
                     <div class="form-floating mb-3">
                         <input type="text" class="form-control" id="validationServer01" placeholder="Traje de baño" required>
                         <label for="validationServer01" class="form-label" style="padding-left: 1.3rem;">Nombre</label>

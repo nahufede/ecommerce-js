@@ -164,18 +164,18 @@ export const CreateGender = () => {
         `<div class="container-fluid p-0">
         <div class="row" id="genderpage">
             <div class="col-12">
-              <div class="d-flex flex-row justify-content-center">
-                <a reference="home" class="contactbreadcrumb">Inicio</a>
-                <a reference="gendersdash" class="contactbreadcrumb">> Géneros</a>
-                <p class="d-none d-sm-block">> Añadir Género</p>
-            </div>
+                <div class="d-flex flex-row justify-content-center">
+                    <a reference="home" class="contactbreadcrumb">Inicio</a>
+                    <a reference="gendersdash" class="contactbreadcrumb">> Géneros</a>
+                    <p class="d-none d-sm-block">> Añadir Género</p>
+                </div>
             </div>
             <div class="col-12 col-sm-10 offset-sm-1 my-5 d-flex flex-wrap justify-content-center">
               <div class="col-10 col-md-6">
                 <h1 class="fontzing">CREAR GÉNERO</h1>
               </div>
               <div class="col-10 col-md-6 form">
-              <form class="row g-3" id="createGender">
+              <form class="row g-3" id="createGender" onkeypress="if(event.keyCode == 13) event.returnValue = false;">
                     <div class="form-floating mb-3">
                         <input type="text" class="form-control" id="validationServer01" placeholder="Hombre" required>
                         <label for="validationServer01" class="form-label" style="padding-left: 1.3rem;">Nombre</label>

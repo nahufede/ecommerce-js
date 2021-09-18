@@ -58,7 +58,7 @@ window.addEventListener("click", async (e) => {
     }
   }
 
-  if (focus.parentElement.classList.contains("deleteConsult")) {
+  if (focus.parentElement.classList.contains("deleteOrder")) {
     e.preventDefault();
 
     let id =

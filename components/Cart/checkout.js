@@ -34,13 +34,12 @@ function addProduct(e) {
 function removeProduct(e) {
   e.preventDefault();
   const productoId = e.target.getAttribute("data-id");
-  console.log(productoId);
   articulosCarrito = articulosCarrito.filter(
     (producto) => producto.id !== productoId
   );
-  /* app.innerHTML = Checkout();
+  app.innerHTML = Checkout();
   guardarStorage();
-  nav.innerHTML = Navbar(); */
+  nav.innerHTML = Navbar();
 }
 
 function obtenerDatosProducto(producto) {
@@ -251,7 +250,7 @@ export const Checkout = () => {
           </table>
         </div>
         <div class="col-12 col-md-5">
-          <form id="checkoutForm" class="row g-3 d-flex flex-column align-items-center">
+          <form id="checkoutForm" class="row g-3 d-flex flex-column align-items-center" onkeypress="if(event.keyCode == 13) event.returnValue = false;">
             <div class="form-floating">
               <input type="text" class="form-control" id="validationServer01" placeholder="Nombre" required>
               <label for="validationServer01" class="form-label" style="padding-left: 1.3rem;">Nombre</label>

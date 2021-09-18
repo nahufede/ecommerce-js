@@ -9,11 +9,9 @@ import { ShowGenders } from "./admin/genders/genders.js";
 import { Checkout } from "../components/cart/checkout.js";
 import { Contacto } from "../components/views/contact.js";
 import { AllProducts } from "./admin/products/products.js";
-import { ItemList } from "../components/items/itemList.js";
 import { ProductsDashboard } from "./admin/products/dash.js";
 import { Consultas } from "../components/admin/consultas.js";
 import { CreateGender } from "./admin/genders/create.js";
-import { itemDetail } from "../components/items/itemDetail.js";
 import { CreateCategories } from "./admin/categories/create.js";
 import { CategoriesDashboard } from "./admin/categories/dash.js";
 import { ShowCategories } from "./admin/categories/categories.js";
@@ -120,22 +118,6 @@ export const Router = () => {
         e.preventDefault();
         app.innerHTML = Orders();
         break;
-    }
-  });
-
-  window.addEventListener("click", (e) => {
-
-    if (e.target.classList.contains("click-category")) {
-      let category = e.target.attributes.id.value;
-      ItemList(category)
-    }
-
-    if (e.target.classList.contains("card-img")) {
-      e.preventDefault();
-      let productId = e.target.attributes.id.value;
-      itemDetail.render(productId).then((response) => {
-        app.innerHTML = response;
-      });
     }
   });
 };
