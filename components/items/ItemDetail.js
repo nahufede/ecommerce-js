@@ -24,17 +24,17 @@ export const itemDetail = {
       relatedProducts.append(res);
     }); 
 
-    return `<div class="container container-itemDetail">
+    return `<div class="container-fluid container-itemDetail">
     <div class="row" id="${id}">
-      <div class="col-md-6">
+      <div class="col-12 col-md-6 d-flex">
         <img class="container-itemDetail__img" alt="ProdImg" src="${img}" />
       </div>
-      <div class="col-md-6 container-itemDetail__details">
+      <div class="col-10 col-md-6 container-itemDetail__details ms-auto me-auto">
         <div class="d-flex flex-row">
           <a reference="home" class="contactbreadcrumb">Inicio</a>
           <a class="contactbreadcrumb click-category" id=${category}>> ${capitalize(category)}</a>
         </div>
-        <div>
+        <div class="pe-3">
           <h1 class="product-name mx-0">${name}</h1>
           <p class="mx-0" style="font-size: 1.3rem;">${description}</p>
           <p class="mx-0" style="font-size: 2rem;">$${price.toLocaleString()}</p>

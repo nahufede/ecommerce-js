@@ -6,6 +6,28 @@ const categoriesNav = () => {
   getGenders().then((gender)=>{
     gender.forEach((el) => {
 
+      let cart = JSON.parse(localStorage.getItem("carrito")) || [];
+      let productQuantity = 0;
+      let i;
+
+      for (i = 0; i < cart.length; i++) {
+        productQuantity += cart[i].quantity;
+      }
+
+      let cartCount1 = document.querySelector('#lblCartCount1')
+      let cartCount2 = document.querySelector('#lblCartCount2')
+
+      cartCount1.innerText = productQuantity
+      cartCount2.innerText = productQuantity
+
+      if (cart.length > 0) {
+        cartCount1.style.display = "block"
+        cartCount2.style.display = "block"
+      } else {
+        cartCount1.style.display = "none"
+        cartCount2.style.display = "none"
+      }
+
       if(document.querySelector('.loadingnav')){document.querySelector('.loadingnav').remove()}
 
       const { name } = el
@@ -77,19 +99,6 @@ export const Navbar = () => {
 
   categoriesNav();
 
-  let cart = JSON.parse(localStorage.getItem("carrito")) || [];
-  let productQuantity = 0;
-  let i;
-  for (i = 0; i < cart.length; i++) {
-    productQuantity += cart[i].quantity;
-  }
-
-  let conditionalDisplay = "d-none";
-
-  if (cart.length > 0) {
-    conditionalDisplay = "";
-  }
-
   return `<nav class="navbar navbar-expand-lg navbar-light d-none d-lg-block" reference="navbar">
             <div class="container-fluid mynav">
               <a href="" class="navbar-brand" reference="home">LUCCA</a>
@@ -108,12 +117,12 @@ export const Navbar = () => {
                     <a class="nav-link active navcontact" aria-current="page" reference="contact" href="#">CONTACTO</a>
                   </li>
                 </ul>
-                <form id="search-form" class="d-flex justify-content-end" onkeypress="if(event.keyCode == 13) event.returnValue = false;">
-                  <input class="form-control me-4" id="search" type="search" placeholder="Buscar" aria-label="Search">
+                <form id="search-form1" class="d-flex justify-content-end" onkeypress="if(event.keyCode == 13) event.returnValue = false;">
+                  <input class="form-control me-4" id="search1" type="search" placeholder="Buscar" aria-label="Search" style="width: 60%;">
                 </form>
-                <a>
+                <a class="d-flex align-items-start" style="color:black">
                   <i class="bi bi-cart3 carrito" reference="cart"></i>
-                  <span class='badge badge-warning ${conditionalDisplay} scale-up-center' id='lblCartCount'> ${productQuantity} </span>
+                  <span class='badge badge-warning scale-up-center' style="display:none" id='lblCartCount1'>1</span>
                 </a>
                 <span class="admin-nav">
                   <li class="nav-item dropdown admindrop">
@@ -127,7 +136,7 @@ export const Navbar = () => {
               </div>
             </div>
           </nav>
-          <nav class="navbar navbar-expand-lg navbar-light d-md-block d-lg-none">
+          <nav class="navbar navbar-expand-lg navbar-light d-md-block d-lg-none" id="minim">
             <div class="container-fluid mynav">
               <a class="navbar-brand" reference="home" href="">LUCCA</a>
               <button class="navbar-toggler p-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -138,25 +147,24 @@ export const Navbar = () => {
                 <ul class="navbar-nav mt-3 navitemsmin">
                   <li class="nav-item d-flex justify-content-between">
                     <a class="nav-link active" aria-current="page" reference="contact" href="#">CONTACTO</a>
-                    <span class="d-flex">
-                      <form id="search-form" class="d-flex justify-content-end">
-                        <input class="form-control" id="search" type="search" placeholder="Buscar" aria-label="Search">
-                      </form>
-                      <a>
-                      <i class="bi bi-cart3 ps-3 carrito" reference=cart></i>
-                      <span class='badge badge-warning ${conditionalDisplay} scale-up-center' id='lblCartCount'>
-                        ${productQuantity} </span>
-                      </a>
-                    </span>
                   </li>
                   <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-person"></i>
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">ADMINISTRADOR
                     </a>
                     <ul class="dropdown-menu adminlog1 linkborder" aria-labelledby="navbarDropdown">
                       <li><a class="dropdown-item" reference="admin" href="#">Iniciar sesión</a></li>
                     </ul>
                   </li>
                 </ul>
+                <span class="d-flex py-3 w-100">
+                  <form id="search-form2" class="d-flex w-100">
+                    <input class="form-control" id="search2" type="search" placeholder="Buscar" aria-label="Search">
+                  </form>
+                  <a class="d-flex align-items-start" style="color:black">
+                  <i class="bi bi-cart3 ps-3 carrito" reference="cart"></i>
+                  <span class="badge badge-warning scale-up-center" id="lblCartCount2"></span>
+                  </a>
+                </span>
               </div>
             </div>
           </nav>

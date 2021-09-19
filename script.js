@@ -5,22 +5,26 @@ import { itemDetail } from "./components/items/itemDetail.js";
 
 window.addEventListener('DOMContentLoaded', ()=> Router())
 
-let searchForm = document.getElementById("search-form");
-let searchTerm = document.getElementById("search");
+let searchForm1 = document.getElementById("search-form1");
+let searchTerm1 = document.getElementById("search1");
 
-searchForm.addEventListener("keyup", (e) => {
+let searchForm2 = document.getElementById("search-form2");
+let searchTerm2 = document.getElementById("search2");
+
+
+searchForm1.addEventListener("keyup", (e) => {
     e.preventDefault();
 
     let valuelength = e.target.value.length
     
     if (valuelength > 3) {
-        let search = searchTerm.value;
+        let search = searchTerm1.value;
         app.innerHTML = Search(search);
     } else if (valuelength > 0){
         app.innerHTML = `
         <div class="container-fluid" style="height: 30vh;display: flex;align-items: center;justify-content: center;">
           <div class="row">
-            <h1 class='text-center fontzing'>Buscando ...</h1>
+            <h3 class='text-center fontzing'>Sigue escribiendo ...</h3>
           </div>
         </div>
         `
@@ -28,11 +32,38 @@ searchForm.addEventListener("keyup", (e) => {
       app.innerHTML = 
       `<div class="container-fluid" style="height: 30vh;display: flex;align-items: center;justify-content: center;">
         <div class="row">
-          <h1 class='text-center fontzing'>Realice una nueva búsqueda</h1>
+          <h2 class='text-center fontzing'>Realice una nueva búsqueda</h2>
           <a class="text-center" href="" style="text-decoration:none; color:black;" reference="home">Inicio<i class="bi bi-house-fill ms-2"></i></a>
         </div>
       </div>`
     }
+});
+
+searchForm2.addEventListener("keyup", (e) => {
+  e.preventDefault();
+
+  let valuelength = e.target.value.length
+  
+  if (valuelength > 3) {
+      let search = searchTerm2.value;
+      app.innerHTML = Search(search);
+  } else if (valuelength > 0){
+      app.innerHTML = `
+      <div class="container-fluid" style="height: 30vh;display: flex;align-items: center;justify-content: center;">
+        <div class="row">
+          <h3 class='text-center fontzing'>Sigue escribiendo ...</h3>
+        </div>
+      </div>
+      `
+  } else if(valuelength === 0){
+    app.innerHTML = 
+    `<div class="container-fluid" style="height: 30vh;display: flex;align-items: center;justify-content: center;">
+      <div class="row">
+        <h2 class='text-center fontzing'>Realice una nueva búsqueda</h2>
+        <a class="text-center" href="" style="text-decoration:none; color:black;" reference="home">Inicio<i class="bi bi-house-fill ms-2"></i></a>
+      </div>
+    </div>`
+  }
 });
 
 export function capitalize(str) {
