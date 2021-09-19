@@ -5,8 +5,6 @@ let app = document.querySelector("#app");
 
 const findProducts = async (search) => {
 
-    app.innerHTML = "";
-
     let products = document.createElement("div");
     products.className = "row px-3";
 

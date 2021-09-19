@@ -10,16 +10,26 @@ let searchTerm = document.getElementById("search");
 
 searchForm.addEventListener("keyup", (e) => {
     e.preventDefault();
+
+    let valuelength = e.target.value.length
     
-    if (e.target.value.length > 0) {
+    if (valuelength > 3) {
         let search = searchTerm.value;
         app.innerHTML = Search(search);
-    } else {
+    } else if (valuelength > 0){
+        app.innerHTML = `
+        <div class="container-fluid" style="height: 30vh;display: flex;align-items: center;justify-content: center;">
+          <div class="row">
+            <h1 class='text-center fontzing'>Buscando ...</h1>
+          </div>
+        </div>
+        `
+    } else if(valuelength === 0){
       app.innerHTML = 
       `<div class="container-fluid" style="height: 30vh;display: flex;align-items: center;justify-content: center;">
         <div class="row">
           <h1 class='text-center fontzing'>Realice una nueva búsqueda</h1>
-          <a class="text-center" href="" style="text-decoration:none; color:black;" reference="home">Inicio</a>
+          <a class="text-center" href="" style="text-decoration:none; color:black;" reference="home">Inicio<i class="bi bi-house-fill ms-2"></i></a>
         </div>
       </div>`
     }
