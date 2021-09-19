@@ -29,22 +29,23 @@ export async function ItemList(category) {
   }));
 
   allProducts.forEach((el) => {
-    let prodContainer = document.createElement("div");
-    prodContainer.className = "col-md-4 col-6";
-    let prod = document.createElement("div");
-    prodContainer.appendChild(prod);
-    prod.className = "card";
-    prod.classList.add("itemList-product");
-    prod.innerHTML = `<a href="">  
-    <div class="itemList-imgContainer"><img src="${el.img}" class="card-img itemList-product__image" id="${el.id}" alt="${el.name}"></div>
-                <div class="card-body itemList-product__name">
-                    <p class="card-title text-center">${el.name}</p>
-                </div>
-                </a>
-            `;
+    const { name, id, img } = el;
 
-    products.appendChild(prodContainer);
-  });
+      let prodContainer = document.createElement("div");
+      prodContainer.className = "col-md-4 col-6 p-3";
+      let prod = document.createElement("div");
+      prodContainer.appendChild(prod);
+      prod.className = "card";
+      prod.classList.add("itemList-product");
+      prod.innerHTML = `<a href="" class="itemdetail" style="background-image: url('${img}'); height: 21rem; background-position: center; background-size: cover; background-repeat: no-repeat;" alt="${name}" id="${id}">
+                      <div class="card-body itemList-product__name" style="position: absolute;width: 100%;bottom: 0; padding: 1rem 0;">
+                          <p class="card-title text-center m-0" style="font-size: 0.8rem">${name}</p>
+                      </div>
+                      </a>
+                  `;
+
+      products.appendChild(prodContainer);
+    });
 
   if (allProducts.length === 0) {
     itemListContainer.innerHTML = `<h1 class="text-center container-itemList__title">${category}</h1>
