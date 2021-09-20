@@ -20,7 +20,7 @@ export const itemDetail = {
 
     const { category, description, gender, img, name, price } = product;
     
-    await RelatedItems(category).then((res) => {
+    await RelatedItems(category, gender, name, id).then((res) => {
       relatedProducts.append(res);
     }); 
 
@@ -48,8 +48,11 @@ export const itemDetail = {
         </div>
     </div>
     <div class="container-itemDetail__related">
-      <div><h2 class="fontzing">PRODUCTOS RELACIONADOS</h2></div>
-      ${relatedProducts.innerHTML}
+      <div>
+        <div class="row">
+          <h2 class="fontzing pb-3">PRODUCTOS RELACIONADOS</h2> 
+          ${relatedProducts.innerHTML}
+        </div>
       </div>
     </div>
   </div>`;

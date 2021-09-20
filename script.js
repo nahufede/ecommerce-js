@@ -80,8 +80,8 @@ window.addEventListener("click", (e) => {
 
   if (e.target.classList.contains("click-category")) {
     let category = e.target.attributes.id.value;
-    console.log(category);
-    ItemList(category)
+    let gender = e.target.parentElement.parentElement.attributes.gender.value;
+    ItemList(category, gender)
   }
 
   if (e.target.classList.contains("itemdetail")) {

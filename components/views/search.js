@@ -6,6 +6,7 @@ let app = document.querySelector("#app");
 const findProducts = async (search) => {
 
     let products = document.createElement("div");
+
     products.className = "row px-3";
 
     const itemCollection = db.collection("products");
@@ -22,22 +23,21 @@ const findProducts = async (search) => {
     );
 
     filteredItems.forEach((el) => {
-      const { name, id, img } = el;
+        const { name, id, img } = el;
 
-      let prodContainer = document.createElement("div");
-      prodContainer.className = "col-md-4 col-6 p-3";
-      let prod = document.createElement("div");
-      prodContainer.appendChild(prod);
-      prod.className = "card";
-      prod.classList.add("itemList-product");
-      prod.innerHTML = `<a href="" class="itemdetail" style="background-image: url('${img}'); height: 21rem; background-position: center; background-size: cover; background-repeat: no-repeat;" alt="${name}" id="${id}">
-                      <div class="card-body itemList-product__name" style="position: absolute;width: 100%;bottom: 0; padding: 1rem 0;">
-                          <p class="card-title text-center m-0" style="font-size: 0.8rem">${name}</p>
-                      </div>
-                      </a>
-                  `;
-
-      products.appendChild(prodContainer);
+        let prodContainer = document.createElement("div");
+        prodContainer.className = "col-md-4 col-6 p-3";
+        let prod = document.createElement("div");
+        prodContainer.appendChild(prod);
+        prod.className = "card";
+        prod.classList.add("itemList-product");
+        prod.innerHTML = `<a href="" class="itemdetail" style="background-image: url('${img}'); height: 21rem; background-position: center; background-size: cover; background-repeat: no-repeat;" alt="${name}" id="${id}">
+                        <div class="card-body itemList-product__name" style="position: absolute;width: 100%;bottom: 0; padding: 1rem 0;">
+                            <p class="card-title text-center m-0" style="font-size: 0.8rem">${name}</p>
+                        </div>
+                        </a>
+                    `;
+        products.appendChild(prodContainer);
     });
 
     if(document.querySelector('.container-itemList')){

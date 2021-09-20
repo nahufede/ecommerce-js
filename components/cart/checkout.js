@@ -347,7 +347,7 @@ export const Checkout = () => {
             <div class="alert alert-success d-flex align-items-center justify-content-center mt-3" role="alert">
                 <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
                 <div>
-                  Pedido realizado éxitosamente!
+                  Pedido realizado éxitosamente! Pronto nos pondremos en contacto para concretar el envio.
                 </div>
             </div>
         </div>

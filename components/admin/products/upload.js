@@ -147,8 +147,6 @@ export function createElements(e) {
   let description = createForm[4].value;
   let file = createForm[5].files[0];
 
-  category = category.charAt(0).toUpperCase() + category.slice(1);
-
   db.collection("products")
     .add({
       name,
@@ -173,6 +171,8 @@ export function createElements(e) {
           );
 
           progressBar.style.width = `${progress}%`;
+          document.querySelector('.loadingbtn').innerHTML = `<span class="spinner-border spinner-border-sm me-1" role="status" aria-hidden="true"></span>
+          Subiendo ${progress}%`;
 
           console.log("Upload is " + progress + "% done");
           switch (snapshot.state) {

@@ -37,7 +37,7 @@ const categoriesNav = () => {
       navItemMin.innerHTML = `
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
             aria-expanded="false">${name.toUpperCase()}</a>
-          <ul class="dropdown-menu linkborder" id="categoriesmininav_${name}" aria-labelledby="navbarDropdown">
+          <ul class="dropdown-menu linkborder" id="categoriesmininav_${name}" gender="${name.toLowerCase()}" aria-labelledby="navbarDropdown">
             <li><a class="dropdown-item" reference="${name}" href="#">Principal</a></li>
           </ul>
       `
@@ -54,7 +54,7 @@ const categoriesNav = () => {
       navItem.className = 'nav-item dropdown'
       navItem.innerHTML = `
       <a class="nav-link dropdown-toggle navman" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">${name.toUpperCase()}</a>
-      <ul class="dropdown-menu linkborder" id="categoriesnav_${name}" aria-labelledby="navbarDropdown">
+      <ul class="dropdown-menu linkborder" id="categoriesnav_${name}" gender="${name.toLowerCase()}" aria-labelledby="navbarDropdown">
         <li><a class="dropdown-item" reference="${name}" href="#">Principal</a></li>
       </ul>`
   
