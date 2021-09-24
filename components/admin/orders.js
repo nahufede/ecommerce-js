@@ -61,12 +61,9 @@ window.addEventListener("click", async (e) => {
   if (focus.parentElement.classList.contains("deleteOrder")) {
     e.preventDefault();
 
-    let id =
-      focus.parentElement.parentElement.parentElement.parentElement.getAttribute(
-        "id"
-      );
+    let id = e.target.parentElement.parentElement.parentElement.parentElement.getAttribute('id-order');
 
-    let confirmacion = confirm("Desea eleminar el elemento?");
+    let confirmacion = confirm("Desea eleminar el pedido?");
 
     if (confirmacion) {
       db.collection("orders")
@@ -79,7 +76,7 @@ window.addEventListener("click", async (e) => {
         .catch((error) => {
           console.error("error ->", error);
         });
-    }
+      }
   }
 });
 
@@ -135,14 +132,14 @@ export const Orders = () => {
         </h2>
         <div id="flush-collapse${id}" class="accordion-collapse collapse" aria-labelledby="flush-heading${id}" data-bs-parent="#accordionFlushExample">
           <div class="accordion-body" id-order="${id}">
-            <div class="col-12 d-flex" style="min-height: 12rem;">
-              <div class="col-4 d-flex flex-column justify-content-between">
+            <div class="col-12 d-flex flex-wrap" style="min-height: 15rem;">
+              <div class="col-12 col-md-4 d-flex flex-column justify-content-between">
                <p class="m-0"><i class="bi bi-person me-2"></i>${name}</p>
                <p class="m-0"><i class="bi bi-envelope me-2"></i>${email}</p>
                <a href="https://wa.me/+549${phone}" target="_blank"><i class="bi bi-telephone-forward me-2"></i>${phone}</a>
                <a href="" id="entregado"><i class="bi bi-bag-check me-2"></i>Marcar como entregado</a>
               </div>
-              <div class="col-8 orderCard_products">
+              <div class="col-12 col-md-8 orderCard_products">
                 <table id="orderCards" class="u-full-width w-100">
                   <thead>
                     <tr>
@@ -216,15 +213,16 @@ export const Orders = () => {
       </h2>
       <div id="flush-collapse${id}" class="accordion-collapse collapse" aria-labelledby="flush-heading${id}" data-bs-parent="#accordionFlushExample">
         <div class="accordion-body" id-order="${id}">
-          <div class="col-12 d-flex" style="min-height: 12rem;">
-            <div class="col-4 d-flex flex-column justify-content-between">
+          <div class="col-12 d-flex flex-wrap" style="min-height: 15rem;">
+            <div class="col-12 col-md-4 d-flex flex-column justify-content-between">
              <p class="m-0"><i class="bi bi-person me-2"></i>${name}</p>
              <p class="m-0"><i class="bi bi-envelope me-2"></i>${email}</p>
              <a href="https://wa.me/${phone}" target="_blank"><i class="bi bi-telephone-forward me-2"></i>${phone}</a>
              <p class="m-0"><i class="bi bi-bag-check me-2"></i>Articulo entregado</p>
              <a href="" id="renew"><i class="bi bi-node-plus me-2"></i>Marcar como nuevo</a>
+             <a href="" class="deleteOrder"><i class="bi bi-trash-fill"></i></a>
             </div>
-            <div class="col-8 orderCard_products">
+            <div class="col-12 col-md-8 orderCard_products">
               <table id="orderCards" class="u-full-width w-100">
                 <thead>
                   <tr>

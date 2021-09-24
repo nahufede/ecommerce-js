@@ -5,7 +5,12 @@ let app = document.querySelector("#app");
 
 export const ItemList = async (category, gender) => {
   
-  app.innerHTML = "";
+  app.innerHTML = `
+                  <div class="text-center spinner pt-5 mt-5">
+                    <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                  </div>`;
   
   let allProducts = [];
   let itemListContainer = document.createElement("div");
@@ -49,10 +54,14 @@ export const ItemList = async (category, gender) => {
     });
 
   if (allProducts.length === 0) {
+  
     itemListContainer.innerHTML = `<h1 class="text-center container-itemList__title">${category} de ${gender}</h1>
     <h3 class="text-center pt-5">No hay productos</h3>`;
   }
-  app.appendChild(itemListContainer);
+
+  document.querySelector(".spinner").style.display = "none";
+
+   app.appendChild(itemListContainer);
 }
 
 export const RelatedItems = async (category, gender, id) => {

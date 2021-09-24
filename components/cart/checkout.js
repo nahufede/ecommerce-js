@@ -206,6 +206,9 @@ window.addEventListener("click", (e) => {
   let checkoutForm = document.querySelector("#checkoutForm");
 
   if (e.target.getAttribute("id") === "checkoutbutton"){
+
+    let cartCount1 = document.querySelector('#lblCartCount1')
+    let cartCount2 = document.querySelector('#lblCartCount2')
     
     e.preventDefault();
     
@@ -232,6 +235,8 @@ window.addEventListener("click", (e) => {
         document.querySelector("#alertsuccess").style.display = "block";
         document.querySelector(".loadingbtn").style.display = "none";
         document.querySelector(".progress").style.display = "none";
+        cartCount1.style.display = "none"
+        cartCount2.style.display = "none"
       })
       .catch((error) => {
         console.error("Error adding document: ", error);

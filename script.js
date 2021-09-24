@@ -79,8 +79,8 @@ export function validateEmail(email) {
 window.addEventListener("click", (e) => {
 
   if (e.target.classList.contains("click-category")) {
-    let category = e.target.attributes.id.value;
-    let gender = e.target.parentElement.parentElement.attributes.gender.value;
+    let category = e.target.attributes.category.value;
+    let gender = e.target.attributes.gender.value;
     ItemList(category, gender)
   }
 

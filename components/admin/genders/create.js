@@ -187,7 +187,7 @@ export const CreateGender = () => {
                         </div>
                     </div>
                     <div class="mb-3">
-                        <input class="form-control" type="file" id="validationServer02" multiple>
+                        <input class="form-control" type="file" id="validationServer02">
                         <div class="valid-feedback">
                             Archivo seleccionado
                         </div>

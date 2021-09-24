@@ -77,16 +77,16 @@ const categoriesNav = () => {
         let categoriesmininav = document.querySelector(`#categoriesmininav_${name}`);
         
         el.forEach((el) => {
-          let name = capitalize(el.name)
+          let elementName = capitalize(el.name)
           let categoriesNav = document.createElement("li");
-          categoriesNav.innerHTML = `<a class="dropdown-item click-category" id="${el.name}" href="#">${name}</a>`;
+          categoriesNav.innerHTML = `<a class="dropdown-item click-category" gender="${name}" category="${el.name}" href="#">${elementName}</a>`;
           categoriesnav.appendChild(categoriesNav);
         });
     
         el.forEach((el) => {
-          let name = capitalize(el.name)
+          let elementName = capitalize(el.name)
           let categoriesNav = document.createElement("li");
-          categoriesNav.innerHTML = `<a class="dropdown-item click-category" id="${el.name}" href="#">${name}</a>`;
+          categoriesNav.innerHTML = `<a class="dropdown-item click-category" gender="${name}" category="${el.name}" href="#">${elementName}</a>`;
           categoriesmininav.appendChild(categoriesNav);
         });
       });
@@ -103,7 +103,7 @@ export const Navbar = () => {
             <div class="container-fluid mynav">
               <a href="" class="navbar-brand" reference="home">LUCCA</a>
               <button class="navbar-toggler p-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
+                <span><i class="bi bi-arrows-expand"></i></span>
               </button>
               <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 navitems">
@@ -141,7 +141,7 @@ export const Navbar = () => {
               <a class="navbar-brand" reference="home" href="">LUCCA</a>
               <button class="navbar-toggler p-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
+                <span><i class="bi bi-arrows-expand" style="font-size: 1.6rem;color: black;"></i></span>
               </button>
               <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mt-3 navitemsmin">

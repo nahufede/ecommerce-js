@@ -7,6 +7,8 @@ const categoriesPage = (genero) => {
 
   getCategories(genero).then((categories) => {
 
+    let gender = genero.slice(11)
+
     document.querySelector(".spinner").style.display = "none";
 
     let allCategories = document.createElement("div");
@@ -21,12 +23,15 @@ const categoriesPage = (genero) => {
                                 align-items: center;
                                 text-shadow: 1px 1px 10px black;
                                 text-decoration: none;
-                                cursor: pointer;`;
+                                `;
 
-      let image = document.createElement("a");
-      image.className = "focuscategoryimages";
+      let image = document.createElement("div");
+      image.setAttribute('href',"")
+      image.setAttribute('gender',gender)
+      image.setAttribute('category',el.name)
+      image.className = "focuscategoryimages click-category";
       image.innerHTML = `<h1 class="fontzing">${el.name}</h1>`
-      image.style.cssText = `background-image: url('${el.img}'); text-decoration: none`;
+      image.style.cssText = `background-image: url('${el.img}'); text-decoration: none; cursor: pointer;`;
 
       category.appendChild(image);
 
@@ -43,13 +48,14 @@ const categoriesPage = (genero) => {
 export const Principal = (genero, landing) => {
   categoriesPage(genero);
 
-  window.addEventListener('click', (e)=>{
-    let category = e.target.innerText;
+  /* window.addEventListener('click', (e)=>{
     if(e.target.classList.contains('focuscategoryimages')){
+      let category = e.target.innerText;
+      let gender = e.target.attributes.gender.value;
       e.preventDefault()
-      ItemList(category)
+      ItemList(category, gender)
     }
-  })
+  }) */
 
   return `
             <div class="container-fluid">
