@@ -1,5 +1,4 @@
 import { getCategories } from "../../firebase/db-calls.js";
-import { ItemList } from "../items/itemList.js";
 
 let app = document.querySelector("#app");
 
@@ -45,23 +44,14 @@ const categoriesPage = (genero) => {
   });
 };
 
-export const Principal = (genero, landing) => {
+export const Principal = (genero, portada) => {
   categoriesPage(genero);
-
-  /* window.addEventListener('click', (e)=>{
-    if(e.target.classList.contains('focuscategoryimages')){
-      let category = e.target.innerText;
-      let gender = e.target.attributes.gender.value;
-      e.preventDefault()
-      ItemList(category, gender)
-    }
-  }) */
 
   return `
             <div class="container-fluid">
                 <div class="row d-none d-md-block">
                     <div class="col-12">
-                        <div class="${landing}"></div>
+                        <div class="landing" style="background-image: url('${portada}')"></div>
                     </div>
                 </div>
                 <div class="row thecategories"></div>

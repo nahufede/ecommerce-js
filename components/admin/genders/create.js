@@ -1,5 +1,6 @@
 import { getFirestore, storage } from "../../../firebase/firebase.js";
 import { auth } from "../../../firebase/firebase.js";
+import { Navbar } from "../../nav.js"
 
 let db = getFirestore();
 let storageRef = storage().ref();
@@ -16,7 +17,7 @@ const genderFormValidation = () => {
 
     let validation;
 
-    for (let i = 0; i < 2; i++) {
+    for (let i = 0; i < 3; i++) {
         if (genderForm[i].value === "") {
             genderForm[i].classList.add("is-invalid");
             genderForm[i].classList.remove("is-valid");
@@ -33,7 +34,7 @@ const genderFormValidation = () => {
     const progressValidation = () => {
         let progressVal = [];
 
-        for (let i = 0; i < 2; i++) {
+        for (let i = 0; i < 3; i++) {
             if(genderForm[i].classList.contains('is-valid')){
                 progressVal.push(1);
             }
@@ -43,9 +44,12 @@ const genderFormValidation = () => {
 
         switch (progressForm) {
             case 1:
-                progressBar.style.width = "50%";
+                progressBar.style.width = "33%";
                 break;
             case 2:
+                progressBar.style.width = "66%";
+                break;
+            case 3:
                 progressBar.style.width = "100%";
                 break;
             default:
@@ -57,8 +61,8 @@ const genderFormValidation = () => {
     progressValidation();
 
     if (validation) {
-        genderForm[2].removeAttribute("disabled");
-        genderForm[2].style.opacity = 1;
+        genderForm[3].removeAttribute("disabled");
+        genderForm[3].style.opacity = 1;
     }
 };
 
@@ -81,52 +85,74 @@ const createGender = () => {
 
     // ASIGNACION DE ELEMENTOS DEL FORM
     let name = (createGender[0].value).toLowerCase();
-    let file = createGender[1].files[0];
+    let backfile = createGender[1].files[0];
+    let frontfile = createGender[2].files[0];
 
     db.collection(`genders`).add({
         name,
-        img: ""
+        background: "",
+        portada: ""
+
     })
-    .then((docRef) => {
+    .then( async (docRef) => {
 
-        var uploadTask = storageRef.child(`genders/${docRef.id}`).put(file);
+        var uploadTask1 = storageRef.child(`genders/${docRef.id}`).put(backfile);
 
-        uploadTask.on('state_changed', function (snapshot) {
-            var progress = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
-
-            progressBar.style.width = `${progress}%`;
+        await uploadTask1.on('state_changed', function (snapshot) {
             
             switch (snapshot.state) {
                 case firebase.storage.TaskState.PAUSED:
-                    console.log('Upload is paused');
                     break;
                 case firebase.storage.TaskState.RUNNING:
-                    console.log('Upload is running');
                     break;
             }
         }, function (error) {
             console.log(error);
         }, function() {
             // Upload completed successfully, now we can get the download URL
-            uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL) {
+            uploadTask1.snapshot.ref.getDownloadURL().then(function(downloadURL1) {
                 db.collection(`genders`).doc(docRef.id).update({
-                    "img": downloadURL
+                    "background": downloadURL1
+                })
+            });
+        });
+
+        var uploadTask2 = storageRef.child(`portadas/${docRef.id}`).put(frontfile);
+        await uploadTask2.on('state_changed', function (snapshot) {
+            var progress = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
+
+            progressBar.style.width = `${progress}%`;
+            
+            switch (snapshot.state) {
+                case firebase.storage.TaskState.PAUSED:
+                    break;
+                case firebase.storage.TaskState.RUNNING:
+                    break;
+            }
+        }, function (error) {
+            console.log(error);
+        }, function() {
+            // Upload completed successfully, now we can get the download URL
+            uploadTask2.snapshot.ref.getDownloadURL().then(function(downloadURL2) {
+                db.collection(`genders`).doc(docRef.id).update({
+                    "portada": downloadURL2
                 })
                 .then(() => {
                     createGender.reset();
                     document.querySelector("#alertsuccess").style.display = "block";
                     document.querySelector(".loadingbtn").style.display = "none";
                     document.querySelector(".progress").style.display = "none";
+                    nav.innerHTML = Navbar();
                     setTimeout(() => {
                         app.innerHTML = CreateGender();;
-                    }, 5000);
+                    }, 3000);
                 });
             });
-        });    
+        });
     })
     .catch((error) => {
         console.error("Error adding document: ", error);
-    });
+    })   
 }
 
 export const CreateGender = () => {
@@ -137,7 +163,7 @@ export const CreateGender = () => {
     return (
             `<div class="container">
             <div class="row">
-                <div class="col-12 col-sm-6 offset-sm-3 userdiv">
+                <div class="col-10 offset-1 col-md-6 offset-md-3 userdiv">
                     <div class="d-flex flex-row justify-content-center">
                         <a reference="home" class="contactbreadcrumb">Inicio</a>
                         <p>> Administrador</p>
@@ -176,7 +202,7 @@ export const CreateGender = () => {
               </div>
               <div class="col-10 col-md-6 form">
               <form class="row g-3" id="createGender" onkeypress="if(event.keyCode == 13) event.returnValue = false;">
-                    <div class="form-floating mb-3">
+                    <div class="form-floating">
                         <input type="text" class="form-control" id="validationServer01" placeholder="Hombre" required>
                         <label for="validationServer01" class="form-label" style="padding-left: 1.3rem;">Nombre</label>
                         <div class="valid-feedback">
@@ -186,12 +212,23 @@ export const CreateGender = () => {
                             Elige un nombre
                         </div>
                     </div>
-                    <div class="mb-3">
+                    <div>
+                        <label class="mb-3">Imágen del fondo</label>   
                         <input class="form-control" type="file" id="validationServer02">
                         <div class="valid-feedback">
                             Archivo seleccionado
                         </div>
                         <div id="validationServer02Feedback" class="invalid-feedback">
+                            Selecciona una imagen
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="mb-3">Imágen de portada</label>
+                        <input class="form-control" type="file" id="validationServer03">
+                        <div class="valid-feedback">
+                            Archivo seleccionado
+                        </div>
+                        <div id="validationServer03Feedback" class="invalid-feedback">
                             Selecciona una imagen
                         </div>
                     </div>

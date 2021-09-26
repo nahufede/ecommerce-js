@@ -17,6 +17,7 @@ import { CategoriesDashboard } from "./admin/categories/dash.js";
 import { ShowCategories } from "./admin/categories/categories.js";
 import { GendersDashboard } from "./admin/genders/dash.js";
 import { Orders } from "./admin/orders.js";
+import { getGenders } from "../firebase/db-calls.js";
 
 let nav = document.querySelector("#nav");
 let app = document.querySelector("#app");
@@ -31,18 +32,24 @@ if (app.innerHTML == "") {app.innerHTML = Home()}
 
 export const Router = () => {
   window.addEventListener("click", (e) => {
+
+    if(e.target.getAttribute("reference")){
+
     let reference = e.target.getAttribute("reference");
 
-    switch (reference) {
-      case "hombre":
-        e.preventDefault();
-        app.innerHTML = Principal('categories_hombre', 'landingman');
-        break;
+    getGenders().then((gender)=>{
 
-      case "mujer":
-        e.preventDefault();
-        app.innerHTML = Principal('categories_mujer', 'landingwoman');
-        break;
+      gender.forEach((el)=>{
+        const { name, portada } = el
+
+        if(name === reference){
+          e.preventDefault();
+          app.innerHTML = Principal(`categories_${name}`, portada);
+        }
+      })
+    })
+
+    switch (reference) {
 
       case "contact":
         e.preventDefault();
@@ -118,6 +125,7 @@ export const Router = () => {
         e.preventDefault();
         app.innerHTML = Orders();
         break;
+      }
     }
   });
 };

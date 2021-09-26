@@ -1,5 +1,6 @@
 import { getCategories, getGenders } from "../firebase/db-calls.js";
 import { capitalize } from "../script.js";
+import { auth } from "../firebase/firebase.js";
 
 const categoriesNav = () => {
 
@@ -99,6 +100,22 @@ export const Navbar = () => {
 
   categoriesNav();
 
+  const user = auth().currentUser;
+
+  let adminlog
+
+  if(user){
+    adminlog = `
+      <li><a class="dropdown-item" reference="categoriesdash" href="#">Categorias</a></li>
+      <li><a class="dropdown-item" reference="consultas" href="#">Consultas</a></li>
+      <li><a class="dropdown-item" reference="gendersdash" href="#">Géneros</a></li>
+      <li><a class="dropdown-item" reference="ordenes" href="#">Pedidos</a></li>
+      <li><a class="dropdown-item" reference="productsdash" href="#">Productos</a></li>
+      <li><a class="dropdown-item" reference="logout" href="#">Cerrar sesión</a></li>`
+  } else {
+    adminlog = '<li><a class="dropdown-item" reference="admin" href="#">Iniciar sesión</a></li>'
+  }
+
   return `<nav class="navbar navbar-expand-lg navbar-light d-none d-lg-block" reference="navbar">
             <div class="container-fluid mynav">
               <a href="" class="navbar-brand" reference="home">LUCCA</a>
@@ -129,7 +146,7 @@ export const Navbar = () => {
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-display="static" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-person"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end adminlog" aria-labelledby="navbarDropdown">
-                      <li><a class="dropdown-item" reference="admin" href="#">Iniciar sesión</a></li>
+                    ${adminlog}
                     </ul>
                   </li>
                 </span>
@@ -152,7 +169,7 @@ export const Navbar = () => {
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">ADMINISTRADOR
                     </a>
                     <ul class="dropdown-menu adminlog1 linkborder" aria-labelledby="navbarDropdown">
-                      <li><a class="dropdown-item" reference="admin" href="#">Iniciar sesión</a></li>
+                      ${adminlog}
                     </ul>
                   </li>
                 </ul>
@@ -168,11 +185,7 @@ export const Navbar = () => {
               </div>
             </div>
           </nav>
-          <div id="spinnerdiv">
-            <div class="spinner-border" style="width: 4.5rem; height: 4.5rem;" role="status">
-              <span class="visually-hidden">Loading...</span>
-            </div>
-          </div>`;
+          `;
 };
 
 export default Navbar;

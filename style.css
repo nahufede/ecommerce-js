@@ -36,6 +36,11 @@ body {
     text-shadow: 1px 1px 5px black;
 }
 
+.fontzing3{
+    font-family: "Zing Rust Demo Base";
+    color: black;
+}
+
 
 .dropdown-toggle::after {
     display: none;
@@ -183,7 +188,6 @@ body {
 .landingpageimg:hover{
     font-size: 3.3rem;
     transition: 0.8s;
-    height: 21rem;
 }
 
 .imgPrincipales a{
@@ -544,20 +548,10 @@ bottom: 5%;
 opacity: 1;
 }
 
-.landingman{
-    background-image: url('/img/portadaman.jpg');
-    background-position: center;
+.landing{
     background-repeat: no-repeat;
     background-size: cover;
-    height: 60vh;
-}
-
-.landingwoman{
-    background-image: url('/img/portadawoman.jpg');
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    height: 60vh;
+    height: 350px;
 }
 
 #alertsuccess{
@@ -566,10 +560,9 @@ opacity: 1;
 }
 
 .gendercard{
-    height: 15rem;
-    width: 15rem;
-    color: white;
-    text-shadow: 1px 1px 5px black;
+    width: 20rem;
+    color: black;
+    min-height: 25rem;
 }
 
 .genderimg a{
