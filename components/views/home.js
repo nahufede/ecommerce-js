@@ -6,6 +6,7 @@ export const Home = () => {
 
         setTimeout(()=>{
             document.querySelector("#spinnerdiv").style.display = "none";
+            document.querySelector('#nav').style.pointerEvents = "all"
           }, 2500)
 
         let landingContainer 

@@ -24,6 +24,7 @@ body {
     background-color: white;
     width: 100%;
     z-index: 9;
+    pointer-events: none;
 }
 
 .fontzing{
@@ -356,8 +357,6 @@ body {
 }
 
 .focuscategoryimages:hover{
-    height: 19rem;
-    width: 19rem;
     transition: 1s;
     color: white;
 }
@@ -599,4 +598,17 @@ opacity: 1;
 
 .dropdown-menu{
     min-width: 8rem;
+}
+
+.redline{
+    background-color: red;
+    position: absolute;
+    width: 110px;
+    height: 3.5px;
+    transform: rotate(-18deg);
+    top: 133px;
+    left: -35px;
+    border-radius: 1px;
+    border: none;
+    box-shadow: 1px 9px 7px black;
 }

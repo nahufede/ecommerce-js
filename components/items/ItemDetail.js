@@ -34,10 +34,11 @@ export const itemDetail = {
           <a reference="home" class="contactbreadcrumb">Inicio</a>
           <a class="contactbreadcrumb click-category" id=${category}>> ${capitalize(category)}</a>
         </div>
-        <div class="pe-3">
+        <div class="pe-3" style="position:relative">
           <h1 class="product-name mx-0">${name}</h1>
           <p class="mx-0" style="font-size: 1.3rem;">${description}</p>
           <p class="mx-0" style="font-size: 2rem;">$${price.toLocaleString()}</p>
+          <span class="redline" style="display:none"></span>
           <button class="btn btn-dark btn-add-product m-0">AGREGAR AL CARRITO</button>
         </div>
       </div>

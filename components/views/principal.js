@@ -11,11 +11,11 @@ const categoriesPage = (genero) => {
     document.querySelector(".spinner").style.display = "none";
 
     let allCategories = document.createElement("div");
-    allCategories.className = "col-12 d-flex flex-wrap all-categories";
+    allCategories.className = "col-12 col-lg-10 offset-lg-1 d-flex flex-wrap all-categories";
 
     categories.forEach((el) => {
       let category = document.createElement("div");
-      category.className = "col-12 col-md-6 col-xl-4 my-5";
+      category.className = "col-12 col-sm-6 col-md-4 mt-5 px-2";
       category.style.cssText = `
                                 display: flex; 
                                 justify-content: center; 
