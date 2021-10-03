@@ -26,7 +26,7 @@ const findProducts = async (search) => {
         const { name, id, img } = el;
 
         let prodContainer = document.createElement("div");
-        prodContainer.className = "col-md-4 col-6 p-3";
+        prodContainer.className = "col-md-4 col-6 px-3 pb-3";
         let prod = document.createElement("div");
         prodContainer.appendChild(prod);
         prod.className = "card";
@@ -40,9 +40,17 @@ const findProducts = async (search) => {
         products.appendChild(prodContainer);
     });
 
-    if(document.querySelector('.container-itemList')){
-        document.querySelector('.container-itemList').appendChild(products)
-    }
+    let container = document.querySelector('.container-itemList')
+
+    container.innerHTML = ` <div class="row">
+                                <h3 class="pt-4 fontzing text-center">Mostrando resultados de</h3>
+                                <h3 class="pb-4 fontzing text-center">"${search}"</h3>
+                            </div>
+                            <div class="row noresults" style="display:none">
+                                <h3 class="pt-4 fontzing text-center">No hay resultados relacionados</h3>
+                            </div>
+                            `
+    container.appendChild(products)
 
     if(filteredItems.length === 0){
         document.querySelector('.noresults').style.display = "block"
@@ -53,7 +61,7 @@ export const Search = (search) => {
 
     findProducts(search)
   
-    return `<div class="container-fluid container-itemList">
+    return `<div class="container container-itemList">
             <div class="row">
                 <h3 class="pt-4 fontzing text-center">Mostrando resultados de</h3>
                 <h3 class="pb-4 fontzing text-center">"${search}"</h3>
