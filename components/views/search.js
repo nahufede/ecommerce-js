@@ -40,6 +40,8 @@ const findProducts = async (search) => {
         products.appendChild(prodContainer);
     });
 
+    if(document.querySelector('.container-itemList')){
+        
     let container = document.querySelector('.container-itemList')
 
     container.innerHTML = ` <div class="row">
@@ -51,6 +53,7 @@ const findProducts = async (search) => {
                             </div>
                             `
     container.appendChild(products)
+    }
 
     if(filteredItems.length === 0){
         document.querySelector('.noresults').style.display = "block"

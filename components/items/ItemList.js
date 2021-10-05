@@ -68,9 +68,7 @@ export const RelatedItems = async (category, gender, id) => {
   let relatedProducts = [];
 
   let products = document.createElement("div");
-  products.className = "col-10 offset-1 d-flex flex-column";
-
-  console.log(id);
+  products.className = "col-10 offset-1 d-flex";
 
   const itemCollection = db.collection("products");
   let filteredItems = itemCollection.where("gender", "==", gender).where("category", "==", category).limit(3);

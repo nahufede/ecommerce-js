@@ -136,7 +136,14 @@ window.addEventListener("click", async (e) => {
     var docRef = db.collection("products").doc(id);
 
     let selectedCategory = editForm[1].value;
-    let editCategory = editForm[1][selectedCategory].innerHTML;
+    let editCategory = (editForm[1][selectedCategory].innerHTML).toLowerCase();
+    let sizes = editForm[4].selectedOptions
+    let sizesLength = editForm[4].selectedOptions.length
+    let selectedSizes = []
+
+    for (let i = 0; i < sizesLength; i++) {
+      selectedSizes.push(sizes[i].value)
+    }
 
     return docRef
       .update({
@@ -144,6 +151,7 @@ window.addEventListener("click", async (e) => {
         price: editForm[2].value,
         category: editCategory,
         description: editForm[3].value,
+        sizes: selectedSizes
       })
       .then(() => {
 
@@ -157,8 +165,6 @@ window.addEventListener("click", async (e) => {
           body.style = "";
 
           let modal = document.querySelector('.modal-backdrop');
-          /* modal.className = "modal-backdrop fade";
-          modal.style.display = "none"; */
           modal.remove();
 
           let dbp = document.querySelector('#dbproductsmodal');

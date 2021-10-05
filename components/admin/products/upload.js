@@ -172,15 +172,12 @@ export function createElements(e) {
 
           progressBar.style.width = `${progress}%`;
           document.querySelector('.loadingbtn').innerHTML = `<span class="spinner-border spinner-border-sm me-1" role="status" aria-hidden="true"></span>
-          Subiendo ${progress}%`;
+          Subiendo  ${progress}%`;
 
-          console.log("Upload is " + progress + "% done");
           switch (snapshot.state) {
             case firebase.storage.TaskState.PAUSED:
-              console.log("Upload is paused");
               break;
             case firebase.storage.TaskState.RUNNING:
-              console.log("Upload is running");
               break;
           }
         },

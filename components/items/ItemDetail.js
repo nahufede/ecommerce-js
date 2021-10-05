@@ -18,11 +18,24 @@ export const itemDetail = {
       }
     });
 
-    const { category, description, gender, img, name, price } = product;
+    const { category, description, gender, img, name, price, sizes } = product;
     
     await RelatedItems(category, gender, name, id).then((res) => {
       relatedProducts.append(res);
     }); 
+
+    let sizeContainer = document.createElement('div')
+    
+    sizes.forEach(el=>{
+
+      if(el === 'Seleccionar'){
+        return
+      }
+
+      let div = document.createElement('div')
+      div.innerText = el
+      sizeContainer.append(div)
+    })
 
     return `<div class="container-fluid container-itemDetail">
     <div class="row" id="${id}">
@@ -32,13 +45,15 @@ export const itemDetail = {
       <div class="col-10 col-md-6 container-itemDetail__details ms-auto me-auto">
         <div class="d-flex flex-row">
           <a reference="home" class="contactbreadcrumb">Inicio</a>
-          <a class="contactbreadcrumb click-category" id=${category}>> ${capitalize(category)}</a>
+          <a class="contactbreadcrumb click-category" gender="${gender}" category=${category}>> ${capitalize(category)}</a>
         </div>
-        <div class="pe-3" style="position:relative">
+        <div class="pe-3 size-container">
           <h1 class="product-name mx-0">${name}</h1>
           <p class="mx-0" style="font-size: 1.3rem;">${description}</p>
           <p class="mx-0" style="font-size: 2rem;">$${price.toLocaleString()}</p>
-          <span class="redline" style="display:none"></span>
+          <div class="d-flex flex-row align-items-center justify-content-evenly mb-4">
+          ${sizeContainer.innerHTML}
+          </div>
           <button class="btn btn-dark btn-add-product m-0">AGREGAR AL CARRITO</button>
         </div>
       </div>
