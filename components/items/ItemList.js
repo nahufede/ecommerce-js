@@ -21,7 +21,7 @@ export const ItemList = async (category, gender) => {
                       `;
 
   let products = document.createElement("div");
-  products.className = "row p-3";
+  products.className = "row justify-content-center pt-2 px-3";
   itemListContainer.appendChild(products);
 
   const itemCollection = db.collection("products");
@@ -38,14 +38,14 @@ export const ItemList = async (category, gender) => {
     const { name, id, img } = el;
 
       let prodContainer = document.createElement("div");
-      prodContainer.className = "col-12 col-md-4 p-3";
+      prodContainer.className = "col-10 col-sm-5 col-md-4 p-3";
       let prod = document.createElement("div");
       prodContainer.appendChild(prod);
       prod.className = "card";
       prod.classList.add("itemList-product");
       prod.innerHTML = `<a href="" class="itemdetail" style="background-image: url('${img}'); height: 21rem; background-position: center; background-size: cover; background-repeat: no-repeat;" alt="${name}" id="${id}">
                       <div class="card-body itemList-product__name" style="position: absolute;width: 100%;bottom: 0; padding: 1rem 0;">
-                          <p class="card-title text-center m-0" style="font-size: 0.8rem">${name}</p>
+                          <p class="card-title text-center m-0" style="font-size: 0.8rem">${name.toUpperCase()}</p>
                       </div>
                       </a>
                   `;
@@ -68,7 +68,7 @@ export const RelatedItems = async (category, gender, id) => {
   let relatedProducts = [];
 
   let products = document.createElement("div");
-  products.className = "col-10 offset-1 d-flex";
+  products.className = "col-10 offset-1 d-flex flex-column";
 
   const itemCollection = db.collection("products");
   let filteredItems = itemCollection.where("gender", "==", gender).where("category", "==", category).limit(3);

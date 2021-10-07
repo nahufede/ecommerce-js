@@ -26,6 +26,7 @@ export const itemDetail = {
 
     let sizeContainer = document.createElement('div')
     
+    if(sizes){
     sizes.forEach(el=>{
 
       if(el === 'Seleccionar'){
@@ -35,7 +36,7 @@ export const itemDetail = {
       let div = document.createElement('div')
       div.innerText = el
       sizeContainer.append(div)
-    })
+    })}
 
     return `<div class="container-fluid container-itemDetail">
     <div class="row" id="${id}">

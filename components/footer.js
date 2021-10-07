@@ -1,7 +1,7 @@
 export const Footer = () => {
 
     return (
-            `<div class="container mt-5">
+            `<div class="container mt-3">
             <div class="row">
                 <div class="col-6 truck">
                     <i class="bi bi-truck"></i>
@@ -11,10 +11,10 @@ export const Footer = () => {
                 </div>
                 <div class="col-12 d-flex text-center">
                     <div class="col-6">
-                        <p>ENVIOS A TODO EL PAIS</p>
+                        <p>ENVIOS</p>
                     </div>
                     <div class="col-6">
-                        <a href="https://wa.me/34645049621" target="_blank" class="socialmedia">CONSULTAS Y PEDIDOS</a>
+                        <a href="https://wa.me/34645049621" target="_blank" class="socialmedia">CONSULTAS</a>
                     </div>
                 </div>
                 <div class="col-12 prefooter">
