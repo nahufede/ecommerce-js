@@ -5,8 +5,9 @@ export const Home = () => {
     getGenders().then((genders) => {
 
         setTimeout(()=>{
-            document.querySelector("#spinnerdiv").style.display = "none";
-            document.querySelector('#nav').style.pointerEvents = "all"
+            if(document.querySelector("#spinnerdiv") !== null)
+            {document.querySelector("#spinnerdiv").style.display = "none";
+            document.querySelector('#nav').style.pointerEvents = "all"}
           }, 2500)
 
         let landingContainer 

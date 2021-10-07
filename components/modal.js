@@ -26,7 +26,7 @@ export const DBModal = () => {
               <label for="floatingTextarea">Descripción</label>
             </div>
             <div class="mb-3">
-              <select class="form-select mb-2" style="height: 120px" id="floatingSizes" size="3" multiple aria-label="Floating label sizes">
+              <select class="form-select mb-2" id="floatingSizes" size="3" multiple aria-label="Floating label sizes">
                 <option selected disabled>Seleccionar</option>
                 <option value="XXS">XXS</option>
                 <option value="XS">XS</option>
@@ -37,7 +37,12 @@ export const DBModal = () => {
                 <option value="XXL">XXL</option>
                 <option value="3XL">3XL</option>
               </select>
-              <label for="floatingSizes">Para seleccionar más de una opción al mismo tiempo desde la pc mantener presionada la tecla 'control'</label>
+              <label class="d-none d-md-block text-center" for="floatingSizes">Seleccion multiple: mantener presionado <br> 'Control + click izquierdo del mouse'</label>
+            </div>
+            <div class="input-group mb-3">
+              <span class="input-group-text">Oferta $</span>
+              <input type="text" class="form-control" value="" id="price" aria-label="Amount (to the nearest dollar)" />
+              <span class="input-group-text">.00</span>
             </div>
             <div class="d-flex justify-content-center">
             <button class="btn btn-primary saveEdit mybutton">Guardar</button>

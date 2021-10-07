@@ -81,6 +81,19 @@ window.addEventListener("click", async (e) => {
 
     editForm = document.querySelector(".editForm");
 
+    editForm[4].innerHTML = `<select class="form-select mb-2" id="floatingSizes" size="3" multiple aria-label="Floating label sizes">
+                              <option selected disabled>Seleccionar</option>
+                              <option value="XXS">XXS</option>
+                              <option value="XS">XS</option>
+                              <option value="S">S</option>
+                              <option value="M">M</option>
+                              <option value="L">L</option>
+                              <option value="XL">XL</option>
+                              <option value="XXL">XXL</option>
+                              <option value="3XL">3XL</option>
+                            </select>`
+    editForm[5].value=""
+
     let id = focus.parentElement.getAttribute('id');
 
     var docRef = db.collection("products").doc(id);
@@ -91,7 +104,7 @@ window.addEventListener("click", async (e) => {
         if (doc.exists) {
 
           let product = { ...doc.data(), id: doc.id };
-          const { name, price, description, category } = product;
+          const { name, price, description, category, sizes, promo } = product;
 
           let categoryLength = editForm[1].length;
 
@@ -105,6 +118,20 @@ window.addEventListener("click", async (e) => {
           editForm[0].value = name;
           editForm[2].value = price;
           editForm[3].value = description;
+          if(promo){editForm[5].value = promo}
+
+          let sizesLength = editForm[4].length
+
+          if(sizes){
+            for (let size = 0; size < sizesLength; size++) {
+              for (let i = 0; i < sizes.length; i++) {
+                if(editForm[4][size].value === sizes[i]){
+                  editForm[4][size].setAttribute('selected','')
+                }
+              }
+            }
+          }
+          
         } else {
           // doc.data() will be undefined in this case
           console.log("No such document!");
@@ -140,9 +167,12 @@ window.addEventListener("click", async (e) => {
     let sizes = editForm[4].selectedOptions
     let sizesLength = editForm[4].selectedOptions.length
     let selectedSizes = []
+    let promo = editForm[5].value
 
     for (let i = 0; i < sizesLength; i++) {
-      selectedSizes.push(sizes[i].value)
+      if(sizes[i].value !== "Seleccionar"){
+        selectedSizes.push(sizes[i].value)
+      }
     }
 
     return docRef
@@ -151,7 +181,8 @@ window.addEventListener("click", async (e) => {
         price: editForm[2].value,
         category: editCategory,
         description: editForm[3].value,
-        sizes: selectedSizes
+        sizes: selectedSizes,
+        promo: promo
       })
       .then(() => {
 
