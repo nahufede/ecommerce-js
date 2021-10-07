@@ -50,13 +50,13 @@ export const itemDetail = {
       promotional.innerHTML = `<p class="m-0 fontzing" style="font-size: 3rem;">AHORA $<span style="margin: 0;text-decoration: underline 4px;">${promo.toLocaleString()}!</span></p>`
     } else {
       promotional.style.display = "none"
-      normalPrice.innerHTML = `<p class="mx-0" style="font-size: 1.8rem;">$${price.toLocaleString()}</p>`
+      normalPrice.innerHTML = `<p class="m-0 fontzing" style="font-size: 3rem;">$<span style="margin: 0">${price.toLocaleString()}</span></p>`
     }
 
     return `<div class="container-fluid container-itemDetail">
-    <div class="row px-4" id="${id}">
+    <div class="row px-5" id="${id}">
       <div class="col-12 col-md-6 d-flex flex-column align-items-center justify-content-center p-0">
-        <img class="container-itemDetail__img py-3" style="object-fit: cover; height:550px" alt="ProdImg" src="${img}" />
+        <img class="container-itemDetail__img p-3" style="object-fit: cover; object-position: top; height:550px" alt="ProdImg" src="${img}" />
       </div>
       <div class="col-12 col-md-6 container-itemDetail__details d-flex flex-column px-4 py-3">
         <div class="d-flex flex-row">
