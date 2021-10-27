@@ -1,6 +1,7 @@
 import { getFirestore, storage } from "../../../firebase/firebase.js";
 import { getGenders } from "../../../firebase/db-calls.js";
 import { auth } from "../../../firebase/firebase.js";
+import { Navbar } from "../../nav.js";
 
 let db = getFirestore();
 let storageRef = storage().ref();
@@ -133,9 +134,6 @@ export function createCategory() {
 
           progressBar.style.width = `${progress}%`;
 
-          console.log(progressBar.style.width);
-
-          console.log("Upload is " + progress + "% done");
           switch (snapshot.state) {
             case firebase.storage.TaskState.PAUSED:
               console.log("Upload is paused");
@@ -158,6 +156,7 @@ export function createCategory() {
               })
               .then(() => {
                 createcategory.reset();
+                nav.innerHTML = Navbar();
                 document.querySelector("#alertsuccess").style.display = "block";
                 document.querySelector(".loadingbtn").style.display = "none";
                 document.querySelector(".progress").style.display = "none";
