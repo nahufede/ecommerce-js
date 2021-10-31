@@ -109,7 +109,7 @@ export const ShowCategories = () => {
 
         if(e.target.getAttribute('id') === "catlist"){
 
-          document.querySelector('#categorieslist').innerText = ""
+          document.querySelector('#categorieslist').innerHTML = ""
 
           let name = e.target.innerHTML.toLowerCase()
           
@@ -123,6 +123,13 @@ export const ShowCategories = () => {
     })
     
   const setList = (db, categories, text) => {
+
+    let categorieslist = document.querySelector('#categorieslist');
+
+    for (let i = 0; i < categorieslist.children.length; i++) {
+      categorieslist.children[i].remove();
+    }
+
     let catList = document.createElement("div");
       catList.className = "row pt-4";
 
